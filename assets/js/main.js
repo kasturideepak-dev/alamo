@@ -47,6 +47,33 @@
     });
   }());
 
+  /* --------------------------------------------------------- sticky header */
+  // Runs before the reduced-motion bail-out: the header must still gain its
+  // stuck styling when all animation is switched off.
+  (function stickyHeader() {
+    var header = document.querySelector('.site-header--sticky');
+    if (!header) return;
+    var bar = document.querySelector('.topbar');
+    var threshold = bar ? bar.offsetHeight : 8;
+    var queued = false;
+
+    function apply() {
+      queued = false;
+      header.classList.toggle('is-stuck', window.scrollY > threshold);
+    }
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(apply);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () {
+      threshold = bar ? bar.offsetHeight : 8;
+      apply();
+    });
+    apply();
+  }());
+
   /* ------------------------------------------------------------ mega menu */
   // One panel per header, opened by any trigger in that header. CSS owns the
   // open/close state so the panel still works without JS; this manages intent
