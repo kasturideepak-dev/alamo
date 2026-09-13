@@ -1,0 +1,8 @@
+{
+ "s3_urls": {
+  "a2b9d39be112465588f5e5c246ba55d64baf62fa": "https://s3-alpha-sig.figma.com/img/a2b9/d39b/e112465588f5e5c246ba55d64baf62fa?Expires=1789948800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=pG04oK13uBzbRgnzffgV~L48Bd01aVumpKcsVq9cCbI4N5eYBmfM9u0LDF9aUeatG0ASAoAtDlv6h2UZZIwn4Oh7BVwMZUNihZYPlLix4dJIb5T3NwFwse4HgrudLUwAl63dWusoEx7O4VR~mqXzZGENESYIJSAONNEzcVIL0mdPeOHltKy1YXok0ofeeSM1~gCwVh-bIGaduQ4F5HEk8DMBvsMCNzedO4fJ1SroZYMadOaCWlU6O5nR2Tu6kIZRvzwQwp7Usfm-YIQ9r-zz7pjpvtXtRqAbMCDuouNdMExd4NghzbmgR6UFBUNlbC~tSn8Qx3PRbVFwMbRdx~oxZA__",
+  "65bb7d2ba6c1f69d39fbcc4f93c6c778709c2f9d": "https://s3-alpha-sig.figma.com/img/65bb/7d2b/a6c1f69d39fbcc4f93c6c778709c2f9d?Expires=1789948800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=WPNNT-WimHPudVRNlioD4wl5tZUjUfrwkEVtzqU0NKBFFmZ5snUjt9C~bESBH8doPNJc3f~EycQsapl2cm~nyBn~W07mlPGdLHb60ClP~JVN9xQJ0drFe9eBs1wFod~sqkJ4hFAICJ7XN~Pcj6cdTI0Aepb6oA1x1htPITk-VPHwTRrRGJWp~32R60YMhUAaKqfPcvQj6Wb6xxDUSfWS2h-4YCbOaDIrqZTe0lu59SLECfYwfdBQMH37n~X1mvYnZoVN4sBic6tA1P9owoLFC0JLYZH9TJEoenLt6T-u1QmOGrZzuR2T9uLNydnGU9KUlXqDmi5DxzpQzdoDxZ-Sbw__"
+ },
+ "compressed_texture_s3_urls": {},
+ "has_blob_url_ttl_override": false
+}

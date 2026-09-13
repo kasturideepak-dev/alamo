@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Client-supplied archives — large binaries, not part of the prototype
+*.zip
+
+# Figma capture + verification working files.
+# The scripts are tracked; their output is large and regenerable.
+scratch/dl/
+scratch/shots/
+scratch/*.png
+scratch/*.jpg
+# signed, expiring Figma S3 URLs
+scratch/urls.json

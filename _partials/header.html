@@ -1,0 +1,80 @@
+<!-- ============================== TOP BAR ============================== -->
+<div class="topbar">
+  <div class="shell topbar__in">
+    <p class="topbar__hours">
+      <svg aria-hidden="true"><use href="#i-clock"/></svg>
+      <b>Hours Of Operation:</b>
+      <span>Monday to Thursday, 7:00&nbsp;am to 5:00&nbsp;pm | Friday, 7:00&nbsp;am to 3:00&nbsp;pm</span>
+    </p>
+    <a class="topbar__call" href="tel:+12105711338">
+      <svg aria-hidden="true"><use href="#i-phone"/></svg>
+      <em>Contact&nbsp;Us</em> <b>+1 210 571 1338</b>
+    </a>
+  </div>
+</div>
+
+<!-- ============================== NAV BAR ============================== -->
+<header class="site-header site-header--sticky">
+  <div class="shell">
+    <nav class="navbar" aria-label="Primary">
+      <ul class="nav nav--left">
+        <li><a class="nav__link{{ACT_PC}}" href="primary-care.html">Primary Care</a></li>
+        <li><a class="nav__link" href="#services">Weight Loss</a></li>
+        <li><a class="nav__link" href="#services">Hormone Replacement</a></li>
+        <li><a class="nav__link" href="#services">Aesthetics</a></li>
+      </ul>
+
+      <a class="navbar__brand" href="index.html" aria-label="Alamo Primary Care — home">
+        <img src="assets/img/logo.png" alt="Alamo Primary Care" width="1053" height="265">
+      </a>
+
+      <ul class="nav nav--right">
+        <li><a class="nav__util" href="#pay">Pay Online</a></li>
+        <li><a class="nav__util" href="#portal">Patient Portal</a></li>
+        <li><a class="nav__util" href="#book">Book Appointment</a></li>
+        <li>
+          <a class="nav__cta" href="#contact" data-magnetic>
+            <svg aria-hidden="true"><use href="#i-phone"/></svg> Contact Us
+          </a>
+        </li>
+      </ul>
+
+      <button class="navbar__burger" type="button" data-drawer-open aria-label="Open menu" aria-expanded="false">
+        <svg aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================ MOBILE DRAWER ========================== -->
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer__scrim" data-drawer-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__top">
+      <img src="assets/img/logo.png" alt="Alamo Primary Care" width="1053" height="265">
+      <button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">
+        <svg aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+    <div class="drawer__group">
+      <p class="drawer__label">Services</p>
+      <a class="drawer__link" href="primary-care.html">Primary Care <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+      <a class="drawer__link" href="#services">Weight Loss <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+      <a class="drawer__link" href="#services">Hormone Replacement <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+      <a class="drawer__link" href="#services">Aesthetics <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+    </div>
+    <div class="drawer__group">
+      <p class="drawer__label">Patients</p>
+      <a class="drawer__link" href="#pay">Pay Online <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+      <a class="drawer__link" href="#portal">Patient Portal <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+      <a class="drawer__link" href="#locations">Our Locations <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+    </div>
+    <div class="drawer__group">
+      <p class="drawer__label">Get in touch</p>
+      <div class="btn-row">
+        <a class="btn btn--green" href="#book">Book An Appointment <span class="btn__ico"><svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></a>
+        <a class="btn btn--line" href="tel:+12105711338">Call 210-571-1338 <span class="btn__ico"><svg aria-hidden="true"><use href="#i-phone"/></svg></span></a>
+      </div>
+    </div>
+  </div>
+</div>

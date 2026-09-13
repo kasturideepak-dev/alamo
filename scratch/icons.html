@@ -1,0 +1,17 @@
+<style>body{margin:0;background:#F7F7FA;font:14px Inter,sans-serif}
+.g{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:16px}
+.c{background:#fff;border-radius:10px;padding:12px;text-align:center}
+.c svg{width:64px;height:64px;color:#479F45}
+.c b{display:block;font-size:10px;color:#2A3379;margin-top:6px}</style>
+<div class="g" id="g"></div>
+<script>
+fetch('/primary-care.html').then(r=>r.text()).then(h=>{
+  const d=new DOMParser().parseFromString(h,'text/html');
+  const sp=d.querySelector('.svg-sprite'); document.body.appendChild(sp);
+  const g=document.getElementById('g');
+  [...sp.querySelectorAll('symbol')].forEach(s=>{
+    g.insertAdjacentHTML('beforeend',
+      `<div class="c"><svg><use href="#${s.id}"/></svg><b>${s.id}</b></div>`);
+  });
+});
+</script>
