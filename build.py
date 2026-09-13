@@ -4,7 +4,7 @@
 Static HTML is the deliverable; this only keeps the shared header, footer and
 repeated sections from drifting between the two pages. Run: python3 build.py
 """
-import pathlib, re, sys
+import hashlib, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).parent
 P = ROOT / "_partials"
@@ -68,6 +68,19 @@ MAP_BO = locmap("S Main St", [
     ("M130 -4 V124", 2.4), ("M0 100 C60 78 140 108 204 84", 2.4),
 ], pin=(80, 56))
 
+def stamp(rel):
+    """Content-hash query on an asset URL.
+
+    A CDN keys its cache on the exact URL, so an unchanged `style.css` path can
+    keep serving a stale copy for the whole max-age after a deploy — which is
+    exactly what happened on 2026-09-13 (the brotli variant went 31 hours
+    stale). Changing the URL whenever the bytes change makes that impossible.
+    """
+    p = ROOT / rel
+    h = hashlib.sha256(p.read_bytes()).hexdigest()[:10] if p.exists() else "0"
+    return "%s?v=%s" % (rel, h)
+
+
 SHELL = """<title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#2A3379">
@@ -76,7 +89,7 @@ SHELL = """<title>{title}</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="{css}">
 {preload}
 {sprite}
 {header}
@@ -87,7 +100,7 @@ SHELL = """<title>{title}</title>
 <script src="assets/js/gsap.min.js"></script>
 <script src="assets/js/ScrollTrigger.min.js"></script>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="{mainjs}"></script>
 """
 
 HEAD_OPEN = """<!doctype html>
@@ -111,6 +124,8 @@ def compose(out, title, desc, body_file, preload, active_pc, header_file="header
         .replace("{{MAP_BO}}", MAP_BO))
 
     page = SHELL.format(title=title, desc=desc, preload=preload,
+                        css=stamp("assets/css/style.css"),
+                        mainjs=stamp("assets/js/main.js"),
                         sprite=read("sprite.html"), header=header,
                         body=body,
                         footer=read("footer.html")
