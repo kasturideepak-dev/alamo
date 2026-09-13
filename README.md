@@ -50,8 +50,16 @@ from the logo artwork:
 
 | | Hex | Role |
 | --- | --- | --- |
-| Navy | `#2A3379` | **Primary.** All dark grounds, headings, section cuts, service-card overlays, the active nav item, most buttons |
-| Green | `#52B04F` | **Accent only.** Booking CTAs, icons, the thin diagonal stripe, hover states, carousel dots, footer contact icons |
+| Navy | `#2A3379` | **Primary.** All dark grounds, headings, every icon, the nav CTA, pins, carousel dots, testimonial ring, collage rules, the active nav item, most buttons |
+| Green | `#52B04F` | **Accent only.** The primary *Book An Appointment* / *Contact Us* buttons, the thin diagonal stripe, the video play button, the footer newsletter button, and hover states |
+
+Green was cut back twice at the client's request. It now appears in roughly a dozen
+places per page rather than thirty: run the inventory in `scratch/` or grep the
+stylesheet for `--green` to see the full list. Everything that used to be a green
+icon, pin, dot or ring is navy.
+
+The **menu carries no border or underline** — the active and hover states are a
+soft `--navy-50` pill plus weight and colour.
 
 The Figma uses green heavily — green utility bar, green active nav, green first
 service card, green washes on half the service grid, a green first location pill.
@@ -62,6 +70,24 @@ deliberate departure from the frames, and it is what the client asked for.
 The portal's pale grounds are sampled straight from frame `163-139`: page
 `#EEF9ED`, green cards fading to `#DCF6DB`, navy cards to `#EBECF8`. All three are
 light tints of the two logo colours.
+
+## Mega menu
+
+One panel per header, in `_partials/megamenu.html`: the twelve Primary Care
+services with icons, the four verticals with one-line descriptors, and a promo
+panel with the two locations. It is anchored to the nav bar (`[data-mega-scope]`)
+so it spans the shell and is **never full-bleed** — the client asked for that
+specifically.
+
+CSS owns the open/close state, so the panel still works with JavaScript disabled;
+`main.js` only manages intent (hover with a 200 ms close delay, click, focus,
+Escape) and staggers the columns and links with GSAP. Escape sets a short
+`suppress` flag before returning focus to the trigger, otherwise the trigger's
+focus handler reopens the panel immediately.
+
+Below 1180px the panel is hidden and the mobile drawer takes over. One known
+limit: the panel sits after the nav in DOM order, so Tab reaches its links after
+the rest of the nav rather than immediately.
 
 ## Locations
 

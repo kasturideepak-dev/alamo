@@ -16,12 +16,24 @@
 <!-- ============================== NAV BAR ============================== -->
 <header class="site-header site-header--sticky">
   <div class="shell">
-    <nav class="navbar" aria-label="Primary">
+    <nav class="navbar" aria-label="Primary" data-mega-scope>
       <ul class="nav nav--left">
-        <li><a class="nav__link{{ACT_PC}}" href="primary-care.html">Primary Care</a></li>
-        <li><a class="nav__link" href="#services">Weight Loss</a></li>
-        <li><a class="nav__link" href="#services">Hormone Replacement</a></li>
-        <li><a class="nav__link" href="#services">Aesthetics</a></li>
+        <li class="has-mega">
+          <a class="nav__link{{ACT_PC}}" href="primary-care.html"
+             aria-haspopup="true" aria-expanded="false" data-mega-trigger>Primary Care</a>
+        </li>
+        <li class="has-mega">
+          <a class="nav__link" href="#services"
+             aria-haspopup="true" aria-expanded="false" data-mega-trigger>Weight Loss</a>
+        </li>
+        <li class="has-mega">
+          <a class="nav__link" href="#services"
+             aria-haspopup="true" aria-expanded="false" data-mega-trigger>Hormone Replacement</a>
+        </li>
+        <li class="has-mega">
+          <a class="nav__link" href="#services"
+             aria-haspopup="true" aria-expanded="false" data-mega-trigger>Aesthetics</a>
+        </li>
       </ul>
 
       <a class="navbar__brand" href="index.html" aria-label="Alamo Primary Care — home">
@@ -42,6 +54,8 @@
       <button class="navbar__burger" type="button" data-drawer-open aria-label="Open menu" aria-expanded="false">
         <svg aria-hidden="true"><use href="#i-menu"/></svg>
       </button>
+
+{{MEGA}}
     </nav>
   </div>
 </header>

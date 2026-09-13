@@ -47,6 +47,93 @@
     });
   }());
 
+  /* ------------------------------------------------------------ mega menu */
+  // One panel per header, opened by any trigger in that header. CSS owns the
+  // open/close state so the panel still works without JS; this manages intent
+  // (hover with a close delay, click, keyboard) and staggers the contents.
+  (function megaMenu() {
+    var scopes = Array.prototype.slice.call(document.querySelectorAll('[data-mega-scope]'));
+    if (!scopes.length) return;
+    var CLOSE_DELAY = 200;
+
+    scopes.forEach(function (scope) {
+      var panel = scope.querySelector('[data-mega]');
+      var triggers = Array.prototype.slice.call(scope.querySelectorAll('[data-mega-trigger]'));
+      if (!panel || !triggers.length) return;
+      var timer = null;
+      var hideTimer = null;
+      // Escape returns focus to the trigger, whose focus handler would otherwise
+      // reopen the panel straight away.
+      var suppress = false;
+
+      function close() {
+        clearTimeout(timer);
+        if (!scope.classList.contains('is-mega-open')) return;
+        scope.classList.remove('is-mega-open');
+        triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(function () {
+          if (!scope.classList.contains('is-mega-open')) panel.hidden = true;
+        }, 420);
+      }
+
+      function open() {
+        if (suppress) return;
+        clearTimeout(timer);
+        clearTimeout(hideTimer);
+        if (scope.classList.contains('is-mega-open')) return;
+        panel.hidden = false;
+        void panel.offsetWidth;           // flush layout so the transition runs
+        scope.classList.add('is-mega-open');
+        triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'true'); });
+
+        if (!still && hasGSAP) {
+          var cols = panel.querySelectorAll('.mega__col');
+          var items = panel.querySelectorAll('.mega__link, .mega__vert, .mega__loc');
+          gsap.killTweensOf([cols, items]);
+          gsap.fromTo(cols, { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.06, overwrite: true });
+          gsap.fromTo(items, { opacity: 0, y: 6 },
+            { opacity: 1, y: 0, duration: 0.34, ease: 'power2.out',
+              stagger: 0.012, delay: 0.06, overwrite: true });
+        }
+      }
+
+      function scheduleClose() {
+        clearTimeout(timer);
+        timer = setTimeout(close, CLOSE_DELAY);
+      }
+
+      triggers.forEach(function (t) {
+        var group = t.closest('.has-mega') || t;
+        group.addEventListener('mouseenter', open);
+        group.addEventListener('mouseleave', scheduleClose);
+        // touch and keyboard: the first activation opens, the second follows the link
+        t.addEventListener('click', function (e) {
+          if (!scope.classList.contains('is-mega-open')) { e.preventDefault(); open(); }
+        });
+        t.addEventListener('focus', open);
+      });
+      panel.addEventListener('mouseenter', function () { clearTimeout(timer); });
+      panel.addEventListener('mouseleave', scheduleClose);
+
+      scope.addEventListener('focusout', function (e) {
+        if (!scope.contains(e.relatedTarget)) scheduleClose();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && scope.classList.contains('is-mega-open')) {
+          suppress = true;
+          close();
+          triggers[0].focus();
+          setTimeout(function () { suppress = false; }, 320);
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!scope.contains(e.target)) close();
+      });
+    });
+  }());
+
   /* ------------------------------------------------------------- carousel */
   (function carousel() {
     document.querySelectorAll('[data-carousel]').forEach(function (root) {

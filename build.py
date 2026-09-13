@@ -111,7 +111,9 @@ HEAD_OPEN = """<!doctype html>
 """
 
 def compose(out, title, desc, body_file, preload, active_pc, header_file="header.html"):
-    header = read(header_file).replace("{{ACT_PC}}", " is-active" if active_pc else "")
+    header = (read(header_file)
+              .replace("{{ACT_PC}}", " is-active" if active_pc else "")
+              .replace("{{MEGA}}", read("megamenu.html")))
     body = read(body_file)
     body = (body
         .replace("{{VALUES}}", read("values.html"))

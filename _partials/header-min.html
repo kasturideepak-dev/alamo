@@ -1,17 +1,22 @@
 <!-- ===================== HEADER — Figma frame 163-139 ==================== -->
 <header class="site-header site-header--min site-header--sticky">
-  <div class="shell minbar">
+  <div class="shell minbar" data-mega-scope>
     <a class="minbar__brand" href="index.html" aria-label="Alamo Primary Care — home">
       <img src="assets/img/logo.png" alt="Alamo Primary Care" width="1053" height="265">
     </a>
     <div class="minbar__acts">
-      <a class="minbar__link" href="primary-care.html">Our Care</a>
+      <span class="has-mega">
+        <a class="minbar__link" href="primary-care.html"
+           aria-haspopup="true" aria-expanded="false" data-mega-trigger>Our Care</a>
+      </span>
       <a class="minbar__link" href="#locations">Locations</a>
       <a class="nav__cta" href="#contact" data-magnetic>Contact Us</a>
       <button class="navbar__burger" type="button" data-drawer-open aria-label="Open menu" aria-expanded="false">
         <svg aria-hidden="true"><use href="#i-menu"/></svg>
       </button>
     </div>
+
+{{MEGA}}
   </div>
 </header>
 

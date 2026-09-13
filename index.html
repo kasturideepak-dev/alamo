@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=88e5e84de8">
+<link rel="stylesheet" href="assets/css/style.css?v=edd46b7aac">
 <link rel="preload" as="image" href="assets/img/card-primary.png">
 </head>
 <body>
@@ -151,18 +151,84 @@
 
 <!-- ===================== HEADER — Figma frame 163-139 ==================== -->
 <header class="site-header site-header--min site-header--sticky">
-  <div class="shell minbar">
+  <div class="shell minbar" data-mega-scope>
     <a class="minbar__brand" href="index.html" aria-label="Alamo Primary Care — home">
       <img src="assets/img/logo.png" alt="Alamo Primary Care" width="1053" height="265">
     </a>
     <div class="minbar__acts">
-      <a class="minbar__link" href="primary-care.html">Our Care</a>
+      <span class="has-mega">
+        <a class="minbar__link" href="primary-care.html"
+           aria-haspopup="true" aria-expanded="false" data-mega-trigger>Our Care</a>
+      </span>
       <a class="minbar__link" href="#locations">Locations</a>
       <a class="nav__cta" href="#contact" data-magnetic>Contact Us</a>
       <button class="navbar__burger" type="button" data-drawer-open aria-label="Open menu" aria-expanded="false">
         <svg aria-hidden="true"><use href="#i-menu"/></svg>
       </button>
     </div>
+
+    <div class="mega" data-mega hidden>
+      <div class="mega__inner">
+
+        <div class="mega__col">
+          <p class="mega__label">Primary Care Services</p>
+          <div class="mega__links">
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-tele"/></svg></span><span>Telemedicine Visits</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-chronic"/></svg></span><span>Chronic Disease Management</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-screen"/></svg></span><span>Health Screenings &amp; Diagnostics</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-checkup"/></svg></span><span>Routine Check-ups</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-proc"/></svg></span><span>In-office Procedures</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-geri"/></svg></span><span>Geriatric Care</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-mens"/></svg></span><span>Men&rsquo;s Health Services</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-womens"/></svg></span><span>Women&rsquo;s Health Services</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-refer"/></svg></span><span>Referrals to Specialists</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-acute"/></svg></span><span>Acute Care Visits</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-iv"/></svg></span><span>IV Therapy</span></a>
+            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-vax"/></svg></span><span>Immunization &amp; Vaccination</span></a>
+          </div>
+        </div>
+
+        <div class="mega__col">
+          <p class="mega__label">Our Care</p>
+          <a class="mega__vert" href="primary-care.html">
+            <b>Primary Care</b><span>Preventive care, chronic conditions and everyday health.</span>
+          </a>
+          <a class="mega__vert" href="#services">
+            <b>Weight Loss Management</b><span>Medically supervised plans built around your body.</span>
+          </a>
+          <a class="mega__vert" href="#services">
+            <b>Hormone Replacement</b><span>Balance restored, monitored by your own provider.</span>
+          </a>
+          <a class="mega__vert" href="#services">
+            <b>Aesthetics</b><span>Treatments that look like you, only rested.</span>
+          </a>
+        </div>
+
+        <div class="mega__col mega__col--promo">
+          <a class="mega__promo" href="#book">
+            <img src="assets/img/community-room.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <span class="mega__promo-body">
+              <b>Accepting new patients, ages&nbsp;16+</b>
+              <span>Same-week appointments at both Texas clinics.</span>
+              <span class="mega__promo-cta">Book An Appointment
+                <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>
+            </span>
+          </a>
+          <div class="mega__locs">
+            <a class="mega__loc" href="index.html#locations">
+              <span class="mega__loc-pin"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>
+              <span><b>Westover Hills</b><span>San Antonio, TX</span></span>
+            </a>
+            <a class="mega__loc" href="index.html#locations">
+              <span class="mega__loc-pin"><svg aria-hidden="true"><use href="#i-pin"/></svg></span>
+              <span><b>Main Street</b><span>Boerne, TX</span></span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </header>
 
@@ -377,6 +443,6 @@
 <script src="assets/js/gsap.min.js"></script>
 <script src="assets/js/ScrollTrigger.min.js"></script>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=565e349ac4"></script>
+<script src="assets/js/main.js?v=303843e76f"></script>
 </body>
 </html>
