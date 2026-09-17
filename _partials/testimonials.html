@@ -1,54 +1,99 @@
-<section class="section" id="testimonials">
-  <div class="shell">
-    <div class="center" style="margin-bottom:clamp(34px,4vw,58px)">
-      <p class="eyebrow" data-reveal-y>Patient Testimonial</p>
-      <h2 class="h2" data-split>What Our Patient Say</h2>
-    </div>
+<section class="section tdeck-sec" id="testimonials">
+  <div class="shell tdeck-sec__in">
 
-    <div class="tst" data-carousel>
-      <button class="tst__nav" type="button" data-car-prev aria-label="Previous testimonial">
-        <svg aria-hidden="true"><use href="#i-arrow-l"/></svg>
-      </button>
+    <div class="tdeck-sec__copy">
+      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-star"/></svg> Patient Testimonials</p>
+      <h2 class="tdeck-sec__title" data-split>What our patients <span class="hl">say about us</span></h2>
+      <p class="tdeck-sec__lede" data-reveal-y>Real words from the people we care for in San Antonio and Boerne.</p>
 
-      <div class="tst__stage" data-reveal-y>
-        <figure class="tst__card" data-slide>
-          <div class="tst__avatar"><img src="assets/img/avatar-1.jpg" alt="" loading="lazy"></div>
-          <blockquote>
-            <p class="tst__quote">The staff is amazing and always makes me feel comfortable. The doctors truly care!
-              Professional, kind, and thorough. I highly recommend Alamo Primary Care.</p>
-            <span class="tst__rule"></span>
-            <figcaption class="tst__who"><b>Jessica R.</b><span>Patient</span></figcaption>
-          </blockquote>
-        </figure>
-        <figure class="tst__card" data-slide hidden>
-          <div class="tst__avatar"><img src="assets/img/avatar-2.jpg" alt="" loading="lazy"></div>
-          <blockquote>
-            <p class="tst__quote">Booking was simple and I was seen on time. Dr. Nemarugommula explained every
-              result clearly and never once made me feel rushed.</p>
-            <span class="tst__rule"></span>
-            <figcaption class="tst__who"><b>Patient Name</b><span>Patient</span></figcaption>
-          </blockquote>
-        </figure>
-        <figure class="tst__card" data-slide hidden>
-          <div class="tst__avatar"><img src="assets/img/avatar-3.jpg" alt="" loading="lazy"></div>
-          <blockquote>
-            <p class="tst__quote">I have been coming here for two years for chronic care. The follow-up is
-              consistent and the whole team knows my history.</p>
-            <span class="tst__rule"></span>
-            <figcaption class="tst__who"><b>Patient Name</b><span>Patient</span></figcaption>
-          </blockquote>
-        </figure>
+      <div class="tdeck-trust" data-reveal-y>
+        <div class="trusted__avatars">
+          <img src="assets/img/avatar-1.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+          <img src="assets/img/avatar-2.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+          <img src="assets/img/avatar-3.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+        </div>
+        <div>
+          <span class="tdeck-stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+          <small>Trusted by <b>5,000+ patients</b></small>
+        </div>
       </div>
 
-      <button class="tst__nav" type="button" data-car-next aria-label="Next testimonial">
-        <svg aria-hidden="true"><use href="#i-arrow-r"/></svg>
-      </button>
+      <div class="tdeck-ctrl" data-reveal-y>
+        <button class="tdeck-ctrl__btn" type="button" data-tdeck-prev aria-label="Previous testimonial">
+          <svg aria-hidden="true"><use href="#i-arrow-l"/></svg>
+        </button>
+        <button class="tdeck-ctrl__btn" type="button" data-tdeck-next aria-label="Next testimonial">
+          <svg aria-hidden="true"><use href="#i-arrow-r"/></svg>
+        </button>
+        <div class="tdeck-ctrl__meta">
+          <span class="tdeck-ctrl__count" aria-live="polite"><b data-tdeck-cur>01</b> / <span data-tdeck-total>05</span></span>
+          <span class="tdeck-ctrl__bar"><i data-tdeck-bar></i></span>
+        </div>
+      </div>
     </div>
 
-    <div class="tst__dots" role="tablist" aria-label="Choose testimonial">
-      <button class="tst__dot is-on" type="button" data-car-dot role="tab" aria-label="Testimonial 1" aria-selected="true"></button>
-      <button class="tst__dot" type="button" data-car-dot role="tab" aria-label="Testimonial 2" aria-selected="false"></button>
-      <button class="tst__dot" type="button" data-car-dot role="tab" aria-label="Testimonial 3" aria-selected="false"></button>
+    <div class="tdeck" data-tdeck data-reveal>
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">The staff is amazing and always makes me feel comfortable. The doctors truly care! Professional, kind, and thorough. I highly recommend Alamo Primary Care.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-1.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Daniel R.</b><small>Primary Care · Westover Hills</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">Booking was simple and I was seen on time. Dr. Nemarugommula explained every result clearly and never once made me feel rushed.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-2.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Jessica R.</b><small>Primary Care · Boerne</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">I have been coming here for two years for chronic care. The follow-up is consistent and the whole team knows my history.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-3.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Monica T.</b><small>Chronic Care · San Antonio</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">I was seen the same week, and my provider actually remembered the details of my last visit. That has never happened to me before.</p>
+        <footer class="tcard__who">
+          <span class="tcard__initials">JH</span>
+          <span><b>Jessica H.</b><small>Preventive Care · Boerne</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">Telemedicine made managing my condition so much easier. Clear answers, no waiting room, and my prescriptions sorted the same day.</p>
+        <footer class="tcard__who">
+          <span class="tcard__initials">MK</span>
+          <span><b>Marcus K.</b><small>Telemedicine · San Antonio</small></span>
+        </footer>
+      </article>
+    </div>
+  </div>
+
+  <!-- looping strip of short review snippets -->
+  <div class="tmarq" aria-hidden="true" data-tmarq>
+    <div class="tmarq__track">
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Seen the same week”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Professional, kind and thorough”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Never felt rushed”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“The whole team knows my history”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Telemedicine made it easy”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Clear answers, every visit”</span>
     </div>
   </div>
 </section>

@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=ffc473ebe7">
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/style.css?v=b16ca88b0a">
 <link rel="preload" as="image" href="assets/img/community-room.jpg">
 </head>
 <body>
@@ -147,6 +147,11 @@
   <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <rect x="3.4" y="3.4" width="17.2" height="17.2" rx="5"/><circle cx="12" cy="12" r="3.9"/><circle cx="17.1" cy="6.9" r="1.1" fill="currentColor" stroke="none"/>
   </symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5.2 5.2 0 0 0-7.4 0L12 7l-1.4-1.4a5.2 5.2 0 1 0-7.4 7.4l1.4 1.4L12 21.4l7.4-7.4 1.4-1.4a5.2 5.2 0 0 0 0-7.4Z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 2.6v5M12 16.4v5M2.6 12h5M16.4 12h5M5.4 5.4l3.5 3.5M15.1 15.1l3.5 3.5M18.6 5.4l-3.5 3.5M8.9 15.1l-3.5 3.5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21.2l1.5-7L2 9.4l7-.8Z"/></symbol>
 </svg>
 
 <!-- ============================== TOP BAR ============================== -->
@@ -212,43 +217,37 @@
         <div class="mega__col">
           <p class="mega__label">Primary Care Services</p>
           <div class="mega__links">
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-tele"/></svg></span><span>Telemedicine Visits</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-chronic"/></svg></span><span>Chronic Disease Management</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-screen"/></svg></span><span>Health Screenings &amp; Diagnostics</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-checkup"/></svg></span><span>Routine Check-ups</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-proc"/></svg></span><span>In-office Procedures</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-geri"/></svg></span><span>Geriatric Care</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-mens"/></svg></span><span>Men&rsquo;s Health Services</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-womens"/></svg></span><span>Women&rsquo;s Health Services</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-refer"/></svg></span><span>Referrals to Specialists</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-acute"/></svg></span><span>Acute Care Visits</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-iv"/></svg></span><span>IV Therapy</span></a>
-            <a class="mega__link" href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-vax"/></svg></span><span>Immunization &amp; Vaccination</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s01-telemedicine.jpg" data-promo-title="Telemedicine Visits" data-promo-text="See your provider from home, on your schedule." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-tele"/></svg></span><span>Telemedicine Visits</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s02-chronic.jpg" data-promo-title="Chronic Disease Management" data-promo-text="Ongoing care plans for diabetes, blood pressure and more." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-chronic"/></svg></span><span>Chronic Disease Management</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s03-screenings.jpg" data-promo-title="Health Screenings &amp; Diagnostics" data-promo-text="In-house screenings and labs, reviewed with you." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-screen"/></svg></span><span>Health Screenings &amp; Diagnostics</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s04-checkups.jpg" data-promo-title="Routine Check-ups" data-promo-text="Annual physicals and preventive care for every stage of life." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-checkup"/></svg></span><span>Routine Check-ups</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s05-procedures.jpg" data-promo-title="In-office Procedures" data-promo-text="Minor procedures handled right here in the clinic." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-proc"/></svg></span><span>In-office Procedures</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s06-geriatric.jpg" data-promo-title="Geriatric Care" data-promo-text="Thoughtful, unhurried care for older adults." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-geri"/></svg></span><span>Geriatric Care</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s07-mens.jpg" data-promo-title="Men&rsquo;s Health Services" data-promo-text="Screenings and care built around men&rsquo;s health." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-mens"/></svg></span><span>Men&rsquo;s Health Services</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s08-womens.jpg" data-promo-title="Women&rsquo;s Health Services" data-promo-text="Preventive care and wellness for women at every age." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-womens"/></svg></span><span>Women&rsquo;s Health Services</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s09-referrals.jpg" data-promo-title="Referrals to Specialists" data-promo-text="Connected to trusted specialists when you need them." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-refer"/></svg></span><span>Referrals to Specialists</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s10-acute.jpg" data-promo-title="Acute Care Visits" data-promo-text="Same-week visits for illness and minor injuries." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-acute"/></svg></span><span>Acute Care Visits</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s11-iv.jpg" data-promo-title="IV Therapy" data-promo-text="Hydration and nutrient infusions in a calm setting." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-iv"/></svg></span><span>IV Therapy</span></a>
+            <a class="mega__link" data-promo-img="assets/img/s12-immunization.jpg" data-promo-title="Immunization &amp; Vaccination" data-promo-text="Flu, travel and routine vaccines for the whole family." href="primary-care.html#services"><span class="mega__ico"><svg aria-hidden="true"><use href="#i-vax"/></svg></span><span>Immunization &amp; Vaccination</span></a>
           </div>
         </div>
 
         <div class="mega__col">
-          <p class="mega__label">Our Care</p>
-          <a class="mega__vert" href="primary-care.html">
-            <b>Primary Care</b><span>Preventive care, chronic conditions and everyday health.</span>
-          </a>
-          <a class="mega__vert" href="#services">
-            <b>Weight Loss Management</b><span>Medically supervised plans built around your body.</span>
-          </a>
-          <a class="mega__vert" href="#services">
-            <b>Hormone Replacement</b><span>Balance restored, monitored by your own provider.</span>
-          </a>
-          <a class="mega__vert" href="#services">
-            <b>Aesthetics</b><span>Treatments that look like you, only rested.</span>
-          </a>
+          <p class="mega__label">Explore</p>
+          <div class="mega__explore">
+            <a href="primary-care.html#about">About <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+            <a href="primary-care.html#providers">Service Provider <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+            <a href="primary-care.html#careers">Career <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+            <a href="primary-care.html#contact">Contact <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+          </div>
         </div>
 
         <div class="mega__col mega__col--promo">
-          <a class="mega__promo" href="#book">
+          <a class="mega__promo" href="primary-care.html#schedule" data-mega-promo>
             <img src="assets/img/community-room.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <span class="mega__promo-body">
-              <b>Accepting new patients, ages&nbsp;16+</b>
-              <span>Same-week appointments at both Texas clinics.</span>
+              <b data-promo-title>Accepting new patients, ages&nbsp;16+</b>
+              <span data-promo-text>Same-week appointments at both Texas clinics.</span>
               <span class="mega__promo-cta">Book An Appointment
                 <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>
             </span>
@@ -334,75 +333,151 @@
   </svg>
 </div>
 
-<!-- =========================== ABOUT + COLLAGE ======================== -->
-<section class="section" id="about">
-  <div class="shell split">
-    <div class="split__copy">
-      <h2 class="h2" data-split>Exceptional Care Tailored to Your Needs</h2>
-      <p class="lede" data-reveal-y>Welcome to Alamo Primary Care, your trusted provider of comprehensive
-        primary healthcare services in San Antonio. We are dedicated to delivering personalized,
-        compassionate care that focuses on your overall well-being.</p>
-      <div class="btn-row" data-reveal-y>
-        <a class="btn btn--green btn--lead" href="#services" data-magnetic>
-          <span class="btn__ico"><svg aria-hidden="true"><use href="#i-arrow-r"/></svg></span>
-          Read More</a>
+<!-- ============== ABOUT — pre-Figma design, restored ================= -->
+<section class="section about-c tex tex--glow" id="about">
+  <div class="shell">
+    <div class="about-c__head">
+      <p class="about-c__eyebrow" data-reveal-y>About Alamo Primary Care</p>
+      <p class="about-c__statement" data-reveal-y>Alamo Primary Care is your trusted provider of comprehensive primary healthcare in San Antonio and Boerne, dedicated to delivering personalized, compassionate care that focuses on your overall well-being.</p>
+
+      <div class="about-c__meta" data-reveal-y>
+        <a class="pill-btn" href="#providers">
+          More about us
+          <span class="pill-btn__ico"><svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>
+        </a>
+        <div class="trusted">
+          <div class="trusted__avatars">
+            <img src="assets/img/avatar-1.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+            <img src="assets/img/avatar-2.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+            <img src="assets/img/avatar-3.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+          </div>
+          <div class="trusted__text">
+            <small>Trusted by</small>
+            <b>5,000+ patients</b>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="collage" data-reveal>
-      <span class="collage__rule collage__rule--a"></span>
-      <span class="collage__rule collage__rule--b"></span>
-      <figure class="collage__a"><img src="assets/img/monument-sign.jpg" alt="Alamo Primary Care signage" loading="lazy" decoding="async"></figure>
-      <figure class="collage__b"><img src="assets/img/community-room.jpg" alt="A patient education session" loading="lazy" decoding="async"></figure>
-      <figure class="collage__c"><img src="assets/img/waiting-room-b.jpg" alt="Inside the clinic" loading="lazy" decoding="async"></figure>
+    <div class="about-cards">
+      <article class="acard" data-reveal-y>
+        <div class="acard__head">
+          <span class="acard__ico"><svg aria-hidden="true"><use href="#i-heart"/></svg></span>
+          <h3>Comprehensive Care</h3>
+        </div>
+        <div class="acard__viz">
+          <div class="asvc" data-asvc>
+            <span class="asvc__row"><img src="assets/img/svc-t1.jpg" alt="" width="144" height="144" loading="lazy" decoding="async"><span>Telemedicine visits</span></span>
+            <span class="asvc__row"><img src="assets/img/svc-t2.jpg" alt="" width="144" height="144" loading="lazy" decoding="async"><span>Chronic disease care</span></span>
+            <span class="asvc__row"><img src="assets/img/svc-t3.jpg" alt="" width="144" height="144" loading="lazy" decoding="async"><span>Screenings &amp; lab tests</span></span>
+            <span class="asvc__more">+ 9 more services <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></span>
+          </div>
+        </div>
+        <p>Twelve services under one roof, from routine check-ups and screenings to chronic disease management.</p>
+      </article>
+
+      <article class="acard" data-reveal-y>
+        <div class="acard__head">
+          <span class="acard__ico"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
+          <h3>Experienced Providers</h3>
+        </div>
+        <div class="acard__viz">
+          <div class="aav">
+            <img src="assets/img/prov-1.jpg" alt="" width="128" height="128" loading="lazy" decoding="async">
+            <img src="assets/img/prov-2.jpg" alt="" width="128" height="128" loading="lazy" decoding="async">
+            <img src="assets/img/prov-3.jpg" alt="" width="128" height="128" loading="lazy" decoding="async">
+            <img src="assets/img/prov-4.jpg" alt="" width="128" height="128" loading="lazy" decoding="async">
+            <span class="aav__more">+16</span>
+            <span class="aav__label"><b>20+</b><small>board certified</small></span>
+          </div>
+        </div>
+        <p>A board-certified team across our Westover Hills and Boerne clinics, for ages 16 and up.</p>
+      </article>
+
+      <article class="acard acard--feature" data-tilt data-reveal-y>
+        <img class="acard__bg" src="assets/img/clinic-interior.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" data-acard-bg>
+        <span class="acard__veil"></span>
+        <div class="acard__head">
+          <span class="acard__ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <h3>Patient-First Approach</h3>
+        </div>
+        <div class="acard__viz">
+          <div class="afchips">
+            <span class="afchip">Same-day visits</span>
+            <span class="afchip">Telemedicine</span>
+            <span class="afchip">Most insurance</span>
+            <span class="afchip">Ages 16+</span>
+          </div>
+        </div>
+        <p>Appointments that fit your week, from home or in the clinic.</p>
+        <a class="acard__link" href="#schedule">Book a visit <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
+      </article>
     </div>
   </div>
 </section>
 
-<div class="cut" aria-hidden="true">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-    <path d="M0 46 L1440 0 L1440 24 L0 70 Z" fill="#52B04F"/>
-    <path d="M0 70 L1440 24 L1440 100 L0 100 Z" fill="#2A3379"/>
-  </svg>
-</div>
-
-<!-- ==================== MISSION / FACULTY / PROMISE =================== -->
-<section class="pillars section on-dark">
+<!-- ============ MISSION / FACULTY / PROMISE — bento layout ============ -->
+<section class="section mvp tex">
   <div class="shell">
-    <article class="pillar">
-      <div class="pillar__media" data-reveal>
-        <img src="assets/img/mission-tech.jpg" alt="Connected medical technology" loading="lazy" decoding="async">
+    <div class="mvp__head">
+      <div>
+        <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-spark"/></svg> Who We Are</p>
+        <h2 class="mvp__title" data-split>Our mission, our faculty and <span class="hl">our promise</span></h2>
       </div>
-      <div class="pillar__copy">
-        <h2 class="h2" data-split>Our Mission</h2>
-        <p data-reveal-y>Our mission is to provide exceptional healthcare services to individuals and
-          families of all ages, promoting preventive care and empowering you to make informed
-          decisions about your health.</p>
+      <div class="mvp__intro" data-reveal-y>
+        <p>Three commitments shape every visit at Alamo Primary Care, from your first appointment to your long-term care plan.</p>
+        <a class="pill-btn" href="#providers">
+          Meet our providers
+          <span class="pill-btn__ico"><svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></span>
+        </a>
       </div>
-    </article>
+    </div>
 
-    <article class="pillar pillar--flip">
-      <div class="pillar__media" data-reveal>
-        <img src="assets/img/waiting-room-a.jpg" alt="The Alamo Primary Care community room" loading="lazy" decoding="async">
-      </div>
-      <div class="pillar__copy">
-        <h2 class="h2" data-split>Our Faculty</h2>
-        <p data-reveal-y>Our state-of-the-art facility is equipped with advanced technology and staffed
-          by a team of experienced healthcare professionals who are committed to your comfort
-          and satisfaction.</p>
-      </div>
-    </article>
+    <div class="mvp__grid">
+      <article class="mvp-card mvp-card--mission" data-reveal-y>
+        <img class="mvp-card__bg" src="assets/img/mission-tech.jpg" alt="Connected medical technology" loading="lazy" decoding="async">
+        <span class="mvp-card__num">01</span>
+        <div class="mvp-card__glass">
+          <span class="mvp-card__ico"><svg aria-hidden="true"><use href="#i-heart"/></svg></span>
+          <h3>Our Mission</h3>
+          <p>Our mission is to provide exceptional healthcare services to individuals and families of all
+            ages, promoting preventive care and empowering you to make informed decisions about your health.</p>
+        </div>
+      </article>
 
-    <article class="pillar">
-      <div class="pillar__media" data-reveal>
-        <img src="assets/img/promise-hands.jpg" alt="A clinician holding a patient's hand" loading="lazy" decoding="async">
+      <article class="mvp-card mvp-card--faculty" data-reveal-y>
+        <div class="mvp-card__top">
+          <span class="mvp-card__ico"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
+          <span class="mvp-card__num">02</span>
+        </div>
+        <div class="mvp-card__row">
+          <div>
+            <h3>Our Faculty</h3>
+            <p>Our state-of-the-art facility is equipped with advanced technology and staffed by a team of
+              experienced healthcare professionals who are committed to your comfort and satisfaction.</p>
+          </div>
+          <figure class="mvp-card__thumb"><img src="assets/img/waiting-room-a.jpg" alt="The Alamo Primary Care community room" loading="lazy" decoding="async"></figure>
+        </div>
+      </article>
+
+      <article class="mvp-card mvp-card--promise" data-reveal-y>
+        <img class="mvp-card__bg" src="assets/img/promise-hands.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        <div class="mvp-card__top">
+          <span class="mvp-card__ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <span class="mvp-card__num">03</span>
+        </div>
+        <h3>Our Promise</h3>
+        <p>We strive to create a warm and welcoming environment where you can feel at ease while
+          receiving the highest quality of care.</p>
+      </article>
+
+      <div class="mvp-stats" data-reveal-y>
+        <div class="mvp-stat"><b data-count="5000" data-suffix="+">5,000+</b><span>Patients cared for</span></div>
+        <div class="mvp-stat"><b data-count="20" data-suffix="+">20+</b><span>Board-certified providers</span></div>
+        <div class="mvp-stat"><b data-count="12">12</b><span>Primary care services</span></div>
+        <div class="mvp-stat"><b data-count="2">2</b><span>Clinics in San Antonio &amp; Boerne</span></div>
       </div>
-      <div class="pillar__copy">
-        <h2 class="h2" data-split>Our Promise</h2>
-        <p data-reveal-y>We strive to create a warm and welcoming environment where you can feel at ease
-          while receiving the highest quality of care.</p>
-      </div>
-    </article>
+    </div>
   </div>
 </section>
 
@@ -416,18 +491,18 @@
     </div>
 
     <div class="pcard-grid">
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s01-telemedicine.jpg" alt="" loading="lazy" decoding="async"><h3>Telemedicine<br>Visits</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s02-chronic.jpg" alt="" loading="lazy" decoding="async"><h3>Chronic Disease<br>Management</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s03-screenings.jpg" alt="" loading="lazy" decoding="async"><h3>Health Screenings<br>and Diagnostics Tests</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s04-checkups.jpg" alt="" loading="lazy" decoding="async"><h3>Routine Check-ups<br>and preventative care</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s05-procedures.jpg" alt="" loading="lazy" decoding="async"><h3>In-office<br>Procedures</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s06-geriatric.jpg" alt="" loading="lazy" decoding="async"><h3>Geriatric<br>Care</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s07-mens.jpg" alt="" loading="lazy" decoding="async"><h3>Men&rsquo;s Health<br>Services</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s08-womens.jpg" alt="" loading="lazy" decoding="async"><h3>Women&rsquo;s Health<br>services</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s09-referrals.jpg" alt="" loading="lazy" decoding="async"><h3>Referrals to<br>Specialists</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s10-acute.jpg" alt="" loading="lazy" decoding="async"><h3>Acute Care<br>Visits</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s11-iv.jpg" alt="" loading="lazy" decoding="async"><h3>IV<br>Therapy</h3></a>
-      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s12-immunization.jpg" alt="" loading="lazy" decoding="async"><h3>Immunization and<br>Vaccination</h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s01-telemedicine.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Telemedicine <br>Visits</span><span class="pcard__short">Telemedicine</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s02-chronic.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Chronic Disease <br>Management</span><span class="pcard__short">Chronic Care</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s03-screenings.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Health Screenings <br>and Diagnostics Tests</span><span class="pcard__short">Screenings &amp; Tests</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s04-checkups.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Routine Check-ups <br>and preventative care</span><span class="pcard__short">Check-ups</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s05-procedures.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">In-office <br>Procedures</span><span class="pcard__short">In-office Procedures</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s06-geriatric.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Geriatric <br>Care</span><span class="pcard__short">Geriatric Care</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s07-mens.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Men&rsquo;s Health <br>Services</span><span class="pcard__short">Men&rsquo;s Health</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s08-womens.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Women&rsquo;s Health <br>services</span><span class="pcard__short">Women&rsquo;s Health</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s09-referrals.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Referrals to <br>Specialists</span><span class="pcard__short">Specialist Referrals</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s10-acute.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Acute Care <br>Visits</span><span class="pcard__short">Acute Care</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s11-iv.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">IV <br>Therapy</span><span class="pcard__short">IV Therapy</span></h3></a>
+      <a class="pcard" href="#book" data-reveal-y><img src="assets/img/s12-immunization.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Immunization and <br>Vaccination</span><span class="pcard__short">Vaccinations</span></h3></a>
     </div>
   </div>
 </section>
@@ -500,87 +575,108 @@
 
 
 <!-- ============================ TESTIMONIALS ========================== -->
-<section class="section" id="testimonials">
-  <div class="shell">
-    <div class="center" style="margin-bottom:clamp(34px,4vw,58px)">
-      <p class="eyebrow" data-reveal-y>Patient Testimonial</p>
-      <h2 class="h2" data-split>What Our Patient Say</h2>
-    </div>
+<section class="section tdeck-sec" id="testimonials">
+  <div class="shell tdeck-sec__in">
 
-    <div class="tst" data-carousel>
-      <button class="tst__nav" type="button" data-car-prev aria-label="Previous testimonial">
-        <svg aria-hidden="true"><use href="#i-arrow-l"/></svg>
-      </button>
+    <div class="tdeck-sec__copy">
+      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-star"/></svg> Patient Testimonials</p>
+      <h2 class="tdeck-sec__title" data-split>What our patients <span class="hl">say about us</span></h2>
+      <p class="tdeck-sec__lede" data-reveal-y>Real words from the people we care for in San Antonio and Boerne.</p>
 
-      <div class="tst__stage" data-reveal-y>
-        <figure class="tst__card" data-slide>
-          <div class="tst__avatar"><img src="assets/img/avatar-1.jpg" alt="" loading="lazy"></div>
-          <blockquote>
-            <p class="tst__quote">The staff is amazing and always makes me feel comfortable. The doctors truly care!
-              Professional, kind, and thorough. I highly recommend Alamo Primary Care.</p>
-            <span class="tst__rule"></span>
-            <figcaption class="tst__who"><b>Jessica R.</b><span>Patient</span></figcaption>
-          </blockquote>
-        </figure>
-        <figure class="tst__card" data-slide hidden>
-          <div class="tst__avatar"><img src="assets/img/avatar-2.jpg" alt="" loading="lazy"></div>
-          <blockquote>
-            <p class="tst__quote">Booking was simple and I was seen on time. Dr. Nemarugommula explained every
-              result clearly and never once made me feel rushed.</p>
-            <span class="tst__rule"></span>
-            <figcaption class="tst__who"><b>Patient Name</b><span>Patient</span></figcaption>
-          </blockquote>
-        </figure>
-        <figure class="tst__card" data-slide hidden>
-          <div class="tst__avatar"><img src="assets/img/avatar-3.jpg" alt="" loading="lazy"></div>
-          <blockquote>
-            <p class="tst__quote">I have been coming here for two years for chronic care. The follow-up is
-              consistent and the whole team knows my history.</p>
-            <span class="tst__rule"></span>
-            <figcaption class="tst__who"><b>Patient Name</b><span>Patient</span></figcaption>
-          </blockquote>
-        </figure>
+      <div class="tdeck-trust" data-reveal-y>
+        <div class="trusted__avatars">
+          <img src="assets/img/avatar-1.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+          <img src="assets/img/avatar-2.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+          <img src="assets/img/avatar-3.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+        </div>
+        <div>
+          <span class="tdeck-stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+          <small>Trusted by <b>5,000+ patients</b></small>
+        </div>
       </div>
 
-      <button class="tst__nav" type="button" data-car-next aria-label="Next testimonial">
-        <svg aria-hidden="true"><use href="#i-arrow-r"/></svg>
-      </button>
+      <div class="tdeck-ctrl" data-reveal-y>
+        <button class="tdeck-ctrl__btn" type="button" data-tdeck-prev aria-label="Previous testimonial">
+          <svg aria-hidden="true"><use href="#i-arrow-l"/></svg>
+        </button>
+        <button class="tdeck-ctrl__btn" type="button" data-tdeck-next aria-label="Next testimonial">
+          <svg aria-hidden="true"><use href="#i-arrow-r"/></svg>
+        </button>
+        <div class="tdeck-ctrl__meta">
+          <span class="tdeck-ctrl__count" aria-live="polite"><b data-tdeck-cur>01</b> / <span data-tdeck-total>05</span></span>
+          <span class="tdeck-ctrl__bar"><i data-tdeck-bar></i></span>
+        </div>
+      </div>
     </div>
 
-    <div class="tst__dots" role="tablist" aria-label="Choose testimonial">
-      <button class="tst__dot is-on" type="button" data-car-dot role="tab" aria-label="Testimonial 1" aria-selected="true"></button>
-      <button class="tst__dot" type="button" data-car-dot role="tab" aria-label="Testimonial 2" aria-selected="false"></button>
-      <button class="tst__dot" type="button" data-car-dot role="tab" aria-label="Testimonial 3" aria-selected="false"></button>
+    <div class="tdeck" data-tdeck data-reveal>
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">The staff is amazing and always makes me feel comfortable. The doctors truly care! Professional, kind, and thorough. I highly recommend Alamo Primary Care.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-1.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Daniel R.</b><small>Primary Care · Westover Hills</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">Booking was simple and I was seen on time. Dr. Nemarugommula explained every result clearly and never once made me feel rushed.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-2.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Jessica R.</b><small>Primary Care · Boerne</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">I have been coming here for two years for chronic care. The follow-up is consistent and the whole team knows my history.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-3.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Monica T.</b><small>Chronic Care · San Antonio</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">I was seen the same week, and my provider actually remembered the details of my last visit. That has never happened to me before.</p>
+        <footer class="tcard__who">
+          <span class="tcard__initials">JH</span>
+          <span><b>Jessica H.</b><small>Preventive Care · Boerne</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">Telemedicine made managing my condition so much easier. Clear answers, no waiting room, and my prescriptions sorted the same day.</p>
+        <footer class="tcard__who">
+          <span class="tcard__initials">MK</span>
+          <span><b>Marcus K.</b><small>Telemedicine · San Antonio</small></span>
+        </footer>
+      </article>
+    </div>
+  </div>
+
+  <!-- looping strip of short review snippets -->
+  <div class="tmarq" aria-hidden="true" data-tmarq>
+    <div class="tmarq__track">
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Seen the same week”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Professional, kind and thorough”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Never felt rushed”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“The whole team knows my history”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Telemedicine made it easy”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Clear answers, every visit”</span>
     </div>
   </div>
 </section>
 
 
 </main>
-<div class="cut" aria-hidden="true">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-    <path d="M0 46 L1440 0 L1440 24 L0 70 Z" fill="#52B04F"/>
-    <path d="M0 70 L1440 24 L1440 100 L0 100 Z" fill="#2A3379"/>
-  </svg>
-</div>
-
-<!-- ============================== CTA BAND ============================= -->
-<section class="ctaband" id="book">
-  <img src="assets/img/monument-sign.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-  <div class="shell ctaband__in on-dark">
-    <div>
-      <h2 class="h2" data-split>Your Health Deserves Personalized Care</h2>
-      <p data-reveal-y>Schedule your appointment with Alamo Primary Care today.</p>
-    </div>
-    <div class="ctaband__acts" data-reveal-y>
-      <a class="btn btn--green" href="#book" data-magnetic>Book An Appointment
-        <span class="btn__ico"><svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></a>
-      <a class="btn btn--ghost" href="tel:+12105711338" data-magnetic>Call 210-571-1338
-        <span class="btn__ico"><svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></a>
-    </div>
-  </div>
-</section>
-
 <!-- =============================== FOOTER ============================== -->
 <footer class="foot" id="contact">
   <div class="shell">
@@ -647,6 +743,6 @@
 <script src="assets/js/gsap.min.js"></script>
 <script src="assets/js/ScrollTrigger.min.js"></script>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=303843e76f"></script>
+<script src="assets/js/main.js?v=e4db85f809"></script>
 </body>
 </html>

@@ -88,7 +88,7 @@ SHELL = """<title>{title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="{css}">
 {preload}
 {sprite}
@@ -110,7 +110,8 @@ HEAD_OPEN = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 """
 
-def compose(out, title, desc, body_file, preload, active_pc, header_file="header.html"):
+def compose(out, title, desc, body_file, preload, active_pc, header_file="header.html",
+            footer=True):
     header = (read(header_file)
               .replace("{{ACT_PC}}", " is-active" if active_pc else "")
               .replace("{{MEGA}}", read("megamenu.html")))
@@ -131,7 +132,8 @@ def compose(out, title, desc, body_file, preload, active_pc, header_file="header
                         sprite=read("sprite.html"), header=header,
                         body=body,
                         footer=read("footer.html")
-                            .replace("{{CUT_TO_NAVY}}", cut("to-navy")))
+                            .replace("{{CUT_TO_NAVY}}", cut("to-navy"))
+                            if footer else "")
     lines = page.split("\n")
     head_lines, body_lines, in_head = [], [], True
     for ln in lines:
@@ -151,7 +153,7 @@ compose(
   "San Antonio and Boerne, Texas. Accepting new patients ages 16 and up.",
   "page-portal.html",
   '<link rel="preload" as="image" href="assets/img/card-primary.png">',
-  active_pc=False, header_file="header-min.html",
+  active_pc=False, header_file="header-min.html", footer=False,
 )
 compose(
   "primary-care.html",

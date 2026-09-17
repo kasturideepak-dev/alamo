@@ -47,6 +47,183 @@
     });
   }());
 
+  /* -------------------------------------------------------------- count-up */
+  // Numbers already read correctly in the HTML; this only animates them.
+  if (hasGSAP && !still && ScrollTrigger) {
+    document.querySelectorAll('[data-count]').forEach(function (el) {
+      var to = parseFloat(el.getAttribute('data-count'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var o = { v: 0 };
+      var render = function () { el.textContent = Math.round(o.v).toLocaleString('en-US') + suffix; };
+      render();
+      gsap.to(o, {
+        v: to, duration: 1.8, ease: 'power2.out', onUpdate: render,
+        scrollTrigger: { trigger: el, start: 'top 90%', once: true }
+      });
+    });
+  }
+
+  /* ------------------------------------------------------ testimonial deck */
+  // A stacked deck: the front card is flung off and the rest step forward.
+  // Autoplays while on screen (paused on hover), swipeable, keyboard via the
+  // buttons. Without motion it still pages, just without the tweens.
+  document.querySelectorAll('[data-tdeck]').forEach(function (deck) {
+    var cards = Array.prototype.slice.call(deck.querySelectorAll('[data-tcard]'));
+    var n = cards.length;
+    if (n < 2) return;
+    var sec = deck.closest('section') || deck;
+    var curEl = sec.querySelector('[data-tdeck-cur]');
+    var totEl = sec.querySelector('[data-tdeck-total]');
+    var bar = sec.querySelector('[data-tdeck-bar]');
+    var motion = hasGSAP && !still;
+    var DWELL = 6.5;
+    var order = cards.slice();
+    var busy = false, auto = null, inView = false, hovering = false;
+    var pad = function (k) { return (k < 10 ? '0' : '') + k; };
+    if (totEl) totEl.textContent = pad(n);
+
+    cards.forEach(function (c) {
+      var q = c.querySelector('.tcard__quote');
+      if (!q) return;
+      q.innerHTML = q.textContent.trim().split(/[ \t\r\n]+/).map(function (w) {
+        return '<span class="tw">' + w + '</span>';
+      }).join(' ');
+    });
+
+    function slot(d) {
+      var k = deck.clientWidth < 520 ? 0.55 : 1;
+      if (d === 0) return { x: 0, y: 0, rotate: 0, scale: 1, opacity: 1, zIndex: n + 1 };
+      if (d === 1) return { x: 22 * k, y: 20 * k, rotate: 2.5, scale: 0.95, opacity: 1, zIndex: n };
+      if (d === 2) return { x: 42 * k, y: 38 * k, rotate: 5, scale: 0.9, opacity: 0.85, zIndex: n - 1 };
+      return { x: 54 * k, y: 50 * k, rotate: 7, scale: 0.86, opacity: 0, zIndex: 1 };
+    }
+    function apply(c, v) {
+      if (hasGSAP) { gsap.set(c, v); return; }
+      c.style.zIndex = v.zIndex;
+      c.style.opacity = v.opacity;
+      c.style.transform = 'translate(' + v.x + 'px,' + v.y + 'px) rotate(' + v.rotate + 'deg) scale(' + v.scale + ')';
+    }
+    function layout(tween, skip) {
+      order.forEach(function (c, d) {
+        var front = d === 0;
+        c.classList.toggle('is-front', front);
+        c.setAttribute('aria-hidden', front ? 'false' : 'true');
+        if (c === skip) return;
+        if (tween && motion) gsap.to(c, Object.assign({ duration: 0.8, ease: 'power3.out', overwrite: 'auto' }, slot(d)));
+        else apply(c, slot(d));
+      });
+      if (curEl) curEl.textContent = pad(cards.indexOf(order[0]) + 1);
+    }
+    function words(c) {
+      if (!motion) return;
+      gsap.fromTo(c.querySelectorAll('.tw'), { opacity: 0.12, y: 8 },
+        { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out', stagger: 0.022, delay: 0.2, overwrite: true });
+    }
+
+    function go(dir) {
+      if (busy) return;
+      if (!motion) {
+        if (dir > 0) order.push(order.shift()); else order.unshift(order.pop());
+        layout(false);
+        return;
+      }
+      busy = true;
+      if (dir > 0) {
+        var out = order.shift();
+        order.push(out);
+        layout(true, out);
+        gsap.timeline({ onComplete: function () { busy = false; } })
+          .to(out, { x: -160, y: -24, rotate: -12, opacity: 0, duration: 0.5, ease: 'power2.in', overwrite: 'auto' })
+          .set(out, { zIndex: 0 })
+          .to(out, Object.assign({ duration: 0.5, ease: 'power2.out' }, slot(n - 1)));
+      } else {
+        var back = order.pop();
+        order.unshift(back);
+        gsap.set(back, { x: -160, y: -24, rotate: -12, opacity: 0, scale: 1, zIndex: n + 2 });
+        layout(true);
+        gsap.delayedCall(0.8, function () { busy = false; });
+      }
+      words(order[0]);
+      restart();
+    }
+
+    // autoplay, with the progress bar as its clock
+    function restart() {
+      if (!motion || !bar) return;
+      if (auto) auto.kill();
+      auto = gsap.fromTo(bar, { scaleX: 0 }, {
+        scaleX: 1, duration: DWELL, ease: 'none', paused: true,
+        onComplete: function () { go(1); }
+      });
+      sync();
+    }
+    function sync() {
+      if (!auto) return;
+      if (inView && !hovering && !document.hidden) auto.play(); else auto.pause();
+    }
+    sec.addEventListener('mouseenter', function () { hovering = true; sync(); });
+    sec.addEventListener('mouseleave', function () { hovering = false; sync(); });
+    document.addEventListener('visibilitychange', sync);
+    if (motion && ScrollTrigger) {
+      ScrollTrigger.create({
+        trigger: deck, start: 'top 85%', end: 'bottom 15%',
+        onToggle: function (self) { inView = self.isActive; sync(); }
+      });
+    }
+
+    var prev = sec.querySelector('[data-tdeck-prev]');
+    var next = sec.querySelector('[data-tdeck-next]');
+    if (prev) prev.addEventListener('click', function () { go(-1); });
+    if (next) next.addEventListener('click', function () { go(1); });
+
+    // drag / swipe the front card
+    var startX = null, dx = 0;
+    deck.addEventListener('pointerdown', function (e) {
+      if (busy) return;
+      startX = e.clientX; dx = 0;
+      deck.setPointerCapture(e.pointerId);
+    });
+    deck.addEventListener('pointermove', function (e) {
+      if (startX === null) return;
+      dx = e.clientX - startX;
+      if (motion) gsap.set(order[0], { x: dx * 0.7, rotate: dx * 0.03 });
+    });
+    function release() {
+      if (startX === null) return;
+      startX = null;
+      if (Math.abs(dx) > 60) go(dx < 0 ? 1 : -1);
+      else if (motion) gsap.to(order[0], { x: 0, rotate: 0, duration: 0.5, ease: 'back.out(2)' });
+    }
+    deck.addEventListener('pointerup', release);
+    deck.addEventListener('pointercancel', release);
+
+    layout(false);
+    window.addEventListener('resize', function () { if (!busy) layout(false); });
+    restart();
+  });
+
+  // Snippet strip: an endless GSAP loop that speeds up with scroll velocity.
+  document.querySelectorAll('[data-tmarq]').forEach(function (strip) {
+    var track = strip.querySelector('.tmarq__track');
+    if (!track || !motion()) return;
+    track.innerHTML += track.innerHTML;
+    var loop = gsap.to(track, { xPercent: -50, duration: 38, ease: 'none', repeat: -1 });
+    strip.addEventListener('mouseenter', function () { gsap.to(loop, { timeScale: 0.25, duration: 0.6 }); });
+    strip.addEventListener('mouseleave', function () { gsap.to(loop, { timeScale: 1, duration: 0.6 }); });
+    if (ScrollTrigger) {
+      ScrollTrigger.create({
+        trigger: strip, start: 'top bottom', end: 'bottom top',
+        onToggle: function (self) { if (self.isActive) loop.play(); else loop.pause(); },
+        onUpdate: function (self) {
+          var v = Math.min(Math.abs(self.getVelocity()) / 400, 4);
+          gsap.to(loop, { timeScale: 1 + v, duration: 0.2, overwrite: true,
+            onComplete: function () { gsap.to(loop, { timeScale: 1, duration: 0.9 }); } });
+        }
+      });
+    }
+    function motion() { return hasGSAP && !still; }
+  });
+
   /* ------------------------------------------------------------ mega menu */
   // One panel per header, opened by any trigger in that header. CSS owns the
   // open/close state so the panel still works without JS; this manages intent
@@ -73,7 +250,7 @@
         triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
         clearTimeout(hideTimer);
         hideTimer = setTimeout(function () {
-          if (!scope.classList.contains('is-mega-open')) panel.hidden = true;
+          if (!scope.classList.contains('is-mega-open')) { panel.hidden = true; resetPromo(); }
         }, 420);
       }
 
@@ -89,7 +266,7 @@
 
         if (!still && hasGSAP) {
           var cols = panel.querySelectorAll('.mega__col');
-          var items = panel.querySelectorAll('.mega__link, .mega__vert, .mega__loc');
+          var items = panel.querySelectorAll('.mega__link, .mega__explore a, .mega__loc');
           gsap.killTweensOf([cols, items]);
           gsap.fromTo(cols, { opacity: 0, y: 10 },
             { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.06, overwrite: true });
@@ -98,6 +275,79 @@
               stagger: 0.012, delay: 0.06, overwrite: true });
         }
       }
+
+      // Service preview: hovering or focusing a service swaps the promo card's
+      // photo (crossfade) and copy to match; closing the panel restores it.
+      var promo = panel.querySelector('[data-mega-promo]');
+      var svcLinks = Array.prototype.slice.call(panel.querySelectorAll('[data-promo-img]'));
+      var promoTitle = promo && promo.querySelector('[data-promo-title]');
+      var promoText = promo && promo.querySelector('[data-promo-text]');
+      var promoDefault = promo && {
+        img: promo.querySelector('img').getAttribute('src'),
+        title: promoTitle.innerHTML, text: promoText.innerHTML
+      };
+      var promoKey = promoDefault && promoDefault.img;
+      var preloaded = false;
+
+      function setPromo(d, link) {
+        if (!promo) return;
+        svcLinks.forEach(function (l) { l.classList.toggle('is-active', l === link); });
+        if (d.img === promoKey) return;
+        promoKey = d.img;
+        var old = promo.querySelectorAll('img');
+        var img = document.createElement('img');
+        img.src = d.img; img.alt = ''; img.setAttribute('aria-hidden', 'true');
+        old[old.length - 1].after(img);
+        var swap = function () {
+          promoTitle.innerHTML = d.title;
+          promoText.innerHTML = d.text;
+        };
+        if (still || !hasGSAP) {
+          swap();
+          old.forEach(function (o) { o.remove(); });
+          return;
+        }
+        gsap.fromTo(img, { opacity: 0, scale: 1.08 }, {
+          opacity: 1, scale: 1, duration: 0.55, ease: 'power2.out', overwrite: true,
+          onComplete: function () { old.forEach(function (o) { o.remove(); }); }
+        });
+        gsap.to([promoTitle, promoText], {
+          opacity: 0, y: 6, duration: 0.14, ease: 'power1.in', overwrite: true,
+          onComplete: function () {
+            swap();
+            gsap.to([promoTitle, promoText], { opacity: 1, y: 0, duration: 0.32, ease: 'power2.out', stagger: 0.05 });
+          }
+        });
+      }
+      function resetPromo() {
+        if (!promo) return;
+        svcLinks.forEach(function (l) { l.classList.remove('is-active'); });
+        if (promoKey === promoDefault.img) return;
+        var old = promo.querySelectorAll('img');
+        var img = document.createElement('img');
+        img.src = promoDefault.img; img.alt = ''; img.setAttribute('aria-hidden', 'true');
+        old[old.length - 1].after(img);
+        old.forEach(function (o) { o.remove(); });
+        promoKey = promoDefault.img;
+        promoTitle.innerHTML = promoDefault.title;
+        promoText.innerHTML = promoDefault.text;
+        if (hasGSAP) gsap.set([promoTitle, promoText], { clearProps: 'opacity,transform' });
+      }
+      svcLinks.forEach(function (link) {
+        var d = {
+          img: link.getAttribute('data-promo-img'),
+          title: link.getAttribute('data-promo-title'),
+          text: link.getAttribute('data-promo-text')
+        };
+        link.addEventListener('mouseenter', function () { setPromo(d, link); });
+        link.addEventListener('focus', function () { setPromo(d, link); });
+      });
+      // warm the cache on first open so the first swap is instant
+      scope.addEventListener('mouseenter', function () {
+        if (preloaded) return;
+        preloaded = true;
+        svcLinks.forEach(function (l) { new Image().src = l.getAttribute('data-promo-img'); });
+      });
 
       function scheduleClose() {
         clearTimeout(timer);
@@ -277,7 +527,7 @@
   reveal('[data-reveal-y]', { opacity: 1, y: 0 });
 
   // grids stagger rather than firing all at once
-  ['.icard-grid', '.pcard-grid', '.loc-grid', '.prov-grid', '.values__grid'].forEach(function (sel) {
+  ['.icard-grid', '.pcard-grid', '.loc-grid', '.prov-grid', '.values__grid', '.about-cards', '.mvp__grid'].forEach(function (sel) {
     document.querySelectorAll(sel).forEach(function (grid) {
       var kids = grid.querySelectorAll('[data-reveal-y]');
       if (kids.length < 2) return;
@@ -337,6 +587,38 @@
     btn.addEventListener('mouseleave', function () { tl.reverse(); });
     btn.addEventListener('focus', function () { tl.play(); });
     btn.addEventListener('blur', function () { tl.reverse(); });
+  });
+
+  /* ------------------------------------------- about cards (restored) */
+  // The feature card's photo leans toward the cursor; pointer-fine devices only.
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+      var bg = card.querySelector('[data-acard-bg]');
+      if (!bg) return;
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        gsap.to(bg, {
+          xPercent: ((e.clientX - (r.left + r.width / 2)) / r.width) * -6,
+          yPercent: ((e.clientY - (r.top + r.height / 2)) / r.height) * -6,
+          duration: 0.7, ease: 'power3.out', overwrite: 'auto'
+        });
+      });
+      card.addEventListener('mouseleave', function () {
+        gsap.to(bg, { xPercent: 0, yPercent: 0, duration: 0.9, ease: 'power3.out', overwrite: 'auto' });
+      });
+    });
+  }
+  // Service rows slide in one after another on hover.
+  document.querySelectorAll('[data-asvc]').forEach(function (list) {
+    var card = list.closest('.acard');
+    var rows = list.querySelectorAll('.asvc__row');
+    if (!card || !rows.length) return;
+    card.addEventListener('mouseenter', function () {
+      gsap.to(rows, { x: 7, duration: 0.5, ease: 'power3.out', stagger: 0.05, overwrite: 'auto' });
+    });
+    card.addEventListener('mouseleave', function () {
+      gsap.to(rows, { x: 0, duration: 0.45, ease: 'power3.out', stagger: 0.03, overwrite: 'auto' });
+    });
   });
 
   /* --------------------------------------------------------- housekeeping */
