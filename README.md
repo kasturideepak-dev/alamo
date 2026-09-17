@@ -1,6 +1,6 @@
 # Alamo Primary Care — static design prototype
 
-Two pages, plain HTML/CSS/JS with GSAP. No build step is required to view them —
+Six pages, plain HTML/CSS/JS with GSAP. No build step is required to view them —
 they work from the filesystem (`file://`) as well as over a server.
 
 Built to follow the client's Figma:
@@ -26,19 +26,30 @@ layout, and what the screenshots in `preview/` were captured with.
 | File | What it is |
 | --- | --- |
 | `index.html` | Portal / main landing page, frame `163-139`. Pale green ground, the four service verticals as 2×2 cards with cut-out photography, then the **Location panel** → CTA band → footer |
-| `primary-care.html` | Primary Health Care page, frame `203-210`. Video hero → About + collage → Mission / Faculty / Promise → 12 service cards → "From Age 16" band → Schedule → Providers → Testimonials → CTA → Footer |
+| `primary-care.html` | Primary Health Care page, frame `203-210`. Video hero → About → Mission / Faculty / Promise → 12 service cards → "From Age 16" band → Schedule → Providers → Testimonials → Footer |
+| `weight-loss.html` | Weight Loss Management. Hero → intro → 5 service cards → why us → tirzepatide / semaglutide → InBody → free delivery → steps → band → FAQ |
+| `hormone-replacement.html` | Hormone Replacement Therapy. Hero → intro → TRT + Biote cards → TRT spotlight → Biote → symptom checker → band → contact strip |
+| `trt.html` | Testosterone Replacement Therapy membership ($150/month). Hero → program intro → signs → membership + timeline → contact form → FAQ → band |
+| `aesthetics.html` | Aesthetics. Hero → intro → Botox / Filler / Sculptra cards → treatment guide tabs → steps → band → contact strip |
 
 The portal uses the frame's own **minimal header** (logo + green *Contact Us*) rather
 than the full `63-99` nav bar, because that is what the frame the client approved
 shows. `primary-care.html` carries the full `63-99` header. Both share the `63-99`
 footer.
 
-`index.html` and `primary-care.html` are the deliverables. They are generated
-from `_partials/` by `build.py` so the header, footer, value strip, providers
-row and testimonial carousel cannot drift apart between the two pages:
+The service pages share the Primary Care page's header, banner (`.phero`),
+services grid (`.pcard-grid`, with `--2`, `--3` and `--5` variants), "From Age 16"
+band (`_partials/band.html`) and footer. Each service in the header has its own mega
+menu: Primary Care's is `_partials/megamenu.html`, the other three are generated
+by `megamenus.py` in the same shape. The TRT enquiry form validates in the
+browser but has no backend yet: a valid submit only shows the confirmation.
+
+The HTML files at the root are the deliverables. They are generated from
+`_partials/` by `build.py` so the shared header, footer, band, providers row and
+testimonials cannot drift apart between pages:
 
 ```bash
-python3 build.py     # rewrites both HTML files from _partials/
+python3 build.py     # rewrites every HTML page from _partials/
 ```
 
 Edit the partials, not the generated pages.

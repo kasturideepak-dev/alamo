@@ -12,3 +12,6 @@ scratch/*.png
 scratch/*.jpg
 # signed, expiring Figma S3 URLs
 scratch/urls.json
+
+# build.py imports megamenus.py
+__pycache__/

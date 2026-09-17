@@ -63,6 +63,148 @@
     });
   }
 
+  /* ------------------------------------------------ service page widgets */
+  // Pill tabs (symptom checker): a sliding pill under the
+  // selected button, arrow keys to move, panels toggled by aria-controls.
+  function pillTabs(list, onChange) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    var pill = list.querySelector('[class$="pill"]');
+    function place() {
+      var on = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0];
+      if (!on || !pill) return;
+      pill.style.setProperty('--pw', on.offsetWidth + 'px');
+      pill.style.setProperty('--px', (on.offsetLeft - 5) + 'px');
+    }
+    function select(i, focus) {
+      tabs.forEach(function (t, k) {
+        var on = k === i;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !on;
+        if (on && panel && hasGSAP && !still) {
+          gsap.fromTo(panel, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', overwrite: true });
+        }
+      });
+      if (focus) tabs[i].focus();
+      place();
+      if (onChange) onChange(i);
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); select((i + 1) % tabs.length, true); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); select((i - 1 + tabs.length) % tabs.length, true); }
+      });
+    });
+    window.addEventListener('resize', place);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+    select(0);
+    return select;
+  }
+
+  document.querySelectorAll('[data-hcheck]').forEach(function (box) {
+    var count = box.querySelector('[data-hcheck-count]');
+    var msg = box.querySelector('[data-hcheck-msg]');
+    function tally() {
+      var visible = box.querySelector('[role="tabpanel"]:not([hidden])');
+      var n = visible ? visible.querySelectorAll('input:checked').length : 0;
+      count.textContent = n;
+      msg.textContent = n === 0 ? 'Select any that apply.'
+        : n < 3 ? 'Worth mentioning at your next visit.'
+        : 'A hormone panel could tell you a lot. Let’s test.';
+      if (hasGSAP && !still) gsap.fromTo(count, { scale: 1.35 }, { scale: 1, duration: 0.45, ease: 'back.out(3)' });
+    }
+    box.addEventListener('change', tally);
+    pillTabs(box.querySelector('[role="tablist"]'), tally);
+  });
+
+  // Enquiry form: validated in the browser. There is no backend in this
+  // prototype, so a valid submit shows the confirmation state only.
+  document.querySelectorAll('[data-cform]').forEach(function (form) {
+    var done = form.querySelector('.cform__done');
+    function check(input) {
+      var field = input.closest('.field');
+      var bad = input.required && !input.value.trim();
+      field.classList.toggle('is-bad', bad);
+      input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      var err = field.querySelector('.field__err');
+      if (bad && !err) {
+        err = document.createElement('span');
+        err.className = 'field__err';
+        err.id = input.id + '-err';
+        err.textContent = 'Please fill this in.';
+        field.appendChild(err);
+        input.setAttribute('aria-describedby', err.id);
+      } else if (!bad && err) {
+        err.remove();
+        input.removeAttribute('aria-describedby');
+      }
+      return !bad;
+    }
+    form.querySelectorAll('[required]').forEach(function (i) {
+      i.addEventListener('blur', function () { check(i); });
+      i.addEventListener('input', function () { if (i.closest('.field').classList.contains('is-bad')) check(i); });
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ok = true, first = null;
+      form.querySelectorAll('[required]').forEach(function (i) {
+        if (!check(i)) { ok = false; first = first || i; }
+      });
+      if (!ok) { first.focus(); return; }
+      done.hidden = false;
+      if (hasGSAP && !still) gsap.fromTo(done, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' });
+      form.reset();
+    });
+  });
+
+  // Report bars, drawn lines and step rails: final state without motion,
+  // animated on scroll with it.
+  var scrollFx = hasGSAP && !still && ScrollTrigger;
+  document.querySelectorAll('[data-bar]').forEach(function (em) {
+    var w = em.getAttribute('data-bar') + '%';
+    if (!scrollFx) { em.style.setProperty('--w', w); return; }
+    gsap.fromTo(em, { '--w': '0%' }, {
+      '--w': w, duration: 1.4, ease: 'power3.out',
+      scrollTrigger: { trigger: em, start: 'top 92%', once: true }
+    });
+  });
+  document.querySelectorAll('[data-draw]').forEach(function (path) {
+    if (!scrollFx) return;
+    gsap.fromTo(path, { strokeDasharray: 1, strokeDashoffset: 1 }, {
+      strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut',
+      scrollTrigger: { trigger: path, start: 'top 92%', once: true }
+    });
+  });
+  document.querySelectorAll('.deliver__path').forEach(function (path) {
+    if (!scrollFx) return;
+    gsap.to(path, { strokeDashoffset: -0.3, duration: 6, ease: 'none', repeat: -1 });
+  });
+  // Floating collage: each photo drifts at its own speed as the section scrolls.
+  document.querySelectorAll('[data-spa-float] [data-speed]').forEach(function (fig) {
+    if (!scrollFx) return;
+    var sp = parseFloat(fig.getAttribute('data-speed'));
+    gsap.fromTo(fig, { yPercent: sp * -100 }, {
+      yPercent: sp * 100, ease: 'none',
+      scrollTrigger: { trigger: fig.closest('[data-spa-float]'), start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  });
+  document.querySelectorAll('.spa-hero__title .it, .spa-title .it').forEach(function (em) {
+    if (!scrollFx) return;
+    gsap.fromTo(em, { letterSpacing: '0.04em' }, {
+      letterSpacing: '-0.02em', duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { trigger: em, start: 'top 90%', once: true }
+    });
+  });
+  document.querySelectorAll('[data-steps], [data-tline]').forEach(function (rail) {
+    if (!scrollFx) return;
+    gsap.fromTo(rail, { '--p': 0 }, {
+      '--p': 1, ease: 'none',
+      scrollTrigger: { trigger: rail, start: 'top 80%', end: 'bottom 60%', scrub: true }
+    });
+  });
+
   /* ------------------------------------------------------ testimonial deck */
   // A stacked deck: the front card is flung off and the rest step forward.
   // Autoplays while on screen (paused on hover), swipeable, keyboard via the
@@ -233,51 +375,124 @@
     if (!scopes.length) return;
     var CLOSE_DELAY = 200;
 
+    // One scope (header) can hold several panels, one per service; each
+    // trigger names its panel with data-mega-trigger="key".
     scopes.forEach(function (scope) {
-      var panel = scope.querySelector('[data-mega]');
+      var panels = {};
+      Array.prototype.slice.call(scope.querySelectorAll('[data-mega]')).forEach(function (p) {
+        panels[p.getAttribute('data-mega') || 'pc'] = setupPanel(p);
+      });
       var triggers = Array.prototype.slice.call(scope.querySelectorAll('[data-mega-trigger]'));
-      if (!panel || !triggers.length) return;
+      if (!triggers.length || !Object.keys(panels).length) return;
+      var current = null;
       var timer = null;
-      var hideTimer = null;
+      var hideTimers = {};
       // Escape returns focus to the trigger, whose focus handler would otherwise
       // reopen the panel straight away.
       var suppress = false;
+      var keyOf = function (t) { return t.getAttribute('data-mega-trigger') || 'pc'; };
+
+      function setExpanded() {
+        triggers.forEach(function (t) {
+          var on = keyOf(t) === current;
+          t.setAttribute('aria-expanded', on ? 'true' : 'false');
+          var li = t.closest('.has-mega');
+          if (li) li.classList.toggle('is-open', on);
+        });
+      }
+
+      function hide(key, instant) {
+        var p = panels[key];
+        if (!p) return;
+        p.el.classList.remove('is-open');
+        clearTimeout(hideTimers[key]);
+        var done = function () {
+          if (current !== key) { p.el.hidden = true; p.reset(); }
+        };
+        if (instant) done(); else hideTimers[key] = setTimeout(done, 420);
+      }
 
       function close() {
         clearTimeout(timer);
-        if (!scope.classList.contains('is-mega-open')) return;
+        if (!current) return;
+        var was = current;
+        current = null;
         scope.classList.remove('is-mega-open');
-        triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(function () {
-          if (!scope.classList.contains('is-mega-open')) { panel.hidden = true; resetPromo(); }
-        }, 420);
+        setExpanded();
+        hide(was);
       }
 
-      function open() {
-        if (suppress) return;
+      function open(key) {
+        if (suppress || !panels[key]) return;
         clearTimeout(timer);
-        clearTimeout(hideTimer);
-        if (scope.classList.contains('is-mega-open')) return;
-        panel.hidden = false;
-        void panel.offsetWidth;           // flush layout so the transition runs
+        clearTimeout(hideTimers[key]);
+        if (current === key) return;
+        var prev = current;
+        var switching = prev !== null;
+        current = key;
+        if (switching) hide(prev, true);
+        var p = panels[key];
+        p.el.hidden = false;
+        void p.el.offsetWidth;            // flush layout so the transition runs
+        p.el.classList.toggle('is-instant', switching);
+        p.el.classList.add('is-open');
         scope.classList.add('is-mega-open');
-        triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'true'); });
+        setExpanded();
+        p.preload();
 
         if (!still && hasGSAP) {
-          var cols = panel.querySelectorAll('.mega__col');
-          var items = panel.querySelectorAll('.mega__link, .mega__explore a, .mega__loc');
+          var cols = p.el.querySelectorAll('.mega__col');
+          var items = p.el.querySelectorAll('.mega__link, .mega__explore a, .mega__loc');
           gsap.killTweensOf([cols, items]);
-          gsap.fromTo(cols, { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', stagger: 0.06, overwrite: true });
+          gsap.fromTo(cols, { opacity: 0, y: switching ? 4 : 10 },
+            { opacity: 1, y: 0, duration: switching ? 0.26 : 0.4, ease: 'power2.out', stagger: 0.05, overwrite: true });
           gsap.fromTo(items, { opacity: 0, y: 6 },
-            { opacity: 1, y: 0, duration: 0.34, ease: 'power2.out',
-              stagger: 0.012, delay: 0.06, overwrite: true });
+            { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out',
+              stagger: 0.012, delay: 0.04, overwrite: true });
         }
       }
 
-      // Service preview: hovering or focusing a service swaps the promo card's
-      // photo (crossfade) and copy to match; closing the panel restores it.
+      function scheduleClose() {
+        clearTimeout(timer);
+        timer = setTimeout(close, CLOSE_DELAY);
+      }
+
+      triggers.forEach(function (t) {
+        var key = keyOf(t);
+        var group = t.closest('.has-mega') || t;
+        group.addEventListener('mouseenter', function () { open(key); });
+        group.addEventListener('mouseleave', scheduleClose);
+        // touch and keyboard: the first activation opens, the second follows the link
+        t.addEventListener('click', function (e) {
+          if (current !== key) { e.preventDefault(); open(key); }
+        });
+        t.addEventListener('focus', function () { open(key); });
+      });
+      Object.keys(panels).forEach(function (k) {
+        panels[k].el.addEventListener('mouseenter', function () { clearTimeout(timer); });
+        panels[k].el.addEventListener('mouseleave', scheduleClose);
+      });
+
+      scope.addEventListener('focusout', function (e) {
+        if (!scope.contains(e.relatedTarget)) scheduleClose();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && current) {
+          var back = triggers.filter(function (t) { return keyOf(t) === current; })[0];
+          suppress = true;
+          close();
+          if (back) back.focus();
+          setTimeout(function () { suppress = false; }, 320);
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!scope.contains(e.target)) close();
+      });
+    });
+
+    // Service preview: hovering or focusing a service swaps the promo card's
+    // photo (crossfade) and copy to match; closing the panel restores it.
+    function setupPanel(panel) {
       var promo = panel.querySelector('[data-mega-promo]');
       var svcLinks = Array.prototype.slice.call(panel.querySelectorAll('[data-promo-img]'));
       var promoTitle = promo && promo.querySelector('[data-promo-title]');
@@ -292,25 +507,31 @@
       function setPromo(d, link) {
         if (!promo) return;
         svcLinks.forEach(function (l) { l.classList.toggle('is-active', l === link); });
-        if (d.img === promoKey) return;
+        if (d.img === promoKey && promoTitle.innerHTML === d.title) return;
+        var sameImg = d.img === promoKey;
         promoKey = d.img;
-        var old = promo.querySelectorAll('img');
-        var img = document.createElement('img');
-        img.src = d.img; img.alt = ''; img.setAttribute('aria-hidden', 'true');
-        old[old.length - 1].after(img);
         var swap = function () {
           promoTitle.innerHTML = d.title;
           promoText.innerHTML = d.text;
         };
+        var old = promo.querySelectorAll('img');
+        var img = null;
+        if (!sameImg) {
+          img = document.createElement('img');
+          img.src = d.img; img.alt = ''; img.setAttribute('aria-hidden', 'true');
+          old[old.length - 1].after(img);
+        }
         if (still || !hasGSAP) {
           swap();
-          old.forEach(function (o) { o.remove(); });
+          if (img) old.forEach(function (o) { o.remove(); });
           return;
         }
-        gsap.fromTo(img, { opacity: 0, scale: 1.08 }, {
-          opacity: 1, scale: 1, duration: 0.55, ease: 'power2.out', overwrite: true,
-          onComplete: function () { old.forEach(function (o) { o.remove(); }); }
-        });
+        if (img) {
+          gsap.fromTo(img, { opacity: 0, scale: 1.08 }, {
+            opacity: 1, scale: 1, duration: 0.55, ease: 'power2.out', overwrite: true,
+            onComplete: function () { old.forEach(function (o) { o.remove(); }); }
+          });
+        }
         gsap.to([promoTitle, promoText], {
           opacity: 0, y: 6, duration: 0.14, ease: 'power1.in', overwrite: true,
           onComplete: function () {
@@ -319,9 +540,13 @@
           }
         });
       }
-      function resetPromo() {
+      function reset() {
         if (!promo) return;
         svcLinks.forEach(function (l) { l.classList.remove('is-active'); });
+        if (hasGSAP) gsap.killTweensOf([promoTitle, promoText]);
+        promoTitle.innerHTML = promoDefault.title;
+        promoText.innerHTML = promoDefault.text;
+        if (hasGSAP) gsap.set([promoTitle, promoText], { clearProps: 'opacity,transform' });
         if (promoKey === promoDefault.img) return;
         var old = promo.querySelectorAll('img');
         var img = document.createElement('img');
@@ -329,9 +554,6 @@
         old[old.length - 1].after(img);
         old.forEach(function (o) { o.remove(); });
         promoKey = promoDefault.img;
-        promoTitle.innerHTML = promoDefault.title;
-        promoText.innerHTML = promoDefault.text;
-        if (hasGSAP) gsap.set([promoTitle, promoText], { clearProps: 'opacity,transform' });
       }
       svcLinks.forEach(function (link) {
         var d = {
@@ -343,45 +565,13 @@
         link.addEventListener('focus', function () { setPromo(d, link); });
       });
       // warm the cache on first open so the first swap is instant
-      scope.addEventListener('mouseenter', function () {
+      function preload() {
         if (preloaded) return;
         preloaded = true;
         svcLinks.forEach(function (l) { new Image().src = l.getAttribute('data-promo-img'); });
-      });
-
-      function scheduleClose() {
-        clearTimeout(timer);
-        timer = setTimeout(close, CLOSE_DELAY);
       }
-
-      triggers.forEach(function (t) {
-        var group = t.closest('.has-mega') || t;
-        group.addEventListener('mouseenter', open);
-        group.addEventListener('mouseleave', scheduleClose);
-        // touch and keyboard: the first activation opens, the second follows the link
-        t.addEventListener('click', function (e) {
-          if (!scope.classList.contains('is-mega-open')) { e.preventDefault(); open(); }
-        });
-        t.addEventListener('focus', open);
-      });
-      panel.addEventListener('mouseenter', function () { clearTimeout(timer); });
-      panel.addEventListener('mouseleave', scheduleClose);
-
-      scope.addEventListener('focusout', function (e) {
-        if (!scope.contains(e.relatedTarget)) scheduleClose();
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && scope.classList.contains('is-mega-open')) {
-          suppress = true;
-          close();
-          triggers[0].focus();
-          setTimeout(function () { suppress = false; }, 320);
-        }
-      });
-      document.addEventListener('click', function (e) {
-        if (!scope.contains(e.target)) close();
-      });
-    });
+      return { el: panel, reset: reset, preload: preload };
+    }
   }());
 
   /* ------------------------------------------------------------- carousel */
@@ -527,7 +717,7 @@
   reveal('[data-reveal-y]', { opacity: 1, y: 0 });
 
   // grids stagger rather than firing all at once
-  ['.icard-grid', '.pcard-grid', '.loc-grid', '.prov-grid', '.values__grid', '.about-cards', '.mvp__grid'].forEach(function (sel) {
+  ['.icard-grid', '.pcard-grid', '.loc-grid', '.prov-grid', '.values__grid', '.about-cards', '.mvp__grid', '.whygrid__cards', '.signs__grid', '.steps', '.bento', '.vsteps'].forEach(function (sel) {
     document.querySelectorAll(sel).forEach(function (grid) {
       var kids = grid.querySelectorAll('[data-reveal-y]');
       if (kids.length < 2) return;

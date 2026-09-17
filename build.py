@@ -6,6 +6,8 @@ repeated sections from drifting between the two pages. Run: python3 build.py
 """
 import hashlib, pathlib, re, sys
 
+import megamenus
+
 ROOT = pathlib.Path(__file__).parent
 P = ROOT / "_partials"
 
@@ -110,11 +112,17 @@ HEAD_OPEN = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 """
 
-def compose(out, title, desc, body_file, preload, active_pc, header_file="header.html",
-            footer=True):
-    header = (read(header_file)
-              .replace("{{ACT_PC}}", " is-active" if active_pc else "")
-              .replace("{{MEGA}}", read("megamenu.html")))
+def compose(out, title, desc, body_file, preload, active_pc=False, header_file="header.html",
+            footer=True, active=None):
+    # active: which nav item is current — "PC", "WL", "HR" or "AE"
+    if active_pc:
+        active = "PC"
+    header = read(header_file)
+    for key in ("PC", "WL", "HR", "AE"):
+        header = header.replace("{{ACT_%s}}" % key, " is-active" if active == key else "")
+    header = (header
+              .replace("{{MEGA}}", megamenus.panels(read("megamenu.html"))
+                                if header_file == "header.html" else read("megamenu.html")))
     body = read(body_file)
     body = (body
         .replace("{{VALUES}}", read("values.html"))
@@ -124,7 +132,9 @@ def compose(out, title, desc, body_file, preload, active_pc, header_file="header
         .replace("{{CUT_TO_NAVY}}", cut("to-navy"))
         .replace("{{CUT_TO_WHITE}}", cut("to-white"))
         .replace("{{MAP_SA}}", MAP_SA)
-        .replace("{{MAP_BO}}", MAP_BO))
+        .replace("{{MAP_BO}}", MAP_BO)
+        .replace("{{BAND}}", read("band.html"))
+        .replace("{{FAQ_CTA}}", read("contact-strip.html")))
 
     page = SHELL.format(title=title, desc=desc, preload=preload,
                         css=stamp("assets/css/style.css"),
@@ -163,4 +173,40 @@ compose(
   "page-primary.html",
   '<link rel="preload" as="image" href="assets/img/community-room.jpg">',
   active_pc=True,
+)
+compose(
+  "weight-loss.html",
+  "Weight Loss Management — Alamo Primary Care",
+  "Medically supervised weight loss in San Antonio and Boerne: tirzepatide, semaglutide, "
+  "InBody body composition analysis and free medication delivery.",
+  "page-weight.html",
+  '<link rel="preload" as="image" href="assets/img/svc-weight-loss.jpg">',
+  active="WL",
+)
+compose(
+  "hormone-replacement.html",
+  "Hormone Replacement Therapy — Alamo Primary Care",
+  "Hormone replacement therapy at Alamo Primary Care: a testosterone replacement "
+  "membership for men and Biote bioidentical hormone therapy for men and women.",
+  "page-hormone.html",
+  '<link rel="preload" as="image" href="assets/img/svc-hormone.jpg">',
+  active="HR",
+)
+compose(
+  "trt.html",
+  "Testosterone Replacement Therapy Membership — Alamo Primary Care",
+  "The TRT program at Alamo Primary Care: a $150/month membership with consultations, "
+  "lab reviews, prescription management and injection training.",
+  "page-trt.html",
+  '<link rel="preload" as="image" href="assets/img/s07-mens.jpg">',
+  active="HR",
+)
+compose(
+  "aesthetics.html",
+  "Aesthetics — Botox, Filler & Sculptra — Alamo Primary Care",
+  "Botox, dermal filler and Sculptra treatments at Alamo Primary Care in San Antonio "
+  "and Boerne, Texas.",
+  "page-aesthetics.html",
+  '<link rel="preload" as="image" href="assets/img/svc-aesthetics.jpg">',
+  active="AE",
 )
