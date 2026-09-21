@@ -30,7 +30,7 @@ layout, and what the screenshots in `preview/` were captured with.
 | `weight-loss.html` | Weight Loss Management. Hero → intro → 5 service cards → why us → tirzepatide / semaglutide → InBody → free delivery → steps → band → FAQ |
 | `hormone-replacement.html` | Hormone Replacement Therapy. Hero → intro → TRT + Biote cards → TRT spotlight → Biote → symptom checker → band → contact strip |
 | `trt.html` | Testosterone Replacement Therapy membership ($150/month). Hero → program intro → signs → membership + timeline → contact form → FAQ → band |
-| `aesthetics.html` | Aesthetics. Hero → intro → Botox / Filler / Sculptra cards → treatment guide tabs → steps → band → contact strip |
+| `aesthetics.html` | Aesthetics. Hero with treatment wheel → statement → Botox / Filler / Sculptra cards → approach panel → bento → what we treat → appointment form → FAQ → closing band |
 
 The portal uses the frame's own **minimal header** (logo + green *Contact Us*) rather
 than the full `63-99` nav bar, because that is what the frame the client approved
@@ -233,3 +233,21 @@ Purge the CDN cache in hPanel to clear it.
   `overflow.py`, `motion.py` and `audit.py` are the checks this build was
   verified with.
 - `preview/` holds full-page JPEGs at 1440 / 820 / 390 px plus section crops.
+
+## Weight loss photography
+
+`weight-loss.html` uses free photos from [Unsplash](https://unsplash.com/license),
+linked from Unsplash's CDN rather than stored in `assets/img/`. Swap them for the
+clinic's own photography when it's available. Photographers: Dmitriy K. (hero),
+B Y G (nutritionist, consultation, meal plan), Sweet Life (pen injection),
+Haberdoedas (semaglutide pen), Neuro Equilibrium (body composition scale),
+Vitaly Gariev (delivery, doctor consultations), Willo Team (parcel at the door),
+Rashmi Kalburgie (walk in the park).
+
+`hormone-replacement.html` uses Unsplash photos the same way: the hero, the TRT,
+Biote for Men and Biote for Women cards, the spotlight, the lab sample, the
+symptom checker and the closing consultation.
+
+`aesthetics.html` also uses Unsplash photos from the CDN: the hero, the wheel
+thumbnails, the treatment cards, the bento, the appointment and FAQ
+images and the closing band.

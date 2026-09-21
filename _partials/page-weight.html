@@ -1,63 +1,85 @@
-<!-- ============================== HERO ================================ -->
-<section class="phero">
-  <div class="phero__media">
-    <img src="assets/img/svc-weight-loss.jpg" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+<div class="well">
+
+<!-- =============================== INTRO ============================== -->
+<div class="wl-loader" data-wl-loader aria-hidden="true">
+  <div class="wl-loader__ring">
+    <svg viewBox="0 0 200 200"><circle class="wl-loader__track" cx="100" cy="100" r="92"/><circle class="wl-loader__arc" cx="100" cy="100" r="92" pathLength="1"/></svg>
+    <span class="wl-loader__dot"></span>
+    <p class="wl-loader__word" data-wl-word>Evaluate</p>
   </div>
-  <div class="shell phero__in on-dark">
-    <div>
-      <h1 class="h1" data-split>Weight Loss Management</h1>
-      <div class="btn-row" data-reveal-y>
-        <a class="btn btn--green btn--lead" href="#book" data-magnetic>
-          <span class="btn__ico"><svg aria-hidden="true"><use href="#i-cal"/></svg></span>
-          Book An Appointment</a>
-      </div>
+  <p class="wl-loader__meta"><i></i>Weight loss &middot; San Antonio &amp; Boerne</p>
+  <p class="wl-loader__pct"><b data-wl-pct>0</b>%</p>
+</div>
+
+<!-- =============================== HERO =============================== -->
+<section class="wl-hero" data-wl-hero>
+  <canvas class="wl-hero__ink" data-wl-ink aria-hidden="true"></canvas>
+  <figure class="wl-hero__photo" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1620242736370-bfb4ce9ebf3e?auto=format&fit=crop&w=1800&q=80" alt="" crossorigin="anonymous" fetchpriority="high" decoding="async" data-wl-photo>
+    <svg class="wl-hero__ring" viewBox="0 0 200 300" preserveAspectRatio="none"><ellipse cx="100" cy="150" rx="96" ry="146" data-wl-ring/></svg>
+  </figure>
+  <span class="wl-cursor" data-wl-cursor aria-hidden="true"><i></i></span>
+
+  <div class="shell wl-hero__in">
+    <p class="wl-kicker" data-wl-rise><i></i>Weight loss &middot; Tirzepatide &middot; Semaglutide &mdash; San Antonio</p>
+    <h1 class="wl-hero__title">
+      <span class="wl-line"><span data-wl-line>Weight Loss</span></span>
+      <span class="wl-line"><em data-wl-line>Management.</em></span>
+    </h1>
+    <p class="wl-hero__lede" data-wl-rise>Weight is rarely just about willpower. Our program starts with a full
+      medical evaluation, then a plan built around your health history and your week.</p>
+    <div class="wl-hero__acts" data-wl-rise>
+      <a class="wl-btn" href="#book">Book a consultation <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
+      <a class="wl-btn wl-btn--line" href="#plan">See the program <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
     </div>
-    <button class="play" type="button" aria-label="Play the clinic tour video" data-reveal>
-      <svg aria-hidden="true"><use href="#i-play"/></svg>
-    </button>
+  </div>
+
+  <div class="shell wl-hero__foot">
+    <div class="wl-pill" data-wl-rise>
+      <span class="wl-breath" data-wl-breath><i></i><b data-wl-breath-n>4</b></span>
+      <span><small>Breathe with us</small><strong data-wl-breath-w>Inhale</strong></span>
+    </div>
+    <p class="wl-hint" data-wl-rise><i></i>Move to pour</p>
+    <div class="wl-pill" data-wl-rise>
+      <span class="wl-pill__dot"><i></i></span>
+      <span><small>Clinic &middot; <span data-wl-day>Today</span></small><strong data-wl-open>Westover Hills &middot; Boerne</strong><em data-wl-count>Mon&ndash;Thu 7&ndash;5 &middot; Fri 7&ndash;3</em></span>
+    </div>
   </div>
 </section>
 
-{{CUT_TO_WHITE}}
+<!-- ============================== MARQUEE ============================= -->
+<div class="wl-marq" aria-hidden="true" data-tmarq>
+  <div class="tmarq__track">
+    <span>Weight Management</span><i></i><span>Tirzepatide</span><i></i><span>Semaglutide</span><i></i>
+    <span>InBody Weight Analyzer</span><i></i><span>Personal Coaching</span><i></i>
+  </div>
+</div>
 
-<!-- ============================== ABOUT =============================== -->
-<section class="section absplit">
-  <div class="shell absplit__in">
-    <div class="absplit__media" data-reveal>
-      <figure class="absplit__main"><img src="assets/img/svc-weight-loss.jpg" alt="A provider measuring a patient&rsquo;s waist" loading="lazy" decoding="async"></figure>
-      <figure class="absplit__sub"><img src="assets/img/s03-screenings.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <div class="absplit__badge">
-        <span><svg aria-hidden="true"><use href="#i-stetho"/></svg></span>
-        <p><b>Physician-led</b><small>Every plan is prescribed and monitored</small></p>
-      </div>
-      <div class="absplit__stat"><b>5</b><small>services in one program</small></div>
+<!-- ============================== PROGRAM ============================= -->
+<section class="wl-sec wl-sec--paper" id="program">
+  <div class="shell wl-split">
+    <div class="wl-split__copy">
+      <p class="wl-kicker" data-wl-rise><i></i>The program</p>
+      <h2 class="wl-h2" data-wl-heading>Weight Loss Program at <em>Alamo Primary Care.</em></h2>
+      <p class="wl-body" data-wl-rise>Your provider builds a plan around your health history and your week: nutrition
+        guidance you can keep, activity that suits your body and, when appropriate, prescription medication. We check
+        in regularly and track progress with an InBody scan, and adjust as you go.</p>
+      <dl class="wl-stats" data-wl-rise>
+        <div><dt data-count="5">5</dt><dd>Services in one program</dd></div>
+        <div><dt data-count="4">4</dt><dd>Steps, one provider</dd></div>
+        <div><dt data-count="2">2</dt><dd>Clinics in Texas</dd></div>
+      </dl>
+      <a class="wl-link" href="#plan" data-wl-rise>How the program works <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
     </div>
-    <div class="absplit__copy">
-      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-scale"/></svg> Weight Loss Program</p>
-      <h2 class="absplit__title" data-split>Weight Loss Program at <span class="hl">Alamo Primary Care</span></h2>
-      <p class="absplit__lead" data-reveal-y>Weight is rarely just about willpower. Hormones, sleep, medications, stress and conditions like thyroid disease or insulin resistance all play a part, so our program starts with a full medical evaluation, not a meal plan.</p>
-      <p data-reveal-y>Your provider builds a plan around your health history and your week: nutrition guidance you can keep, activity that suits your body and, when appropriate, prescription medication. We check in regularly and track progress with an InBody scan.</p>
-      <ul class="absplit__checks" data-reveal-y>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg>Physician-led, personalized plans</li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg>Tirzepatide &amp; semaglutide options</li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg>InBody body composition tracking</li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg>Free delivery of your medication</li>
-      </ul>
-      <div class="absplit__acts" data-reveal-y>
-        <a class="btn btn--green btn--lead" href="#book" data-magnetic>
-          <span class="btn__ico"><svg aria-hidden="true"><use href="#i-cal"/></svg></span>
-          Book a Consultation</a>
-        <a class="absplit__call" href="tel:+12105711338">
-          <span><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
-          <span><small>Consult with our doctor</small><b>210-571-1338</b></span>
-        </a>
-      </div>
-    </div>
+    <figure class="wl-arch" data-wl-img>
+      <img src="https://images.unsplash.com/photo-1675270882554-ab6817fb44f3?auto=format&fit=crop&w=1100&q=80" alt="A nutritionist at her desk with fresh produce and a tape measure" loading="lazy" decoding="async">
+      <figcaption>Westover Hills &middot; Boerne</figcaption>
+    </figure>
   </div>
 </section>
 
 <!-- ============================== SERVICES ============================ -->
-<section class="section section--flush-top" id="services">
+<section class="section" id="services">
   <div class="shell">
     <div class="center" style="margin-bottom:clamp(32px,3.8vw,54px)">
       <h2 class="h2" data-split>Our Weight Loss Services</h2>
@@ -65,224 +87,166 @@
         assessment to your follow-up scans.</p>
     </div>
 
-    <div class="pcard-grid pcard-grid--5">
-      <a class="pcard" href="#plan" data-reveal-y><img src="assets/img/svc-weight-loss.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Weight <br>Management</span><span class="pcard__short">Weight Management</span></h3></a>
-      <a class="pcard" href="#medications" data-reveal-y><img src="assets/img/s12-immunization.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Tirzepatide</span><span class="pcard__short">Tirzepatide</span></h3></a>
-      <a class="pcard" href="#medications" data-reveal-y><img src="assets/img/s10-acute.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Semaglutide</span><span class="pcard__short">Semaglutide</span></h3></a>
-      <a class="pcard" href="#inbody" data-reveal-y><img src="assets/img/s03-screenings.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">InBody Weight Analyzer <br>Body composition insights</span><span class="pcard__short">InBody Analyzer</span></h3></a>
-      <a class="pcard" href="#delivery" data-reveal-y><img src="assets/img/s01-telemedicine.jpg" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Free Delivery <br>of Your Medication</span><span class="pcard__short">Free Delivery</span></h3></a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================== WHY US ============================== -->
-<section class="section whygrid">
-  <div class="shell whygrid__in">
-    <div class="whygrid__intro">
-      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-shield"/></svg> Why Alamo</p>
-      <h2 class="whygrid__title" data-split>Why patients choose us <span class="hl">for weight loss</span></h2>
-      <p class="lede" data-reveal-y>Four things we won&rsquo;t compromise on, whichever treatment you end up on.</p>
-      <figure class="whygrid__img" data-reveal>
-        <img src="assets/img/clinic-interior.jpg" alt="Inside the clinic" loading="lazy" decoding="async">
-        <figcaption><b>2</b><span>clinics in San Antonio<br>&amp; Boerne</span></figcaption>
-      </figure>
-    </div>
-    <div class="whygrid__cards">
-      <article class="fcard" data-reveal-y>
-        <span class="fcard__ico"><svg aria-hidden="true"><use href="#i-stetho"/></svg></span>
-        <h3>Medical expertise</h3>
-        <p>Board-certified providers who understand the medical side of weight, including the conditions that make it harder to lose.</p>
-      </article>
-      <article class="fcard fcard--accent" data-reveal-y>
-        <span class="fcard__ico"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
-        <h3>A plan that is yours</h3>
-        <p>Nutrition, activity and treatment options shaped around your history, your goals and your schedule.</p>
-      </article>
-      <article class="fcard" data-reveal-y>
-        <span class="fcard__ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
-        <h3>Safe and sustainable</h3>
-        <p>Evidence-based care aimed at results you can keep, with side effects watched closely.</p>
-      </article>
-      <article class="fcard" data-reveal-y>
-        <span class="fcard__ico"><svg aria-hidden="true"><use href="#i-chat"/></svg></span>
-        <h3>Support between visits</h3>
-        <p>Regular check-ins and progress tracking, plus a team you can reach when questions come up.</p>
-      </article>
+    <div class="pcard-grid pcard-grid--4">
+      <a class="pcard" href="#plan" data-reveal-y><img src="https://images.unsplash.com/photo-1675270714610-11a5cadcc7b3?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Weight <br>Management</span><span class="pcard__short">Weight Management</span></h3></a>
+      <a class="pcard" href="#medications" data-reveal-y><img src="https://images.unsplash.com/photo-1683713881012-4c3fb63d0dd2?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Tirzepatide</span><span class="pcard__short">Tirzepatide</span></h3></a>
+      <a class="pcard" href="#medications" data-reveal-y><img src="https://images.unsplash.com/photo-1745939921744-ba8ef27940bf?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Semaglutide</span><span class="pcard__short">Semaglutide</span></h3></a>
+      <a class="pcard" href="#inbody" data-reveal-y><img src="https://images.unsplash.com/photo-1764314484083-cbd0de7e512c?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async" style="object-position:50% 22%"><h3><span class="pcard__full">InBody Weight Analyzer <br>Body composition insights</span><span class="pcard__short">InBody Analyzer</span></h3></a>
     </div>
   </div>
 </section>
 
 <!-- ============================ MEDICATIONS =========================== -->
-<section class="section medcmp" id="medications">
-  <div class="shell">
-    <div class="center" style="margin-bottom:clamp(30px,3.6vw,52px)">
-      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-pen"/></svg> Prescription options</p>
-      <h2 class="medcmp__title" data-split>Tirzepatide <span class="hl">and</span> Semaglutide</h2>
-      <p class="lede" data-reveal-y>Two once-weekly medications that work with your body's own appetite signals.
-        Your provider will recommend one only if it is right for you.</p>
+<section class="wl-sec wl-sec--paper" id="medications">
+  <div class="shell wl-board">
+    <div class="wl-board__side">
+      <p class="wl-kicker" data-wl-rise><i></i>Prescription options</p>
+      <h2 class="wl-h2" data-wl-heading>Two once-weekly <em>options.</em></h2>
+      <p class="wl-body" data-wl-rise>Both work with your body&rsquo;s own appetite signals. Your provider will
+        recommend one only if it is right for you.</p>
+      <div class="wl-chips" role="tablist" aria-label="Choose a medication" data-wl-tabs data-wl-rise>
+        <button type="button" role="tab" aria-selected="true" aria-controls="wl-med-t" id="wl-med-t-tab">Tirzepatide</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="wl-med-s" id="wl-med-s-tab">Semaglutide</button>
+      </div>
     </div>
 
-    <div class="medcmp__grid">
-      <article class="medcard medcard--t" data-reveal-y>
-        <div class="medcard__top">
-          <span class="medcard__chip">Dual GIP + GLP-1</span>
-          <span class="medcard__dose">1&times; weekly</span>
-        </div>
-        <h3>Tirzepatide</h3>
-        <p class="medcard__sum">Acts on two gut hormone receptors, GIP and GLP-1, to reduce appetite, help you feel full
-          sooner and improve how your body handles blood sugar.</p>
-        <dl class="medcard__rows">
-          <div><dt>How it's taken</dt><dd>A small injection under the skin, once a week</dd></div>
-          <div><dt>Dosing</dt><dd>Started low and increased gradually as you tolerate it</dd></div>
-          <div><dt>Often considered for</dt><dd>Adults with obesity, or overweight with a weight-related condition</dd></div>
-        </dl>
-      </article>
-
-      <span class="medcmp__vs" aria-hidden="true">vs</span>
-
-      <article class="medcard medcard--s" data-reveal-y>
-        <div class="medcard__top">
-          <span class="medcard__chip">GLP-1</span>
-          <span class="medcard__dose">1&times; weekly</span>
-        </div>
-        <h3>Semaglutide</h3>
-        <p class="medcard__sum">Mimics GLP-1, a hormone released after eating, which slows digestion and quiets hunger so
-          smaller portions feel satisfying.</p>
-        <dl class="medcard__rows">
-          <div><dt>How it's taken</dt><dd>A small injection under the skin, once a week</dd></div>
-          <div><dt>Dosing</dt><dd>Stepped up over several weeks to limit side effects</dd></div>
-          <div><dt>Often considered for</dt><dd>Adults with obesity, or overweight with a weight-related condition</dd></div>
-        </dl>
-      </article>
-    </div>
-    <p class="medcmp__note" data-reveal-y>Both medications need a prescription and a medical evaluation. Common side effects include
-      nausea and digestive upset, especially early on. They are not suitable for everyone, including people with
-      certain thyroid or pancreatic conditions.</p>
-  </div>
-</section>
-
-<!-- ============================== INBODY ============================== -->
-<section class="section inbody" id="inbody">
-  <div class="shell inbody__in">
-    <div class="inbody__copy">
-      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-body"/></svg> InBody Weight Analyzer</p>
-      <h2 class="inbody__title" data-split>See what you are losing, <span class="hl">not just how much.</span></h2>
-      <p class="lede" data-reveal-y>A scale cannot tell fat from muscle. Our InBody analyzer gives a comprehensive
-        breakdown of your body composition in about a minute, so we can make sure the weight coming off is the
-        weight you want gone.</p>
-      <ul class="ticks" data-reveal-y>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg>Muscle, fat and water measured separately</li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg>Visceral fat level, the fat around your organs</li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg>Repeat scans show progress between visits</li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg>Quick, non-invasive, done standing on a platform</li>
-      </ul>
-    </div>
-
-    <figure class="report" data-reveal-y aria-label="Sample body composition report">
-      <figcaption class="report__head">
-        <span><b>Body Composition</b><small>Sample report &middot; for illustration</small></span>
-        <span class="report__badge">InBody</span>
-      </figcaption>
-      <div class="report__rows">
-        <div class="report__row"><span>Skeletal muscle mass</span><i><em data-bar="68"></em></i><b>68%</b></div>
-        <div class="report__row"><span>Body fat mass</span><i><em data-bar="42" class="is-warn"></em></i><b>42%</b></div>
-        <div class="report__row"><span>Total body water</span><i><em data-bar="74"></em></i><b>74%</b></div>
-        <div class="report__row"><span>Visceral fat level</span><i><em data-bar="55" class="is-warn"></em></i><b>11</b></div>
+    <div class="wl-board__rows" data-wl-rise>
+      <div class="wl-panel" role="tabpanel" id="wl-med-t" aria-labelledby="wl-med-t-tab">
+        <div class="wl-row"><b>Type</b><div><h3>Dual GIP + GLP-1</h3><p>Acts on two gut hormone receptors to reduce appetite, help you feel full sooner and improve how your body handles blood sugar.</p></div></div>
+        <div class="wl-row"><b>Taken</b><div><h3>Once a week</h3><p>A small injection under the skin.</p></div></div>
+        <div class="wl-row"><b>Dosing</b><div><h3>Started low</h3><p>Increased gradually as you tolerate it.</p></div></div>
+        <div class="wl-row"><b>For</b><div><h3>Considered for</h3><p>Adults with obesity, or overweight with a weight-related condition.</p></div></div>
       </div>
-      <div class="report__foot">
-        <div><small>Scan 1</small><b>Week 0</b></div>
-        <svg class="report__spark" viewBox="0 0 160 40" aria-hidden="true"><path d="M2 8 C30 10 44 14 62 18 S100 28 120 30 S150 33 158 34" pathLength="1" data-draw/></svg>
-        <div><small>Latest</small><b>Week 12</b></div>
+      <div class="wl-panel" role="tabpanel" id="wl-med-s" aria-labelledby="wl-med-s-tab" hidden>
+        <div class="wl-row"><b>Type</b><div><h3>GLP-1</h3><p>Mimics a hormone released after eating, which slows digestion and quiets hunger so smaller portions feel satisfying.</p></div></div>
+        <div class="wl-row"><b>Taken</b><div><h3>Once a week</h3><p>A small injection under the skin.</p></div></div>
+        <div class="wl-row"><b>Dosing</b><div><h3>Stepped up</h3><p>Over several weeks to limit side effects.</p></div></div>
+        <div class="wl-row"><b>For</b><div><h3>Considered for</h3><p>Adults with obesity, or overweight with a weight-related condition.</p></div></div>
       </div>
-    </figure>
-  </div>
-</section>
-
-<!-- ============================= DELIVERY ============================= -->
-<section class="section section--flush-top" id="delivery">
-  <div class="shell">
-    <div class="deliver" data-reveal-y>
-      <div class="deliver__copy">
-        <span class="deliver__ico"><svg aria-hidden="true"><use href="#i-truck"/></svg></span>
-        <h2>Free delivery of your medication</h2>
-        <p>Once you are prescribed, we can have your medication delivered to you at no extra delivery cost,
-          so staying on schedule does not depend on a pharmacy run. Ask our team whether delivery is available
-          for your prescription and address.</p>
-      </div>
-      <svg class="deliver__route" viewBox="0 0 520 160" aria-hidden="true">
-        <path class="deliver__path" d="M20 120 C110 120 120 40 210 40 S320 120 400 90 S480 40 500 40" pathLength="1"/>
-        <circle cx="20" cy="120" r="9" class="deliver__dot"/>
-        <g class="deliver__pin" transform="translate(500 40)"><circle r="16"/><circle r="6" class="deliver__pin-in"/></g>
-        <text x="20" y="150">Alamo Primary Care</text>
-        <text x="500" y="12" text-anchor="middle">Your door</text>
-      </svg>
+      <p class="wl-note">Both need a prescription and a medical evaluation. Common side effects include nausea and
+        digestive upset, especially early on. Not suitable for everyone, including people with certain thyroid or
+        pancreatic conditions.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================== JOURNEY ============================= -->
-<section class="section journey" id="plan">
+<!-- ============================== WHY US ============================== -->
+<section class="wl-sec wl-sec--paper" id="plan">
   <div class="shell">
-    <div class="center" style="margin-bottom:clamp(34px,4vw,60px)">
-      <h2 class="h2" data-split>How the program works</h2>
-      <p class="lede" data-reveal-y>Four steps, and the same provider with you through each of them.</p>
+    <div class="wl-head">
+      <div>
+        <p class="wl-kicker" data-wl-rise><i></i>Why Alamo</p>
+        <h2 class="wl-h2" data-wl-heading>Why patients <em>choose us.</em></h2>
+      </div>
     </div>
-    <ol class="steps" data-steps>
-      <li class="step" data-reveal-y>
-        <span class="step__dot"><svg aria-hidden="true"><use href="#i-stetho"/></svg></span>
-        <small>Step 1</small>
-        <h3>Health evaluation</h3>
-        <p>History, current medications, labs and an InBody scan to set your baseline.</p>
-      </li>
-      <li class="step" data-reveal-y>
-        <span class="step__dot"><svg aria-hidden="true"><use href="#i-scale"/></svg></span>
-        <small>Step 2</small>
-        <h3>Your plan</h3>
-        <p>Nutrition and activity guidance, plus medication if it is appropriate for you.</p>
-      </li>
-      <li class="step" data-reveal-y>
-        <span class="step__dot"><svg aria-hidden="true"><use href="#i-truck"/></svg></span>
-        <small>Step 3</small>
-        <h3>Start treatment</h3>
-        <p>We walk you through your first dose and can deliver your medication free.</p>
-      </li>
-      <li class="step" data-reveal-y>
-        <span class="step__dot"><svg aria-hidden="true"><use href="#i-chat"/></svg></span>
-        <small>Step 4</small>
-        <h3>Check in and adjust</h3>
-        <p>Regular follow-ups and repeat scans, with doses and goals tuned as you progress.</p>
-      </li>
+    <div class="wl-sticky" data-wl-sticky>
+      <ol class="wl-sticky__list">
+        <li class="wl-step" data-wl-stepitem>
+          <small>01 / 04</small><h3>Medical expertise</h3>
+          <p>Board-certified providers who understand the medical side of weight, including the conditions that make it harder to lose.</p>
+        </li>
+        <li class="wl-step" data-wl-stepitem>
+          <small>02 / 04</small><h3>A plan that is yours</h3>
+          <p>Nutrition, activity and treatment options shaped around your history, your goals and your schedule.</p>
+        </li>
+        <li class="wl-step" data-wl-stepitem>
+          <small>03 / 04</small><h3>Safe and sustainable</h3>
+          <p>Evidence-based care aimed at results you can keep, with side effects watched closely.</p>
+        </li>
+        <li class="wl-step" data-wl-stepitem>
+          <small>04 / 04</small><h3>Support between visits</h3>
+          <p>Regular check-ins and progress tracking, plus a team you can reach when questions come up.</p>
+        </li>
+      </ol>
+      <div class="wl-sticky__media">
+        <figure class="wl-sticky__frame">
+          <img class="is-on" src="https://images.unsplash.com/photo-1758691462878-6edc3d3da1be?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async">
+          <img src="https://images.unsplash.com/photo-1675270427967-b8f09d7c939b?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async">
+          <img src="https://images.unsplash.com/photo-1776897874928-51c99e566952?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async">
+          <img src="https://images.unsplash.com/photo-1758691463000-08b98131daf3?auto=format&fit=crop&w=1400&q=80" alt="" loading="lazy" decoding="async">
+          <figcaption data-wl-sticky-cap>Medical expertise</figcaption>
+        </figure>
+      </div>
+    </div>
+    <ol class="wl-steps4">
+      <li data-wl-card><span>Step 1</span><h3>Health evaluation</h3><p>History, current medications, labs and an InBody scan to set your baseline.</p></li>
+      <li data-wl-card><span>Step 2</span><h3>Your plan</h3><p>Nutrition and activity guidance, plus medication if it is appropriate for you.</p></li>
+      <li data-wl-card><span>Step 3</span><h3>Start treatment</h3><p>We walk you through your first dose and what to expect in the weeks ahead.</p></li>
+      <li data-wl-card><span>Step 4</span><h3>Check in and adjust</h3><p>Regular follow-ups and repeat scans, with doses and goals tuned as you progress.</p></li>
     </ol>
   </div>
 </section>
 
-{{BAND}}
+<!-- =============================== INBODY ============================= -->
+<section class="wl-sec" id="inbody">
+  <div class="shell">
+    <div class="wl-space__head">
+      <div>
+        <p class="wl-kicker" data-wl-rise><i></i>InBody Weight Analyzer</p>
+        <h2 class="wl-h2" data-wl-heading>See what you are losing, <em>not just how much.</em></h2>
+      </div>
+      <p class="wl-body" data-wl-rise>A scale cannot tell fat from muscle. Our InBody analyzer gives a comprehensive
+        breakdown of your body composition in about a minute, so we can make sure the weight coming off is the
+        weight you want gone.</p>
+    </div>
+    <div class="wl-space">
+      <figure class="wl-space__big" data-wl-img><img src="https://images.unsplash.com/photo-1764314138160-5f04f4a50dae?auto=format&fit=crop&w=1400&q=80" alt="A provider guiding a patient onto a body composition analyzer" loading="lazy" decoding="async"></figure>
+      <figure class="wl-report" data-wl-card aria-label="Sample body composition report">
+        <figcaption><small>Sample report &middot; for illustration</small><b>Body composition</b></figcaption>
+        <div class="wl-report__row"><span>Skeletal muscle mass</span><i><em data-bar="68"></em></i><b>68%</b></div>
+        <div class="wl-report__row"><span>Body fat mass</span><i><em data-bar="42"></em></i><b>42%</b></div>
+        <div class="wl-report__row"><span>Total body water</span><i><em data-bar="74"></em></i><b>74%</b></div>
+        <div class="wl-report__row"><span>Visceral fat level</span><i><em data-bar="55"></em></i><b>11</b></div>
+        <ul class="wl-report__list">
+          <li>Muscle, fat and water measured separately</li>
+          <li>Repeat scans show progress between visits</li>
+          <li>Done standing on a platform</li>
+        </ul>
+      </figure>
+    </div>
+  </div>
+</section>
 
 <!-- ================================ FAQ =============================== -->
-<section class="section faq">
-  <div class="shell faq__in">
-    <div class="faq__side">
-      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-chat"/></svg> Questions</p>
-      <h2 class="faq__title" data-split>Before you book</h2>
-      <p data-reveal-y>Can't find your answer? Call us on <a href="tel:+12105711338">210-571-1338</a> and our team will help.</p>
+<section class="wl-sec wl-sec--paper">
+  <div class="shell wl-faq">
+    <div>
+      <p class="wl-kicker" data-wl-rise><i></i>Questions</p>
+      <h2 class="wl-h2" data-wl-heading>Before you <em>book.</em></h2>
+      <p class="wl-body" data-wl-rise>Can&rsquo;t find your answer? Call either clinic and our team will help.</p>
+      <a class="wl-btn wl-btn--line" href="tel:+12105711338" data-wl-rise>Call 210-571-1338 <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
     </div>
-    <div class="faq__list">
-      <details class="faq__item" data-reveal-y open>
-        <summary>Do I need to be on medication to join the program?<span aria-hidden="true"></span></summary>
-        <p>No. Many patients start with nutrition and activity changes alone. Medication is one option your provider may discuss if it suits your health and goals.</p>
+    <div class="wl-faq__list">
+      <details class="wl-q" data-wl-rise>
+        <summary>Do I need to be on medication to join the program?</summary>
+        <div class="wl-q__body"><p>No. Many patients start with nutrition and activity changes alone. Medication is one option your provider may discuss if it suits your health and goals.</p></div>
       </details>
-      <details class="faq__item" data-reveal-y>
-        <summary>How do I know if tirzepatide or semaglutide is right for me?<span aria-hidden="true"></span></summary>
-        <p>Your provider reviews your history, current medications and labs before recommending either. Some conditions and medications rule them out.</p>
+      <details class="wl-q" data-wl-rise>
+        <summary>How do I know if tirzepatide or semaglutide is right for me?</summary>
+        <div class="wl-q__body"><p>Your provider reviews your history, current medications and labs before recommending either. Some conditions and medications rule them out.</p></div>
       </details>
-      <details class="faq__item" data-reveal-y>
-        <summary>What does an InBody scan involve?<span aria-hidden="true"></span></summary>
-        <p>You stand barefoot on the platform and hold the handles for about a minute. It is painless and you get a printed breakdown of your body composition.</p>
-      </details>
-      <details class="faq__item" data-reveal-y>
-        <summary>Is delivery really free?<span aria-hidden="true"></span></summary>
-        <p>Free delivery of medication is available. Our team will confirm whether it applies to your prescription and address when you are prescribed.</p>
+      <details class="wl-q" data-wl-rise>
+        <summary>What does an InBody scan involve?</summary>
+        <div class="wl-q__body"><p>You stand barefoot on the platform and hold the handles for about a minute. It is painless and you get a printed breakdown of your body composition.</p></div>
       </details>
     </div>
   </div>
 </section>
+
+<!-- ============================ CLOSING CTA =========================== -->
+<section class="wl-end" id="book" data-wl-end>
+  <div class="wl-end__media"><img src="https://images.unsplash.com/photo-1758691461935-202e2ef6b69f?auto=format&fit=crop&w=2200&q=80" alt="" loading="lazy" decoding="async"></div>
+  <div class="shell wl-end__in">
+    <p class="wl-kicker wl-kicker--light" data-wl-rise><i></i>Start here</p>
+    <h2 class="wl-end__title" data-wl-letters>Start with <em>a conversation.</em></h2>
+    <p class="wl-end__lede" data-wl-rise>Your first step is a full health evaluation with our providers, at Westover Hills in
+      San Antonio or on Main Street in Boerne.</p>
+    <div class="wl-end__acts" data-wl-rise>
+      <a class="wl-btn wl-btn--paper" href="tel:+12105711338">Book a consultation <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
+      <a class="wl-btn wl-btn--ghost" href="https://maps.google.com/?q=12047+Potranco+Rd+Ste+105+San+Antonio+TX+78253" target="_blank" rel="noopener">Get directions</a>
+    </div>
+    <p class="wl-end__meta" data-wl-rise>12047 Potranco Rd &middot; 1411 S Main St, Boerne &middot; Mon&ndash;Thu 7&ndash;5, Fri 7&ndash;3</p>
+  </div>
+</section>
+
+</div>

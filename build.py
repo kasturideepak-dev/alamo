@@ -178,8 +178,9 @@ compose(
   "weight-loss.html",
   "Weight Loss Management — Alamo Primary Care",
   "Medically supervised weight loss in San Antonio and Boerne: tirzepatide, semaglutide, "
-  "InBody body composition analysis and free medication delivery.",
+  "and InBody body composition analysis.",
   "page-weight.html",
+  '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">\n'
   '<link rel="preload" as="image" href="assets/img/svc-weight-loss.jpg">',
   active="WL",
 )
@@ -189,7 +190,8 @@ compose(
   "Hormone replacement therapy at Alamo Primary Care: a testosterone replacement "
   "membership for men and Biote bioidentical hormone therapy for men and women.",
   "page-hormone.html",
-  '<link rel="preload" as="image" href="assets/img/svc-hormone.jpg">',
+  '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">\n'
+  '<link rel="preconnect" href="https://images.unsplash.com">',
   active="HR",
 )
 compose(
@@ -207,6 +209,8 @@ compose(
   "Botox, dermal filler and Sculptra treatments at Alamo Primary Care in San Antonio "
   "and Boerne, Texas.",
   "page-aesthetics.html",
-  '<link rel="preload" as="image" href="assets/img/svc-aesthetics.jpg">',
+  '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">\n'
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1673970561722-9f1dec556bdd?auto=format&fit=crop&w=2200&q=80">',
   active="AE",
 )
