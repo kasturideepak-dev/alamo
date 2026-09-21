@@ -690,7 +690,17 @@
     var wideEnough = window.matchMedia('(min-width:901px)').matches;
     var gl = motion && fine && wideEnough && cv ? cv.getContext('webgl2', { premultipliedAlpha: false, antialias: false }) : null;
     if (gl && !gl.getExtension('EXT_color_buffer_float')) gl = null;
-    if (gl) (function pour() {
+    // Software WebGL (hardware acceleration off, old drivers) cannot keep up
+    // with a full-screen fluid and would freeze the page, so skip it there.
+    if (gl) {
+      var dbg = gl.getExtension('WEBGL_debug_renderer_info');
+      var gpu = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : '';
+      if (/swiftshader|llvmpipe|software|basic render/i.test(gpu)) gl = null;
+    }
+    // Nothing is compiled or drawn until the intro has finished, so the pour
+    // never competes with the loader.
+    if (gl) hero.classList.add('is-gl');
+    if (gl) document.addEventListener('wl:ready', function pour() {
       var VS = '#version 300 es\nin vec2 p;out vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
       var SPLAT = '#version 300 es\nprecision highp float;in vec2 v;out vec4 o;' +
         'uniform sampler2D uVel,uSrc;uniform vec2 uPt,uForce,uAspect;uniform float uR,uAmt,uKeep,uDrop,uStep;uniform int uIsVel;' +
@@ -734,7 +744,7 @@
         return { p: pr, u: u };
       }
       var splat, draw;
-      try { splat = prog(SPLAT); draw = prog(DRAW); } catch (e) { return; }
+      try { splat = prog(SPLAT); draw = prog(DRAW); } catch (e) { hero.classList.remove('is-gl'); return; }
 
       var buf = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, buf);
@@ -759,9 +769,12 @@
 
       var W, H, SW, SH, vel, dye;
       function size() {
-        var r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        // the effect is soft, so a capped backing size looks the same and costs far less
+        var r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 1.25, 1600 / r.width);
         W = cv.width = Math.round(r.width * dpr); H = cv.height = Math.round(r.height * dpr);
-        SW = 220; SH = Math.max(80, Math.round(220 * r.height / r.width));
+        var sh = Math.max(80, Math.round(220 * r.height / r.width));
+        if (vel && sh === SH) return;
+        SW = 220; SH = sh;
         vel = pair(SW, SH); dye = pair(SW, SH);
       }
       size();
@@ -836,10 +849,14 @@
       });
       hero.addEventListener('pointerleave', function () { ptr = null; lastPtr = null; });
 
-      var start = null, entered = false, running = false, wander = [0.68, 0.5], wPrev = null;
-      document.addEventListener('wl:ready', function () { entered = true; start = null; }, { once: true });
+      var start = null, entered = true, running = false, wander = [0.68, 0.5], wPrev = null;
+      // If frames come in slow on this machine, stop and show the still photo.
+      var slow = 0, prevNow = 0, dead = false;
       function frame(now) {
-        if (!running) return;
+        if (!running || dead) return;
+        if (prevNow && now - prevNow > 50) slow++; else if (slow > 0) slow--;
+        prevNow = now;
+        if (slow > 12) { dead = true; running = false; hero.classList.remove('is-gl'); return; }
         var t = now / 1000;
         if (entered) {
           if (start === null) start = now;
@@ -867,13 +884,12 @@
         render(t);
         requestAnimationFrame(frame);
       }
-      hero.classList.add('is-gl');
       new IntersectionObserver(function (en) {
         var on = en[0].isIntersecting && !document.hidden;
-        if (on && !running) { running = true; requestAnimationFrame(frame); }
+        if (on && !running) { running = true; prevNow = 0; requestAnimationFrame(frame); }
         if (!on) running = false;
       }).observe(hero);
-    }());
+    }, { once: true });
 
     // Cursor ring that follows the pointer over the hero.
     var cursor = root.querySelector('[data-wl-cursor]');
