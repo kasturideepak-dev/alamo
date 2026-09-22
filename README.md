@@ -27,7 +27,7 @@ layout, and what the screenshots in `preview/` were captured with.
 | --- | --- |
 | `index.html` | Portal / main landing page, frame `163-139`. Pale green ground, the four service verticals as 2×2 cards with cut-out photography, then the **Location panel** → CTA band → footer |
 | `primary-care.html` | Primary Health Care page, frame `203-210`. Video hero → About → Mission / Faculty / Promise → 12 service cards → "From Age 16" band → Schedule → Providers → Testimonials → Footer |
-| `weight-loss.html` | Weight Loss Management. Hero → intro → 5 service cards → why us → tirzepatide / semaglutide → InBody → free delivery → steps → band → FAQ |
+| `weight-loss.html` | Weight Loss Management. Photo hero → service marquee → 4 service cards → program → tirzepatide / semaglutide → plan steps → InBody → FAQ → closing band |
 | `hormone-replacement.html` | Hormone Replacement Therapy. Hero → intro → TRT + Biote cards → TRT spotlight → Biote → symptom checker → band → contact strip |
 | `trt.html` | Testosterone Replacement Therapy membership ($150/month). Hero → program intro → signs → membership + timeline → contact form → FAQ → band |
 | `aesthetics.html` | Aesthetics. Hero with treatment wheel → statement → Botox / Filler / Sculptra cards → approach panel → bento → what we treat → appointment form → FAQ → closing band |
@@ -238,7 +238,7 @@ Purge the CDN cache in hPanel to clear it.
 
 `weight-loss.html` uses free photos from [Unsplash](https://unsplash.com/license),
 linked from Unsplash's CDN rather than stored in `assets/img/`. Swap them for the
-clinic's own photography when it's available. Photographers: Dmitriy K. (hero),
+clinic's own photography when it's available. Photographers: B Y G (hero),
 B Y G (nutritionist, consultation, meal plan), Sweet Life (pen injection),
 Haberdoedas (semaglutide pen), Neuro Equilibrium (body composition scale),
 Vitaly Gariev (delivery, doctor consultations), Willo Team (parcel at the door),

@@ -622,6 +622,43 @@
     jumpTo(t);
   });
 
+  /* ------------------------------------------------------- service hero */
+  // Shared by the weight loss and hormone pages: the photo settles in while the
+  // headline lines rise, then drifts slower than the page as you scroll away.
+  document.querySelectorAll('[data-rhero]').forEach(function (hero) {
+    var open = hero.querySelector('[data-rhero-open]');
+    if (open) {
+      // Mon–Thu 7–17, Fri 7–15, closed weekends
+      var hours = { 1: [7, 17], 2: [7, 17], 3: [7, 17], 4: [7, 17], 5: [7, 15] };
+      var fmt = function (h) { return (h > 12 ? h - 12 : h) + (h >= 12 ? ' pm' : ' am'); };
+      var update = function () {
+        var now = new Date(), d = now.getDay(), h = hours[d];
+        var mins = now.getHours() * 60 + now.getMinutes();
+        if (h && mins >= h[0] * 60 && mins < h[1] * 60) {
+          open.textContent = 'Open now, until ' + fmt(h[1]);
+        } else {
+          var nd = d, guard = 0;
+          do { nd = (nd + 1) % 7; guard++; } while (!hours[nd] && guard < 7);
+          var today = h && mins < h[0] * 60;
+          open.textContent = 'Closed now, opens ' + (today ? 'today' : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][nd]) + ' at 7 am';
+        }
+      };
+      update();
+      setInterval(update, 60000);
+    }
+    if (!hasGSAP || still) return;
+    var lines = hero.querySelectorAll('[data-rhero-line]');
+    var rise = hero.querySelectorAll('[data-rhero-rise]');
+    gsap.fromTo(hero.querySelector('[data-rhero-img]'), { '--z': 1.14 }, { '--z': 1, duration: 2.2, ease: 'power3.out' });
+    gsap.fromTo(lines, { yPercent: 110 }, { yPercent: 0, duration: 1.2, ease: 'power4.out', stagger: 0.12, delay: 0.15 });
+    gsap.fromTo(rise, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.35 });
+    if (!ScrollTrigger) return;
+    gsap.to(hero.querySelector('.rhero__media'), { yPercent: 10, ease: 'none',
+      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to(hero.querySelector('.rhero__in'), { y: -60, opacity: 0.2, ease: 'none',
+      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+  });
+
   /* ------------------------------------------------------- weight loss page */
   (function wellPage() {
     var root = document.querySelector('.well');
@@ -630,341 +667,7 @@
     var fx = motion && ScrollTrigger;
     var q = function (sel, ctx) { return Array.prototype.slice.call((ctx || root).querySelectorAll(sel)); };
 
-    // Intro loader: a ring fills while three words cycle, then the page is
-    // uncovered through a closing circle. Once per visit.
-    var loader = root.querySelector('[data-wl-loader]');
-    var seen = false;
-    try { seen = sessionStorage.getItem('wl-intro') === '1'; } catch (e) {}
-    function ready() { document.dispatchEvent(new Event('wl:ready')); }
-    if (!loader || seen || !motion) {
-      if (loader) loader.remove();
-      setTimeout(ready, 0);
-    } else {
-      try { sessionStorage.setItem('wl-intro', '1'); } catch (e) {}
-      var words = ['Evaluate', 'Plan', 'Begin'];
-      var wordEl = loader.querySelector('[data-wl-word]');
-      var pctEl = loader.querySelector('[data-wl-pct]');
-      var arc = loader.querySelector('.wl-loader__arc');
-      var o = { p: 0 };
-      document.documentElement.style.overflow = 'hidden';
-      var intro = gsap.to(o, {
-        p: 100, duration: 1.9, ease: 'power2.inOut',
-        onUpdate: function () {
-          pctEl.textContent = Math.round(o.p);
-          arc.style.strokeDashoffset = 1 - o.p / 100;
-          var w = words[Math.min(words.length - 1, Math.floor(o.p / 34))];
-          if (wordEl.textContent !== w) {
-            wordEl.textContent = w;
-            gsap.fromTo(wordEl, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
-          }
-        },
-        onComplete: function () {
-          loader.classList.add('is-gone');
-          document.documentElement.style.overflow = '';
-          ready();
-          setTimeout(function () { loader.remove(); }, 1100);
-        }
-      });
-      // never hold the page if animation frames are throttled (background tab)
-      setTimeout(function () { if (intro.progress() < 1) intro.progress(1); }, 4000);
-    }
-
-    // Hero entrance, after the loader.
-    var hero = root.querySelector('[data-wl-hero]');
-    if (motion && hero) {
-      gsap.set(q('[data-wl-line]', hero), { yPercent: 110 });
-      gsap.set(q('[data-wl-rise]', hero), { opacity: 0, y: 18 });
-      document.addEventListener('wl:ready', function () {
-        gsap.to(q('[data-wl-line]', hero), { yPercent: 0, duration: 1.2, ease: 'power4.out', stagger: 0.12, delay: 0.15 });
-        gsap.to(q('[data-wl-rise]', hero), { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.45 });
-      }, { once: true });
-    }
-
-    // Pour: a small fluid simulation (velocity + dye, WebGL2). The dye is a
-    // window onto the hero photo: inside it the photo shows through, its edge
-    // tears like wet paper and a sage ink rim bleeds around it. The pour
-    // enters from the left, then drifts on its own and follows the pointer.
-    var cv = root.querySelector('[data-wl-ink]');
-    var photo = root.querySelector('[data-wl-photo]');
     var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-    var wideEnough = window.matchMedia('(min-width:901px)').matches;
-    var gl = motion && fine && wideEnough && cv ? cv.getContext('webgl2', { premultipliedAlpha: false, antialias: false }) : null;
-    if (gl && !gl.getExtension('EXT_color_buffer_float')) gl = null;
-    // Software WebGL (hardware acceleration off, old drivers) cannot keep up
-    // with a full-screen fluid and would freeze the page, so skip it there.
-    if (gl) {
-      var dbg = gl.getExtension('WEBGL_debug_renderer_info');
-      var gpu = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : '';
-      if (/swiftshader|llvmpipe|software|basic render/i.test(gpu)) gl = null;
-    }
-    // Nothing is compiled or drawn until the intro has finished, so the pour
-    // never competes with the loader.
-    if (gl) hero.classList.add('is-gl');
-    if (gl) document.addEventListener('wl:ready', function pour() {
-      var VS = '#version 300 es\nin vec2 p;out vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
-      var SPLAT = '#version 300 es\nprecision highp float;in vec2 v;out vec4 o;' +
-        'uniform sampler2D uVel,uSrc;uniform vec2 uPt,uForce,uAspect;uniform float uR,uAmt,uKeep,uDrop,uStep;uniform int uIsVel;' +
-        'void main(){vec2 vel=texture(uVel,v).xy;vec2 back=v-vel*uStep;vec4 s=texture(uSrc,back)*uKeep;' +
-        'vec2 d=(v-uPt)*uAspect;float g=exp(-dot(d,d)/uR);' +
-        'if(uIsVel==1){s.xy+=uForce*g;s.xy=clamp(s.xy,-.6,.6);}else{s.x=clamp(max(s.x-uDrop,0.)+uAmt*g,0.,1.4);}' +
-        'o=s;}';
-      var DRAW = '#version 300 es\nprecision highp float;in vec2 v;out vec4 o;' +
-        'uniform sampler2D uDye,uPhoto;uniform vec2 uRes;uniform vec4 uRect;uniform float uTime,uHas;' +
-        'uniform vec3 uPaper,uClay,uInk;' +
-        'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}' +
-        'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);' +
-        'return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}' +
-        'void main(){float d=texture(uDye,v).x;' +
-        // a soft, wide copy of the dye for the ink bleed
-        'vec2 px=1./vec2(textureSize(uDye,0));float b=0.;' +
-        'for(int i=0;i<12;i++){float a=float(i)*.5236;vec2 o=vec2(cos(a),sin(a));' +
-        'b+=texture(uDye,v+o*px*3.).x+texture(uDye,v+o*px*7.).x;}b/=24.;' +
-        'vec2 q=v*uRes;float lo=n(q/90.+uTime*.04);float t=lo*.55+n(q/16.)*.3+n(q/4.)*.15;' +
-        'float m=d+(t-.5)*.3;' +
-        'float rim=smoothstep(.03,.34,b+(lo-.5)*.16);float win=smoothstep(.50,.555,m);' +
-        'float edge=smoothstep(.45,.50,m)*(1.-win);' +
-        'vec2 uv=(v-uRect.xy)/uRect.zw;uv.y=1.-uv.y;' +
-        'vec3 ph=texture(uPhoto,uv).rgb;ph=mix(ph,vec3(dot(ph,vec3(.3,.59,.11))),.22)*vec3(1.02,1.,.95);' +
-        'ph=mix(uClay,ph,uHas);' +
-        'vec3 c=uPaper;c=mix(c,uInk,rim*.9);c=mix(c,uClay,edge*.95);c=mix(c,ph,win);' +
-        'c+=(h(q+fract(uTime*7.))-.5)*.035;' +
-        'o=vec4(c,1.);}';
-
-      function sh(type, src) {
-        var o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o);
-        if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o));
-        return o;
-      }
-      function prog(fs) {
-        var pr = gl.createProgram();
-        gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs));
-        gl.bindAttribLocation(pr, 0, 'p'); gl.linkProgram(pr);
-        var u = {}, n = gl.getProgramParameter(pr, gl.ACTIVE_UNIFORMS);
-        for (var i = 0; i < n; i++) { var name = gl.getActiveUniform(pr, i).name; u[name] = gl.getUniformLocation(pr, name); }
-        return { p: pr, u: u };
-      }
-      var splat, draw;
-      try { splat = prog(SPLAT); draw = prog(DRAW); } catch (e) { hero.classList.remove('is-gl'); return; }
-
-      var buf = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-      gl.enableVertexAttribArray(0);
-      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-
-      function tex(w, h) {
-        var t = gl.createTexture();
-        gl.bindTexture(gl.TEXTURE_2D, t);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, w, h, 0, gl.RGBA, gl.HALF_FLOAT, null);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-        var fb = gl.createFramebuffer();
-        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0);
-        return { t: t, fb: fb };
-      }
-      function pair(w, h) { return { a: tex(w, h), b: tex(w, h), swap: function () { var x = this.a; this.a = this.b; this.b = x; } }; }
-
-      var W, H, SW, SH, vel, dye;
-      function size() {
-        // the effect is soft, so a capped backing size looks the same and costs far less
-        var r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 1.25, 1600 / r.width);
-        W = cv.width = Math.round(r.width * dpr); H = cv.height = Math.round(r.height * dpr);
-        var sh = Math.max(80, Math.round(220 * r.height / r.width));
-        if (vel && sh === SH) return;
-        SW = 220; SH = sh;
-        vel = pair(SW, SH); dye = pair(SW, SH);
-      }
-      size();
-      window.addEventListener('resize', function () { size(); });
-
-      var ptex = gl.createTexture(), hasPhoto = 0, pw = 1, ph = 1;
-      gl.bindTexture(gl.TEXTURE_2D, ptex);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([231, 233, 243, 255]));
-      function loadPhoto() {
-        try {
-          gl.bindTexture(gl.TEXTURE_2D, ptex);
-          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, photo);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-          pw = photo.naturalWidth; ph = photo.naturalHeight; hasPhoto = 1;
-        } catch (e) { hasPhoto = 0; }
-      }
-      if (photo) { if (photo.complete && photo.naturalWidth) loadPhoto(); else photo.addEventListener('load', loadPhoto); }
-
-      function step(pt, force, amt, radius) {
-        var aspect = [W / H, 1];
-        gl.useProgram(splat.p);
-        gl.viewport(0, 0, SW, SH);
-        gl.uniform2f(splat.u.uAspect, aspect[0], aspect[1]);
-        gl.uniform2f(splat.u.uPt, pt[0], pt[1]);
-        gl.uniform1f(splat.u.uR, radius);
-        gl.uniform1f(splat.u.uStep, 0.9 / 60);
-        // velocity
-        gl.uniform1i(splat.u.uIsVel, 1);
-        gl.uniform2f(splat.u.uForce, force[0], force[1]);
-        gl.uniform1f(splat.u.uKeep, 0.975);
-        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, vel.a.t); gl.uniform1i(splat.u.uVel, 0);
-        gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, vel.a.t); gl.uniform1i(splat.u.uSrc, 1);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, vel.b.fb);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); vel.swap();
-        // dye, carried by the new velocity
-        gl.uniform1i(splat.u.uIsVel, 0);
-        gl.uniform1f(splat.u.uAmt, amt);
-        gl.uniform1f(splat.u.uKeep, 0.9985);
-        gl.uniform1f(splat.u.uDrop, 0.0011);
-        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, vel.a.t);
-        gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, dye.a.t);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, dye.b.fb);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); dye.swap();
-      }
-      function render(t) {
-        gl.useProgram(draw.p);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-        gl.viewport(0, 0, W, H);
-        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, dye.a.t); gl.uniform1i(draw.u.uDye, 0);
-        gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, ptex); gl.uniform1i(draw.u.uPhoto, 1);
-        gl.uniform2f(draw.u.uRes, W, H);
-        // the photo sits on the right, a little taller than the hero, with
-        // its subject (about 38% across the frame) under the drifting window
-        var rh = 1.12, rw = (pw / ph) * rh * H / W;
-        gl.uniform4f(draw.u.uRect, 0.66 - 0.38 * rw, (1 - rh) / 2 - 0.02, rw, rh);
-        gl.uniform1f(draw.u.uTime, t);
-        gl.uniform1f(draw.u.uHas, hasPhoto);
-        gl.uniform3f(draw.u.uPaper, 0.953, 0.957, 0.976);
-        gl.uniform3f(draw.u.uClay, 0.906, 0.914, 0.953);
-        gl.uniform3f(draw.u.uInk, 0.165, 0.200, 0.475);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      }
-
-      // pointer input, in sim space (0..1, y up)
-      var ptr = null, lastPtr = null, lastMove = -1e9;
-      hero.addEventListener('pointermove', function (e) {
-        var r = cv.getBoundingClientRect();
-        ptr = [(e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height];
-        lastMove = performance.now();
-      });
-      hero.addEventListener('pointerleave', function () { ptr = null; lastPtr = null; });
-
-      var start = null, entered = true, running = false, wander = [0.68, 0.5], wPrev = null;
-      // If frames come in slow on this machine, stop and show the still photo.
-      var slow = 0, prevNow = 0, dead = false;
-      function frame(now) {
-        if (!running || dead) return;
-        if (prevNow && now - prevNow > 50) slow++; else if (slow > 0) slow--;
-        prevNow = now;
-        if (slow > 12) { dead = true; running = false; hero.classList.remove('is-gl'); return; }
-        var t = now / 1000;
-        if (entered) {
-          if (start === null) start = now;
-          var e = (now - start) / 1000;
-          // entrance: a pour that sweeps in from the left
-          if (e < 1.6) {
-            var k = e / 1.6, x = 0.18 + 0.56 * (1 - Math.pow(1 - k, 3)), y = 0.62 - 0.16 * Math.sin(k * 3.1);
-            step([x, y], [0.5, -0.1], 0.2, 0.012);
-          }
-          // idle drift keeps a window open on the right half
-          var ang = t * 0.23;
-          var target = [0.66 + 0.13 * Math.sin(ang * 1.3), 0.48 + 0.2 * Math.sin(ang * 2.1 + 1.2)];
-          wander[0] += (target[0] - wander[0]) * 0.05; wander[1] += (target[1] - wander[1]) * 0.05;
-          var f = wPrev ? [(wander[0] - wPrev[0]) * 8, (wander[1] - wPrev[1]) * 8] : [0, 0];
-          wPrev = wander.slice();
-          var idleAmt = now - lastMove > 1400 ? 0.05 : 0.02;
-          step(wander, f, idleAmt, 0.02);
-          if (ptr) {
-            var fv = lastPtr ? [(ptr[0] - lastPtr[0]) * 14, (ptr[1] - lastPtr[1]) * 14] : [0, 0];
-            var speed = Math.min(1, Math.abs(fv[0]) + Math.abs(fv[1]));
-            step(ptr, fv, 0.05 + speed * 0.25, 0.006 + speed * 0.008);
-            lastPtr = ptr.slice();
-          }
-        }
-        render(t);
-        requestAnimationFrame(frame);
-      }
-      new IntersectionObserver(function (en) {
-        var on = en[0].isIntersecting && !document.hidden;
-        if (on && !running) { running = true; prevNow = 0; requestAnimationFrame(frame); }
-        if (!on) running = false;
-      }).observe(hero);
-    }, { once: true });
-
-    // Cursor ring that follows the pointer over the hero.
-    var cursor = root.querySelector('[data-wl-cursor]');
-    if (cursor && hero && motion && fine) {
-      var cx = 0, cy = 0, tx = 0, ty = 0, cOn = false;
-      hero.addEventListener('pointermove', function (e) {
-        var r = hero.getBoundingClientRect();
-        tx = e.clientX - r.left; ty = e.clientY - r.top;
-        if (!cOn) { cx = tx; cy = ty; cOn = true; hero.classList.add('has-cursor'); }
-      });
-      hero.addEventListener('pointerleave', function () { cOn = false; hero.classList.remove('has-cursor'); });
-      gsap.ticker.add(function () {
-        if (!cOn) return;
-        cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
-        cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
-      });
-      q('a,button', hero).forEach(function (el) {
-        el.addEventListener('mouseenter', function () { cursor.style.width = cursor.style.height = '44px'; cursor.style.margin = '-22px 0 0 -22px'; });
-        el.addEventListener('mouseleave', function () { cursor.style.width = cursor.style.height = ''; cursor.style.margin = ''; });
-      });
-    }
-
-    // Breath: inhale 4, hold 4, exhale 4 — the counter, the sage dot and the
-    // ring round the photo all follow the same clock.
-    var bWrap = root.querySelector('[data-wl-breath]');
-    if (bWrap) {
-      var bN = root.querySelector('[data-wl-breath-n]');
-      var bW = root.querySelector('[data-wl-breath-w]');
-      var ring = root.querySelector('[data-wl-ring]');
-      var phases = [['Inhale', 0.5, 1], ['Hold', 1, 1], ['Exhale', 1, 0.5]];
-      var t0 = performance.now(), lastWord = '';
-      var breathe = function () {
-        var el = (performance.now() - t0) / 1000;
-        var cyc = el % 12, pi = Math.floor(cyc / 4), within = (cyc % 4) / 4;
-        var ph = phases[pi];
-        var eased = 0.5 - Math.cos(within * Math.PI) / 2;
-        var sc = ph[1] + (ph[2] - ph[1]) * eased;
-        bWrap.style.setProperty('--b', sc.toFixed(3));
-        if (ring) ring.style.transform = 'scale(' + (0.9 + (sc - 0.5) * 0.2).toFixed(4) + ')';
-        bN.textContent = 4 - Math.floor(cyc % 4);
-        if (lastWord !== ph[0]) { lastWord = ph[0]; bW.textContent = ph[0]; }
-        if (motion) requestAnimationFrame(breathe);
-      };
-      if (motion) requestAnimationFrame(breathe); else bWrap.style.setProperty('--b', '.8');
-    }
-    var openEl = root.querySelector('[data-wl-open]');
-    if (openEl) {
-      var dayEl = root.querySelector('[data-wl-day]');
-      var countEl = root.querySelector('[data-wl-count]');
-      var pill = openEl.closest('.wl-pill');
-      // Mon–Thu 7–17, Fri 7–15, closed weekends
-      var hours = { 1: [7, 17], 2: [7, 17], 3: [7, 17], 4: [7, 17], 5: [7, 15] };
-      var fmt = function (h) { return (h > 12 ? h - 12 : h) + (h >= 12 ? ' pm' : ' am'); };
-      var pad = function (n) { return (n < 10 ? '0' : '') + n; };
-      var update = function () {
-        var now = new Date(), d = now.getDay(), h = hours[d];
-        var mins = now.getHours() * 60 + now.getMinutes();
-        dayEl.textContent = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][d];
-        if (h && mins >= h[0] * 60 && mins < h[1] * 60) {
-          var left = h[1] * 3600 - (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
-          openEl.textContent = 'Open until ' + fmt(h[1]);
-          countEl.textContent = 'closes in ' + pad(Math.floor(left / 3600)) + ':' + pad(Math.floor(left % 3600 / 60)) + ':' + pad(left % 60);
-          pill.classList.remove('is-closed');
-        } else {
-          var nd = d, guard = 0;
-          do { nd = (nd + 1) % 7; guard++; } while (!hours[nd] && guard < 7);
-          var opensToday = h && mins < h[0] * 60;
-          openEl.textContent = 'Closed now';
-          countEl.textContent = 'opens ' + (opensToday ? 'today' : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][nd]) + ' at 7 am';
-          pill.classList.add('is-closed');
-        }
-      };
-      update();
-      setInterval(update, 1000);
-    }
 
     // Medication tabs
     q('[data-wl-tabs]').forEach(function (list) {
@@ -1045,7 +748,7 @@
     if (!fx) return;
 
     // Scroll reveals
-    q('[data-wl-rise]').filter(function (el) { return !hero || !hero.contains(el); }).forEach(function (el) {
+    q('[data-wl-rise]').forEach(function (el) {
       gsap.fromTo(el, { opacity: 0, y: 26 }, {
         opacity: 1, y: 0, duration: 1, ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 90%', once: true }
@@ -1208,23 +911,6 @@
 
     if (!fx) return;
 
-    // Hero: while the photo stays pinned, the title resolves out of blur one
-    // letter at a time, the side copy follows and the big word rises in.
-    var hero = root.querySelector('[data-cm-hero]');
-    if (hero && window.matchMedia('(min-width:641px)').matches) {
-      var t = root.querySelector('[data-cm-scrub]');
-      var cs = chars(t);
-      var tl = gsap.timeline({
-        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom bottom', scrub: 0.8 }
-      });
-      // the title resolves on arrival; scrolling brings in the rest
-      gsap.fromTo(cs, { opacity: 0, filter: 'blur(12px)' }, {
-        opacity: 1, filter: 'blur(0px)', duration: 1.1, ease: 'power2.out', stagger: 0.035, delay: 0.25 });
-      tl.fromTo(root.querySelector('[data-cm-hero-img]'), { '--z': 1.12 }, { '--z': 1, ease: 'none', duration: 1 }, 0)
-        .fromTo(q('[data-cm-scrub-p]', hero), { opacity: 0, y: 30, filter: 'blur(6px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', stagger: 0.08, duration: 0.25 }, 0.1)
-        .fromTo(root.querySelector('[data-cm-word]'), { yPercent: 70, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.35);
-    }
-
     // Statement: words darken as they pass through the viewport.
     q('[data-cm-words]').forEach(function (el) {
       var words = el.textContent.trim().split(/\s+/);
@@ -1336,17 +1022,17 @@
         opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.1, delay: 0.45 });
       var stage = hero.querySelector('[data-dm-stage]');
       var wheel = hero.querySelector('[data-dm-wheel]');
-      gsap.fromTo(stage, { clipPath: 'inset(8% 5% 0% 5% round 30px)' }, {
-        clipPath: 'inset(0% 0% 0% 0% round 30px)', duration: 1.5, ease: 'power3.out', delay: 0.3,
+      gsap.fromTo(stage, { clipPath: 'inset(6% 4% 0% 4% round 30px)' }, {
+        clipPath: 'inset(0% 0% 0% 0% round 0px)', duration: 1.5, ease: 'power3.out', delay: 0.1,
         onComplete: function () { stage.style.clipPath = ''; } });
       gsap.fromTo(stage.querySelector('.dm-stage__img'), { '--z': 1.25 }, { '--z': 1.04, duration: 2, ease: 'power3.out', delay: 0.3 });
       gsap.fromTo(wheel, { '--spin': '-60deg' }, { '--spin': '0deg', duration: 2.2, ease: 'expo.out', delay: 0.5 });
       gsap.fromTo(q('.dm-chip', wheel), { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'power2.out', stagger: 0.07, delay: 0.6 });
       // the scrub lags a little behind the scroll so the turn glides rather than ticks
       gsap.fromTo(wheel, { '--tilt': '10deg' }, { '--tilt': '-16deg', ease: 'none',
-        scrollTrigger: { trigger: stage, start: 'top 75%', end: 'bottom top', scrub: 1.4 } });
+        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1.4 } });
       gsap.to(stage.querySelector('.dm-stage__img'), { yPercent: 8, ease: 'none',
-        scrollTrigger: { trigger: stage, start: 'top top', end: 'bottom top', scrub: true } });
+        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
     }
 
     // Statement: words fill in as it scrolls through; the photos drift.

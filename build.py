@@ -112,6 +112,25 @@ HEAD_OPEN = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 """
 
+def mobile_bar(body):
+    """Fixed bottom bar on phones: book, services, about. Each button points at
+    this page's own section when it has one, otherwise at the primary care page."""
+    ids = set(re.findall(r'id="([a-z-]+)"', body))
+    def pick(options, fallback):
+        return next(("#" + o for o in options if o in ids), fallback)
+    book = pick(["book", "trt-contact", "schedule"], "tel:+12105711338")
+    # the TRT page belongs to the hormone section
+    services = pick(["services"], "hormone-replacement.html#services" if "trt-contact" in ids
+                    else "primary-care.html#services")
+    about = pick(["about", "program", "approach", "trt", "membership"], "primary-care.html#about")
+    item = ('  <a class="mbar__item%s" href="%s"><svg aria-hidden="true"><use href="#%s"/></svg>'
+            '<span>%s</span></a>\n')
+    return ('\n<nav class="mbar" aria-label="Quick links">\n'
+            + item % ("", services, "i-stetho", "Services")
+            + item % ("", about, "i-users", "About")
+            + item % (" mbar__item--book", book, "i-cal", "Book now")
+            + '</nav>\n')
+
 def compose(out, title, desc, body_file, preload, active_pc=False, header_file="header.html",
             footer=True, active=None):
     # active: which nav item is current — "PC", "WL", "HR" or "AE"
@@ -136,6 +155,7 @@ def compose(out, title, desc, body_file, preload, active_pc=False, header_file="
         .replace("{{BAND}}", read("band.html"))
         .replace("{{FAQ_CTA}}", read("contact-strip.html")))
 
+    body += mobile_bar(body)
     page = SHELL.format(title=title, desc=desc, preload=preload,
                         css=stamp("assets/css/style.css"),
                         mainjs=stamp("assets/js/main.js"),
@@ -181,7 +201,8 @@ compose(
   "and InBody body composition analysis.",
   "page-weight.html",
   '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">\n'
-  '<link rel="preload" as="image" href="assets/img/svc-weight-loss.jpg">',
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1675271007628-47bead6b5960?auto=format&fit=crop&w=2200&q=80">',
   active="WL",
 )
 compose(
@@ -191,7 +212,8 @@ compose(
   "membership for men and Biote bioidentical hormone therapy for men and women.",
   "page-hormone.html",
   '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">\n'
-  '<link rel="preconnect" href="https://images.unsplash.com">',
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1666887360680-9dc27a1d2753?auto=format&fit=crop&w=2200&q=80">',
   active="HR",
 )
 compose(

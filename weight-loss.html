@@ -11,9 +11,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=5e3d74c52c">
+<link rel="stylesheet" href="assets/css/style.css?v=d63f6d00ed">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">
-<link rel="preload" as="image" href="assets/img/svc-weight-loss.jpg">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1675271007628-47bead6b5960?auto=format&fit=crop&w=2200&q=80">
 </head>
 <body>
 <svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
@@ -469,49 +470,31 @@
 <main id="main">
 <div class="well">
 
-<!-- =============================== INTRO ============================== -->
-<div class="wl-loader" data-wl-loader aria-hidden="true">
-  <div class="wl-loader__ring">
-    <svg viewBox="0 0 200 200"><circle class="wl-loader__track" cx="100" cy="100" r="92"/><circle class="wl-loader__arc" cx="100" cy="100" r="92" pathLength="1"/></svg>
-    <span class="wl-loader__dot"></span>
-    <p class="wl-loader__word" data-wl-word>Evaluate</p>
-  </div>
-  <p class="wl-loader__meta"><i></i>Weight loss &middot; San Antonio &amp; Boerne</p>
-  <p class="wl-loader__pct"><b data-wl-pct>0</b>%</p>
-</div>
-
 <!-- =============================== HERO =============================== -->
-<section class="wl-hero" data-wl-hero>
-  <canvas class="wl-hero__ink" data-wl-ink aria-hidden="true"></canvas>
-  <figure class="wl-hero__photo" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1620242736370-bfb4ce9ebf3e?auto=format&fit=crop&w=1800&q=80" alt="" crossorigin="anonymous" fetchpriority="high" decoding="async" data-wl-photo>
-    <svg class="wl-hero__ring" viewBox="0 0 200 300" preserveAspectRatio="none"><ellipse cx="100" cy="150" rx="96" ry="146" data-wl-ring/></svg>
-  </figure>
-  <span class="wl-cursor" data-wl-cursor aria-hidden="true"><i></i></span>
-
-  <div class="shell wl-hero__in">
-    <p class="wl-kicker" data-wl-rise><i></i>Weight loss &middot; Tirzepatide &middot; Semaglutide &mdash; San Antonio</p>
-    <h1 class="wl-hero__title">
-      <span class="wl-line"><span data-wl-line>Weight Loss</span></span>
-      <span class="wl-line"><em data-wl-line>Management.</em></span>
+<section class="rhero" data-rhero>
+  <div class="rhero__media"><img src="https://images.unsplash.com/photo-1675271007628-47bead6b5960?auto=format&fit=crop&w=2200&q=80" alt="A provider measuring a patient's waist during a weight loss visit" fetchpriority="high" decoding="async" data-rhero-img></div>
+  <div class="shell rhero__in">
+    <p class="rhero__eyebrow" data-rhero-rise><i></i>Medical weight loss</p>
+    <h1 class="rhero__title">
+      <span class="rhero__line"><span data-rhero-line>Weight Loss Management,</span></span>
+      <span class="rhero__line"><span data-rhero-line>built around you.</span></span>
     </h1>
-    <p class="wl-hero__lede" data-wl-rise>Weight is rarely just about willpower. Our program starts with a full
-      medical evaluation, then a plan built around your health history and your week.</p>
-    <div class="wl-hero__acts" data-wl-rise>
-      <a class="wl-btn" href="#book">Book a consultation <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
-      <a class="wl-btn wl-btn--line" href="#plan">See the program <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
+    <p class="rhero__lede" data-rhero-rise>Weight is rarely just about willpower. Our program starts with a full medical
+      evaluation, then a plan built around your health history and your week.</p>
+    <div class="rhero__acts" data-rhero-rise>
+      <a class="rbtn" href="#book">Book a consultation <svg aria-hidden="true"><use href="#i-cal"/></svg></a>
+      <div class="rhero__call">
+        <a class="rbtn rbtn--line" href="tel:+12105711338">Call 210-571-1338 <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
+        <small data-rhero-open>Mon&ndash;Thu 7&ndash;5 &middot; Fri 7&ndash;3</small>
+      </div>
     </div>
-  </div>
-
-  <div class="shell wl-hero__foot">
-    <div class="wl-pill" data-wl-rise>
-      <span class="wl-breath" data-wl-breath><i></i><b data-wl-breath-n>4</b></span>
-      <span><small>Breathe with us</small><strong data-wl-breath-w>Inhale</strong></span>
-    </div>
-    <p class="wl-hint" data-wl-rise><i></i>Move to pour</p>
-    <div class="wl-pill" data-wl-rise>
-      <span class="wl-pill__dot"><i></i></span>
-      <span><small>Clinic &middot; <span data-wl-day>Today</span></small><strong data-wl-open>Westover Hills &middot; Boerne</strong><em data-wl-count>Mon&ndash;Thu 7&ndash;5 &middot; Fri 7&ndash;3</em></span>
+    <div class="rhero__proof" data-rhero-rise>
+      <span class="rhero__faces">
+        <img src="https://images.unsplash.com/photo-1683713881012-4c3fb63d0dd2?auto=format&fit=crop&w=96&h=96&q=70" alt="">
+        <img src="https://images.unsplash.com/photo-1745939921744-ba8ef27940bf?auto=format&fit=crop&w=96&h=96&q=70" alt="">
+        <img src="https://images.unsplash.com/photo-1764314484083-cbd0de7e512c?auto=format&fit=crop&w=96&h=96&q=70" alt="">
+      </span>
+      <span><b>Tirzepatide &middot; Semaglutide &middot; InBody</b><small>Physician-led at Westover Hills and Boerne</small></span>
     </div>
   </div>
 </section>
@@ -523,6 +506,24 @@
     <span>InBody Weight Analyzer</span><i></i><span>Personal Coaching</span><i></i>
   </div>
 </div>
+
+<!-- ============================== SERVICES ============================ -->
+<section class="section" id="services">
+  <div class="shell">
+    <div class="center" style="margin-bottom:clamp(32px,3.8vw,54px)">
+      <h2 class="h2" data-split>Our Weight Loss Services</h2>
+      <p class="lede" data-reveal-y>Everything in the program is handled in-house by the same team, from your first
+        assessment to your follow-up scans.</p>
+    </div>
+
+    <div class="pcard-grid pcard-grid--4">
+      <a class="pcard" href="#plan" data-reveal-y><img src="https://images.unsplash.com/photo-1675270714610-11a5cadcc7b3?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Weight <br>Management</span><span class="pcard__short">Weight Management</span></h3></a>
+      <a class="pcard" href="#medications" data-reveal-y><img src="https://images.unsplash.com/photo-1683713881012-4c3fb63d0dd2?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Tirzepatide</span><span class="pcard__short">Tirzepatide</span></h3></a>
+      <a class="pcard" href="#medications" data-reveal-y><img src="https://images.unsplash.com/photo-1745939921744-ba8ef27940bf?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Semaglutide</span><span class="pcard__short">Semaglutide</span></h3></a>
+      <a class="pcard" href="#inbody" data-reveal-y><img src="https://images.unsplash.com/photo-1764314484083-cbd0de7e512c?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async" style="object-position:50% 22%"><h3><span class="pcard__full">InBody Weight Analyzer <br>Body composition insights</span><span class="pcard__short">InBody Analyzer</span></h3></a>
+    </div>
+  </div>
+</section>
 
 <!-- ============================== PROGRAM ============================= -->
 <section class="wl-sec wl-sec--paper" id="program">
@@ -544,24 +545,6 @@
       <img src="https://images.unsplash.com/photo-1675270882554-ab6817fb44f3?auto=format&fit=crop&w=1100&q=80" alt="A nutritionist at her desk with fresh produce and a tape measure" loading="lazy" decoding="async">
       <figcaption>Westover Hills &middot; Boerne</figcaption>
     </figure>
-  </div>
-</section>
-
-<!-- ============================== SERVICES ============================ -->
-<section class="section" id="services">
-  <div class="shell">
-    <div class="center" style="margin-bottom:clamp(32px,3.8vw,54px)">
-      <h2 class="h2" data-split>Our Weight Loss Services</h2>
-      <p class="lede" data-reveal-y>Everything in the program is handled in-house by the same team, from your first
-        assessment to your follow-up scans.</p>
-    </div>
-
-    <div class="pcard-grid pcard-grid--4">
-      <a class="pcard" href="#plan" data-reveal-y><img src="https://images.unsplash.com/photo-1675270714610-11a5cadcc7b3?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Weight <br>Management</span><span class="pcard__short">Weight Management</span></h3></a>
-      <a class="pcard" href="#medications" data-reveal-y><img src="https://images.unsplash.com/photo-1683713881012-4c3fb63d0dd2?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Tirzepatide</span><span class="pcard__short">Tirzepatide</span></h3></a>
-      <a class="pcard" href="#medications" data-reveal-y><img src="https://images.unsplash.com/photo-1745939921744-ba8ef27940bf?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async"><h3><span class="pcard__full">Semaglutide</span><span class="pcard__short">Semaglutide</span></h3></a>
-      <a class="pcard" href="#inbody" data-reveal-y><img src="https://images.unsplash.com/photo-1764314484083-cbd0de7e512c?auto=format&fit=crop&w=1100&q=80" alt="" loading="lazy" decoding="async" style="object-position:50% 22%"><h3><span class="pcard__full">InBody Weight Analyzer <br>Body composition insights</span><span class="pcard__short">InBody Analyzer</span></h3></a>
-    </div>
   </div>
 </section>
 
@@ -676,6 +659,108 @@
   </div>
 </section>
 
+<!-- =========================== TESTIMONIALS =========================== -->
+<section class="section tdeck-sec" id="testimonials">
+  <div class="shell tdeck-sec__in">
+
+    <div class="tdeck-sec__copy">
+      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-star"/></svg> Patient Testimonials</p>
+      <h2 class="tdeck-sec__title" data-split>What our patients <span class="hl">say about us</span></h2>
+      <p class="tdeck-sec__lede" data-reveal-y>Real words from the people we care for in San Antonio and Boerne.</p>
+
+      <div class="tdeck-trust" data-reveal-y>
+        <div class="trusted__avatars">
+          <img src="assets/img/avatar-1.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+          <img src="assets/img/avatar-2.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+          <img src="assets/img/avatar-3.jpg" alt="" width="160" height="160" loading="lazy" decoding="async">
+        </div>
+        <div>
+          <span class="tdeck-stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+          <small>Trusted by <b>5,000+ patients</b></small>
+        </div>
+      </div>
+
+      <div class="tdeck-ctrl" data-reveal-y>
+        <button class="tdeck-ctrl__btn" type="button" data-tdeck-prev aria-label="Previous testimonial">
+          <svg aria-hidden="true"><use href="#i-arrow-l"/></svg>
+        </button>
+        <button class="tdeck-ctrl__btn" type="button" data-tdeck-next aria-label="Next testimonial">
+          <svg aria-hidden="true"><use href="#i-arrow-r"/></svg>
+        </button>
+        <div class="tdeck-ctrl__meta">
+          <span class="tdeck-ctrl__count" aria-live="polite"><b data-tdeck-cur>01</b> / <span data-tdeck-total>05</span></span>
+          <span class="tdeck-ctrl__bar"><i data-tdeck-bar></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tdeck" data-tdeck data-reveal>
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">The staff is amazing and always makes me feel comfortable. The doctors truly care! Professional, kind, and thorough. I highly recommend Alamo Primary Care.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-1.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Daniel R.</b><small>Primary Care · Westover Hills</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">Booking was simple and I was seen on time. Dr. Nemarugommula explained every result clearly and never once made me feel rushed.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-2.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Jessica R.</b><small>Primary Care · Boerne</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">I have been coming here for two years for chronic care. The follow-up is consistent and the whole team knows my history.</p>
+        <footer class="tcard__who">
+          <img src="assets/img/avatar-3.jpg" alt="" loading="lazy" decoding="async">
+          <span><b>Monica T.</b><small>Chronic Care · San Antonio</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">I was seen the same week, and my provider actually remembered the details of my last visit. That has never happened to me before.</p>
+        <footer class="tcard__who">
+          <span class="tcard__initials">JH</span>
+          <span><b>Jessica H.</b><small>Preventive Care · Boerne</small></span>
+        </footer>
+      </article>
+
+      <article class="tcard" data-tcard>
+        <span class="tcard__mark" aria-hidden="true">&ldquo;</span>
+        <span class="tdeck-stars" role="img" aria-label="Five out of five"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+        <p class="tcard__quote">Telemedicine made managing my condition so much easier. Clear answers, no waiting room, and my prescriptions sorted the same day.</p>
+        <footer class="tcard__who">
+          <span class="tcard__initials">MK</span>
+          <span><b>Marcus K.</b><small>Telemedicine · San Antonio</small></span>
+        </footer>
+      </article>
+    </div>
+  </div>
+
+  <!-- looping strip of short review snippets -->
+  <div class="tmarq" aria-hidden="true" data-tmarq>
+    <div class="tmarq__track">
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Seen the same week”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Professional, kind and thorough”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Never felt rushed”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“The whole team knows my history”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Telemedicine made it easy”</span>
+      <span class="tmarq__item"><svg><use href="#i-star"/></svg>“Clear answers, every visit”</span>
+    </div>
+  </div>
+</section>
+
+
 <!-- ================================ FAQ =============================== -->
 <section class="wl-sec wl-sec--paper">
   <div class="shell wl-faq">
@@ -719,6 +804,12 @@
 </section>
 
 </div>
+
+<nav class="mbar" aria-label="Quick links">
+  <a class="mbar__item" href="#services"><svg aria-hidden="true"><use href="#i-stetho"/></svg><span>Services</span></a>
+  <a class="mbar__item" href="#program"><svg aria-hidden="true"><use href="#i-users"/></svg><span>About</span></a>
+  <a class="mbar__item mbar__item--book" href="#book"><svg aria-hidden="true"><use href="#i-cal"/></svg><span>Book now</span></a>
+</nav>
 
 </main>
 <!-- =============================== FOOTER ============================== -->
@@ -787,6 +878,6 @@
 <script src="assets/js/gsap.min.js"></script>
 <script src="assets/js/ScrollTrigger.min.js"></script>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=d82d301e21"></script>
+<script src="assets/js/main.js?v=d60cf5b4af"></script>
 </body>
 </html>
