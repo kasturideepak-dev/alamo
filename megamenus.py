@@ -19,6 +19,8 @@ SERVICES = {
          "Once-weekly GLP-1 medication that quiets hunger."),
         ("i-body", "InBody Weight Analyzer", "weight-loss.html#inbody", "s03-screenings",
          "Comprehensive body composition insights."),
+        ("i-drop", "Lipolean &amp; B12 Injections", "weight-loss.html#services", "s11-iv",
+         "Support alongside your weight loss plan."),
         ("i-cal", "How the Program Works", "weight-loss.html#plan", "s08-womens",
          "Four steps with the same provider throughout."),
     ]),

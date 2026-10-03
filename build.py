@@ -146,6 +146,7 @@ def compose(out, title, desc, body_file, preload, active_pc=False, header_file="
     body = (body
         .replace("{{VALUES}}", read("values.html"))
         .replace("{{PROVIDERS}}", read("providers.html"))
+        .replace("{{INSURANCE}}", read("insurance.html"))
         .replace("{{TESTIMONIALS}}", read("testimonials.html"))
         
         .replace("{{CUT_TO_NAVY}}", cut("to-navy"))

@@ -626,26 +626,6 @@
   // Shared by the weight loss and hormone pages: the photo settles in while the
   // headline lines rise, then drifts slower than the page as you scroll away.
   document.querySelectorAll('[data-rhero]').forEach(function (hero) {
-    var open = hero.querySelector('[data-rhero-open]');
-    if (open) {
-      // Mon–Thu 7–17, Fri 7–15, closed weekends
-      var hours = { 1: [7, 17], 2: [7, 17], 3: [7, 17], 4: [7, 17], 5: [7, 15] };
-      var fmt = function (h) { return (h > 12 ? h - 12 : h) + (h >= 12 ? ' pm' : ' am'); };
-      var update = function () {
-        var now = new Date(), d = now.getDay(), h = hours[d];
-        var mins = now.getHours() * 60 + now.getMinutes();
-        if (h && mins >= h[0] * 60 && mins < h[1] * 60) {
-          open.textContent = 'Open now, until ' + fmt(h[1]);
-        } else {
-          var nd = d, guard = 0;
-          do { nd = (nd + 1) % 7; guard++; } while (!hours[nd] && guard < 7);
-          var today = h && mins < h[0] * 60;
-          open.textContent = 'Closed now, opens ' + (today ? 'today' : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][nd]) + ' at 7 am';
-        }
-      };
-      update();
-      setInterval(update, 60000);
-    }
     if (!hasGSAP || still) return;
     var lines = hero.querySelectorAll('[data-rhero-line]');
     var rise = hero.querySelectorAll('[data-rhero-rise]');
