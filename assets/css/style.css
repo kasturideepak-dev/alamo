@@ -2762,3 +2762,39 @@ html[data-static] .word{opacity:1!important}
   /* the drawer covers navigation below this width */
   .mega{display:none}
 }
+
+/* Column counts matched to the number of cards, so a row never ends with one
+   card stranded on its own. `data-cards` carries the count; four is the default. */
+.svc-grid > *{min-width:0}
+.svc-card h3{overflow-wrap:break-word;hyphens:auto}
+.svc-grid[data-cards="10"] .svc-card{padding:clamp(18px,1.8vw,24px)}
+.svc-grid[data-cards="10"] .svc-card h3{font-size:clamp(1.05rem,1.25vw,1.22rem);margin:14px 0 10px}
+.svc-grid[data-cards="10"] .svc-card p{font-size:14px}
+
+@media (min-width:1181px){
+  .svc-grid[data-cards="5"] > *,
+  .svc-grid[data-cards="6"] > *,
+  .svc-grid[data-cards="9"] > *{flex-basis:calc((100% - 2 * 14px) / 3 - 0.5px)}
+  .svc-grid[data-cards="10"] > *{flex-basis:calc((100% - 4 * 14px) / 5 - 0.5px)}
+  .svc-ticks--cards[data-cards="5"] > li{flex-basis:calc((100% - 4 * 18px) / 5 - 0.5px)}
+  .svc-ticks--cards[data-cards="3"] > li{flex-basis:calc((100% - 2 * 18px) / 3 - 0.5px)}
+}
+@media (max-width:1180px) and (min-width:901px){
+  .svc-grid[data-cards="4"] > *,
+  .svc-grid[data-cards="10"] > *{flex-basis:calc((100% - 14px) / 2 - 0.5px)}
+  .svc-grid[data-cards="7"] > *,
+  .svc-grid[data-cards="8"] > *,
+  .svc-grid[data-cards="12"] > *{flex-basis:calc((100% - 3 * 14px) / 4 - 0.5px)}
+  .svc-ticks--cards[data-cards="5"] > li,
+  .svc-ticks--cards[data-cards="3"] > li{flex-basis:calc((100% - 2 * 18px) / 3 - 0.5px)}
+}
+@media (max-width:900px) and (min-width:701px){
+  /* seven cannot split evenly in two columns, so the last one takes the row */
+  .svc-grid[data-cards="7"] > *:last-child{flex-basis:100%}
+  .svc-grid[data-cards="5"] > *,
+  .svc-grid[data-cards="9"] > *{flex-basis:calc((100% - 2 * 14px) / 3 - 0.5px)}
+  .svc-ticks--cards[data-cards="5"] > li{flex-basis:calc((100% - 2 * 18px) / 3 - 0.5px)}
+}
+@media (max-width:700px){
+  .svc-grid > *,.svc-ticks--cards > li{flex-basis:100%}
+}
