@@ -1635,6 +1635,17 @@ h1,h2,h3,h4,p{margin:0}
   border:1px solid rgba(255,255,255,.2);font-size:14.5px;line-height:1.3;color:#fff;
   transition:background .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease)}
 .er__list li:hover{background:rgba(82,176,79,.18);border-color:var(--green-400);transform:translateY(-2px)}
+/* the alert band without a pill list: the closing line becomes a callout so
+   the second column is not left empty */
+.er__note{position:relative;align-self:center;display:grid;gap:16px;
+  padding:clamp(24px,2.6vw,34px);border-radius:26px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.er__note p{margin:0;font-size:17px;line-height:1.7;color:rgba(255,255,255,.88)}
+.er__note-ico{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;
+  background:rgba(82,176,79,.18);color:var(--green-400)}
+.er__note-ico svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:860px){.er__note{align-self:stretch}}
 @media (max-width:860px){
   .er__in{grid-template-columns:1fr}
   .er__num{top:auto;bottom:-.1em;right:-.04em;translate:0;font-size:clamp(7rem,24vw,11rem)}
