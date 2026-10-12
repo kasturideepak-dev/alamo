@@ -112,6 +112,35 @@ HEAD_OPEN = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 """
 
+# --- URL structure --------------------------------------------------------
+# Each page is written as <folder>/index.html so the live URL reads as a
+# hierarchy: /primary-care/ and /primary-care/acute-care/. Old .html paths are
+# 301-redirected in .htaccess.
+PAGES = {
+    "index.html": "",
+    "primary-care.html": "primary-care",
+    "acute-care.html": "primary-care/acute-care",
+    "weight-loss.html": "weight-loss",
+    "hormone-replacement.html": "hormone-replacement",
+    "trt.html": "hormone-replacement/trt",
+    "aesthetics.html": "aesthetics",
+}
+
+def url_for(name):
+    folder = PAGES[name]
+    return "/" + folder + "/" if folder else "/"
+
+def absolutise(html):
+    """Rewrite page links to their folder URLs and asset paths to root-absolute,
+    so a page works at any depth."""
+    for name in sorted(PAGES, key=len, reverse=True):
+        html = re.sub(r'(href=")%s(#[^"]*)?"' % re.escape(name),
+                      lambda m: 'href="%s%s"' % (url_for(name), m.group(2) or ""), html)
+    html = html.replace('href="assets/', 'href="/assets/')
+    html = html.replace('src="assets/', 'src="/assets/')
+    html = html.replace('content="assets/', 'content="/assets/')
+    return html
+
 def mobile_bar(body):
     """Fixed bottom bar on phones: book, services, about. Each button points at
     this page's own section when it has one, otherwise at the primary care page."""
@@ -173,9 +202,14 @@ def compose(out, title, desc, body_file, preload, active_pc=False, header_file="
         (head_lines if in_head else body_lines).append(ln)
     html = HEAD_OPEN + "\n".join(head_lines).rstrip() + "\n</head>\n<body>\n" \
          + "\n".join(body_lines).rstrip() + "\n</body>\n</html>\n"
-    (ROOT / out).write_text(html)
+    html = absolutise(html)
+    folder = PAGES[out]
+    target = (ROOT / folder / "index.html") if folder else (ROOT / "index.html")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(html)
+    out = str(target.relative_to(ROOT))
     left = re.findall(r"\{\{[A-Z_]+\}\}", html)
-    print("%-20s %6d bytes%s" % (out, len(html), "  UNRESOLVED: %s" % set(left) if left else ""))
+    print("%-34s %6d bytes%s" % (out, len(html), "  UNRESOLVED: %s" % set(left) if left else ""))
 
 compose(
   "index.html",

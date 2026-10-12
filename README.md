@@ -7,8 +7,8 @@ Built to follow the client's Figma:
 
 | Page | Figma frame |
 | --- | --- |
-| `index.html` | **`163-139`** — the portal/landing page, with the Location block promoted |
-| `primary-care.html` | **`203-210`** for the body, **`63-99`** for the footer |
+| `index.html` (/) | **`163-139`** — the portal/landing page, with the Location block promoted |
+| `primary-care/` (/primary-care/) | **`203-210`** for the body, **`63-99`** for the footer |
 
 **Logo navy is the primary colour and logo green is an accent only.**
 
@@ -26,11 +26,11 @@ layout, and what the screenshots in `preview/` were captured with.
 | File | What it is |
 | --- | --- |
 | `index.html` | Portal / main landing page, frame `163-139`. Pale green ground, the four service verticals as 2×2 cards with cut-out photography, then the **Location panel** → CTA band → footer |
-| `primary-care.html` | Primary Health Care page, frame `203-210`. Video hero → About → Mission / Faculty / Promise → 12 service cards → "From Age 16" band → Schedule → Providers → Testimonials → Footer |
-| `weight-loss.html` | Weight Loss Management. Photo hero → service marquee → 4 service cards (weight management, semaglutide & tirzepatide, Lipolean/B12, InBody) → program → tirzepatide / semaglutide → plan steps → InBody → FAQ → closing band |
-| `hormone-replacement.html` | Hormone Replacement Therapy. Hero → intro → TRT + Biote cards → TRT spotlight → Biote → symptom checker → band → contact strip |
-| `trt.html` | Testosterone Replacement Therapy membership ($150/month). Hero → program intro → signs → membership + timeline → contact form → FAQ → band |
-| `aesthetics.html` | Aesthetics. Hero with treatment wheel → statement → Botox / Filler / Sculptra cards → approach panel → bento → what we treat → appointment form → FAQ → closing band |
+| `primary-care/` (/primary-care/) | Primary Health Care page, frame `203-210`. Video hero → About → Mission / Faculty / Promise → 12 service cards → "From Age 16" band → Schedule → Providers → Testimonials → Footer |
+| `weight-loss/` | Weight Loss Management. Photo hero → service marquee → 4 service cards (weight management, semaglutide & tirzepatide, Lipolean/B12, InBody) → program → tirzepatide / semaglutide → plan steps → InBody → FAQ → closing band |
+| `hormone-replacement/` | Hormone Replacement Therapy. Hero → intro → TRT + Biote cards → TRT spotlight → Biote → symptom checker → band → contact strip |
+| `hormone-replacement/trt/` | Testosterone Replacement Therapy membership ($150/month). Hero → program intro → signs → membership + timeline → contact form → FAQ → band |
+| `aesthetics/` | Aesthetics. Hero with treatment wheel → statement → Botox / Filler / Sculptra cards → approach panel → bento → what we treat → appointment form → FAQ → closing band |
 
 The portal uses the frame's own **minimal header** (logo + green *Contact Us*) rather
 than the full `63-99` nav bar, because that is what the frame the client approved
@@ -194,6 +194,14 @@ on the extraction and on what still needs to come from the client:
    nothing; the Figma shows a video hero.
 6. **Service copy.** The twelve service names come from the Figma; there are no
    descriptions yet.
+
+## URLs
+
+Pages are written as `<folder>/index.html`, so the live URL shows the service
+hierarchy: `/primary-care/`, `/primary-care/acute-care/`,
+`/hormone-replacement/trt/`. `build.py` holds the `PAGES` map and rewrites page
+links and asset paths to root-absolute on every build, so a page works at any
+depth. `.htaccess` 301s the old flat `*.html` URLs to the new folders.
 
 ## Deploying
 

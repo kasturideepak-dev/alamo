@@ -1,0 +1,19 @@
+# Old flat page URLs moved into the service folders. 301 so search engines and
+# existing links follow to the new structure.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteRule ^primary-care\.html$        /primary-care/              [R=301,L]
+  RewriteRule ^acute-care\.html$          /primary-care/acute-care/   [R=301,L]
+  RewriteRule ^weight-loss\.html$         /weight-loss/               [R=301,L]
+  RewriteRule ^hormone-replacement\.html$ /hormone-replacement/       [R=301,L]
+  RewriteRule ^trt\.html$                 /hormone-replacement/trt/   [R=301,L]
+  RewriteRule ^aesthetics\.html$          /aesthetics/                [R=301,L]
+
+  # /primary-care -> /primary-care/ so the folder index is served once only
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
+</IfModule>
+
+DirectoryIndex index.html

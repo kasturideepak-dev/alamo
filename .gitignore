@@ -15,3 +15,9 @@ scratch/urls.json
 
 # build.py imports megamenus.py
 __pycache__/
+
+# Client-supplied archive folders
+Archive*/
+
+# Local Claude Code settings
+.claude/
