@@ -120,6 +120,16 @@ PAGES = {
     "index.html": "",
     "primary-care.html": "primary-care",
     "acute-care.html": "primary-care/acute-care",
+    "chronic-care.html": "primary-care/chronic-disease-management",
+    "telemedicine.html": "primary-care/telemedicine",
+    "checkups.html": "primary-care/routine-check-ups",
+    "screenings.html": "primary-care/health-screenings",
+    "procedures.html": "primary-care/in-office-procedures",
+    "geriatric.html": "primary-care/geriatric-care",
+    "mens-health.html": "primary-care/mens-health",
+    "womens-health.html": "primary-care/womens-health",
+    "referrals.html": "primary-care/referrals",
+    "iv-therapy.html": "primary-care/iv-therapy",
     "weight-loss.html": "weight-loss",
     "hormone-replacement.html": "hormone-replacement",
     "trt.html": "hormone-replacement/trt",
@@ -140,6 +150,54 @@ def absolutise(html):
     html = html.replace('src="assets/', 'src="/assets/')
     html = html.replace('content="assets/', 'content="/assets/')
     return html
+
+# --- related services rail -------------------------------------------------
+# One list for every primary care service. `page` points at the service's own
+# page once it exists; the rest fall back to the services grid.
+PC_SERVICES = [
+    ("s01-telemedicine", "Telemedicine Visits", "telemedicine.html"),
+    ("s02-chronic", "Chronic Disease Management", "chronic-care.html"),
+    ("s03-screenings", "Health Screenings &amp; Diagnostic Tests", "screenings.html"),
+    ("s04-checkups", "Routine Check-ups &amp; Preventative Care", "checkups.html"),
+    ("s05-procedures", "In-office Procedures", "procedures.html"),
+    ("s06-geriatric", "Geriatric Care", "geriatric.html"),
+    ("s07-mens", "Men&rsquo;s Health Services", "mens-health.html"),
+    ("s08-womens", "Women&rsquo;s Health Services", "womens-health.html"),
+    ("s09-referrals", "Referrals to Specialists", "referrals.html"),
+    ("s10-acute", "Acute Care Visits", "acute-care.html"),
+    ("s11-iv", "IV Therapy", "iv-therapy.html"),
+]
+
+def service_rail(skip=None):
+    cards = []
+    for img, label, page in PC_SERVICES:
+        if page and page == skip:
+            continue
+        href = url_for(page) if page else "/primary-care/#services"
+        cards.append(
+            '        <a class="scard" href="%s">\n'
+            '          <span class="scard__img"><img src="/assets/img/%s.jpg" alt="" loading="lazy" decoding="async"></span>\n'
+            '          <span class="scard__name">%s</span>\n'
+            '        </a>' % (href, img, label))
+    return ('<section class="section svc-more">\n'
+            '  <div class="shell">\n'
+            '    <div class="svc-more__head">\n'
+            '      <h2 class="h2" data-split>More Primary Care Services</h2>\n'
+            '      <div class="srail__ctrl">\n'
+            '        <button class="srail__btn" type="button" data-srail-prev aria-label="Scroll left">\n'
+            '          <svg aria-hidden="true"><use href="#i-arrow-l"/></svg>\n'
+            '        </button>\n'
+            '        <button class="srail__btn" type="button" data-srail-next aria-label="Scroll right">\n'
+            '          <svg aria-hidden="true"><use href="#i-arrow-r"/></svg>\n'
+            '        </button>\n'
+            '      </div>\n'
+            '    </div>\n'
+            '    <div class="srail" data-srail>\n'
+            '      <div class="srail__track">\n' + "\n".join(cards) + '\n'
+            '      </div>\n'
+            '    </div>\n'
+            '  </div>\n'
+            '</section>')
 
 def mobile_bar(body):
     """Fixed bottom bar on phones: book, services, about. Each button points at
@@ -177,6 +235,7 @@ def compose(out, title, desc, body_file, preload, active_pc=False, header_file="
         .replace("{{PROVIDERS}}", read("providers.html"))
         .replace("{{INSURANCE}}", read("insurance.html"))
         .replace("{{TESTIMONIALS}}", read("testimonials.html"))
+        .replace("{{SERVICE_RAIL}}", service_rail(skip=out))
         
         .replace("{{CUT_TO_NAVY}}", cut("to-navy"))
         .replace("{{CUT_TO_WHITE}}", cut("to-white"))
@@ -268,6 +327,106 @@ compose(
   "page-acute-care.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1758691462878-6edc3d3da1be?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "chronic-care.html",
+  "Chronic Disease Management in San Antonio & Boerne | Alamo Primary Care",
+  "Personalized chronic disease management in San Antonio and Boerne for diabetes, "
+  "high blood pressure, cholesterol, heart disease, COPD and thyroid disorders.",
+  "page-chronic-care.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "telemedicine.html",
+  "Telemedicine Primary Care in San Antonio & Boerne | Alamo Primary Care",
+  "Secure virtual visits with trusted primary care physicians in San Antonio & Boerne. "
+  "Get care for minor illnesses, follow-ups & chronic conditions from home.",
+  "page-telemedicine.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1758691463620-188ca7c1a04f?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "checkups.html",
+  "Routine Check-Ups & Preventive Care in San Antonio & Boerne | Alamo Primary Care",
+  "Annual physicals, wellness exams, vaccines and preventive screenings in San Antonio "
+  "and Boerne, for adults and families at every stage of life.",
+  "page-checkups.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "screenings.html",
+  "Health Screenings & Diagnostic Tests in San Antonio & Boerne | Alamo Primary Care",
+  "Preventive health screenings and diagnostic testing in San Antonio & Boerne. Blood "
+  "work, cholesterol, diabetes & cancer screenings. Book with Alamo Primary Care.",
+  "page-screenings.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1606206591513-adbfbdd7a177?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "procedures.html",
+  "In-Office Procedures in San Antonio & Boerne, TX | Alamo Primary Care",
+  "Stitches, wound repair, pap tests, cyst drainage and foreign body removal at our "
+  "San Antonio and Boerne clinics, without the urgent care or ER wait.",
+  "page-procedures.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1559123633-d373e3384f08?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "geriatric.html",
+  "Geriatric Care in San Antonio & Boerne | Alamo Primary Care",
+  "Senior primary care in San Antonio and Boerne: Medicare wellness visits, chronic "
+  "condition management, medication reviews, memory assessments and fall prevention.",
+  "page-geriatric.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "mens-health.html",
+  "Men’s Health Services in San Antonio & Boerne | Alamo Primary Care",
+  "Men’s health care in San Antonio and Boerne: annual physicals, prostate screening, "
+  "low testosterone evaluation, ED treatment and heart health screening.",
+  "page-mens-health.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1739285388427-d6f85d12a8fc?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "womens-health.html",
+  "Women’s Health Services in San Antonio & Boerne | Alamo Primary Care",
+  "Well-woman exams, pap tests, birth control, menopause care and preventive "
+  "screenings for women in San Antonio and Boerne, Texas.",
+  "page-womens-health.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1631815589874-ca81d86ee018?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "referrals.html",
+  "Referrals to Specialists in San Antonio & Boerne | Alamo Primary Care",
+  "Alamo Primary Care connects patients in San Antonio and Boerne with trusted "
+  "specialists, coordinates records and stays involved after the referral.",
+  "page-referrals.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1745420052490-285dbfa1cf4d?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
+)
+compose(
+  "iv-therapy.html",
+  "IV Therapy & Vitamin Injections in San Antonio & Boerne | Alamo Primary Care",
+  "Physician-supervised IV therapy and vitamin injections in San Antonio and Boerne: "
+  "hydration, Myers’ Cocktail, immunity, recovery drips and B12 shots.",
+  "page-iv-therapy.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1763310225009-50214e3c99d9?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
 )
 compose(

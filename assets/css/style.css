@@ -1420,7 +1420,8 @@ h1,h2,h3,h4,p{margin:0}
 @media (max-width:860px){
   .svc-panel__in{grid-template-columns:1fr}
 }
-.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.svc-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.svc-grid > *{flex:0 1 calc((100% - 3 * 14px) / 4)}
 .svc-card{padding:clamp(24px,2.6vw,34px);border-radius:26px;background:var(--paper-2);border:1px solid var(--line-soft);
   transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
 .svc-card:hover{transform:translateY(-4px);box-shadow:0 30px 56px -42px rgba(17,21,58,.5)}
@@ -1461,15 +1462,21 @@ h1,h2,h3,h4,p{margin:0}
 .svc-end .lede{margin-inline:auto}
 .svc-end .btn-row{margin-top:30px}
 @media (max-width:1180px){
-  .svc-grid{grid-template-columns:1fr 1fr}
+  .svc-grid > *{flex-basis:calc((100% - 2 * 14px) / 3)}
   .svc-steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .svc-grid > *{flex-basis:calc((100% - 14px) / 2)}
 }
 @media (max-width:860px){
   .svc-intro__in,.svc-why{grid-template-columns:1fr}
   .svc-why__img{min-height:0;aspect-ratio:4/3}
 }
+@media (max-width:560px){
+  .svc-grid > *{flex-basis:100%}
+}
 @media (max-width:640px){
-  .svc-grid,.svc-steps{grid-template-columns:1fr}
+  .svc-steps{grid-template-columns:1fr}
 }
 
 /* service page extras — hero form, photo cards, background sections, CTA band */
@@ -1488,6 +1495,15 @@ h1,h2,h3,h4,p{margin:0}
 .rform .rform__submit:hover{background:var(--green-600)}
 .rform .cform__done{border-radius:26px}
 .svc-card__img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:18px}
+.svc-card--plain{padding:clamp(20px,2.2vw,28px)}
+.svc-card--plain h3{margin:14px 0 8px;font-size:clamp(1.15rem,1.5vw,1.35rem)}
+.svc-card--plain p{font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
+.svc-card__list{display:grid;gap:7px;margin-top:10px;list-style:none;padding:0}
+.svc-card__list li{position:relative;padding-left:16px;font-size:14px;line-height:1.5;color:var(--ink-soft)}
+.svc-card__list li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--green-500)}
+.svc-ticks--row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:clamp(26px,3vw,40px)}
+@media (max-width:980px){.svc-ticks--row{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.svc-ticks--row{grid-template-columns:1fr}}
 .svc-card:hover .svc-card__img{filter:saturate(1.05)}
 .svc-steps-sec{position:relative;overflow:hidden;isolation:isolate;color:#fff}
 .svc-bg{position:absolute;inset:0;z-index:-1}
@@ -1501,6 +1517,61 @@ h1,h2,h3,h4,p{margin:0}
 .svc-steps-sec .svc-steps li:hover h3{color:var(--navy-900)}
 .svc-steps-sec .svc-steps li:hover p{color:var(--ink-soft)}
 .svc-steps-sec .svc-steps li:hover span{color:var(--navy-300)}
+/* live icons — line icons that draw themselves in, used beside short claims */
+.lic{display:grid;place-items:center;flex:none;width:54px;height:54px;border-radius:16px;
+  background:linear-gradient(160deg,var(--green-50),#fff);border:1px solid rgba(82,176,79,.28);
+  color:var(--navy-700)}
+.lic svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.1;
+  stroke-linecap:round;stroke-linejoin:round}
+.lic__draw,.lic__tick,.lic__beat{stroke-dasharray:var(--len,160);stroke-dashoffset:var(--len,160);
+  animation:licDraw 1.4s var(--ease) forwards}
+.lic__draw{--len:150}
+.lic__tick{--len:30;animation-delay:.5s;stroke:var(--green-600)}
+.lic__beat{--len:46;animation-delay:.45s;stroke:var(--green-600)}
+.lic__arrow{stroke:var(--green-600);animation:licBob 2.6s var(--ease) infinite .9s}
+.lic--pulse .lic__beat{animation:licDraw 1.1s var(--ease) forwards .4s,licTrace 3.4s linear infinite 1.6s}
+@keyframes licDraw{to{stroke-dashoffset:0}}
+@keyframes licBob{0%,100%{transform:translateY(0)}50%{transform:translateY(2.5px)}}
+@keyframes licTrace{0%{opacity:1}45%{opacity:.35}100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .lic__draw,.lic__tick,.lic__beat{stroke-dashoffset:0;animation:none}
+  .lic__arrow{animation:none}
+}
+/* the claim rows keep their icon at the top of the text */
+.svc-ticks--row li{align-items:flex-start}
+.svc-ticks--row .lic{margin-top:2px}
+
+/* soft section grounds so the service pages are not one flat white */
+.sec-tint{position:relative;background:linear-gradient(180deg,#F4F6FC 0%,#FBFCFE 70%,#fff 100%)}
+.sec-tint--green{position:relative;background:linear-gradient(180deg,#F2F8F2 0%,#FAFCFA 70%,#fff 100%)}
+.sec-tint--flip{background:linear-gradient(180deg,#fff 0%,#F7F8FD 40%,#F2F4FB 100%)}
+.sec-dots::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(42,51,121,.12) 1px,transparent 1px);background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000,transparent 70%);
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000,transparent 70%)}
+.sec-tint > .shell,.sec-tint--green > .shell,.sec-tint--flip > .shell{position:relative;z-index:1}
+
+/* approach list — editorial rows, deliberately not the service card look */
+.appr{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px);align-items:start}
+.appr__head{position:sticky;top:calc(var(--nav-h) + 30px)}
+.appr__img{margin:26px 0 0;border-radius:24px;overflow:hidden;aspect-ratio:4/3}
+.appr__img img{width:100%;height:100%;object-fit:cover}
+.appr__list{list-style:none;padding:0;margin:0;counter-reset:a}
+.appr__list li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(16px,2vw,28px);
+  padding:clamp(20px,2.4vw,28px) 0;border-top:1px solid var(--line-soft)}
+.appr__list li:first-child{border-top:0;padding-top:0}
+.appr__n{font-family:var(--ff-display);font-size:clamp(1.6rem,2.4vw,2.2rem);line-height:1;color:var(--navy-200)}
+.appr__list h3{font-family:var(--ff-display);font-weight:400;font-size:clamp(1.25rem,1.8vw,1.55rem);
+  line-height:1.15;color:var(--navy-900)}
+.appr__list p{margin-top:8px;font-size:15px;line-height:1.7;color:var(--ink-soft);max-width:60ch}
+.appr__list li:hover .appr__n{color:var(--green-500)}
+.appr__note{margin:26px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-soft);max-width:60ch}
+@media (max-width:980px){
+  .appr{grid-template-columns:1fr}
+  .appr__head{position:static}
+  .appr__img{aspect-ratio:16/9}
+}
+
 /* related services rail — compact cards that scroll sideways */
 .svc-more__head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;
   margin-bottom:clamp(24px,3vw,38px)}
@@ -1547,6 +1618,7 @@ h1,h2,h3,h4,p{margin:0}
 .er__title{margin:22px 0 14px;font-family:var(--ff-display);font-weight:400;font-size:clamp(1.9rem,3.2vw,2.9rem);
   line-height:1.08;letter-spacing:-.02em;color:#fff}
 .er__lead{font-size:16px;line-height:1.7;color:rgba(255,255,255,.78);max-width:46ch}
+.er__lead + .er__lead{margin-top:14px}
 .er__list{position:relative;display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
 .er__list li{padding:11px 18px;border-radius:999px;background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.2);font-size:14.5px;line-height:1.3;color:#fff;
@@ -1569,9 +1641,10 @@ h1,h2,h3,h4,p{margin:0}
   letter-spacing:-.02em;color:#fff;max-width:22ch;margin-inline:auto}
 .svc-cta__lede{max-width:62ch;margin:20px auto 0;font-size:16.5px;line-height:1.7;color:rgba(255,255,255,.85)}
 .svc-cta .btn-row{margin-top:30px}
+.rform-slot{background:linear-gradient(180deg,#fff,#F4F6FC)}
+.rform-slot .rform{box-shadow:0 30px 60px -45px rgba(17,21,58,.5);border:1px solid var(--line)}
 @media (max-width:980px){
   .rhero__in--split{grid-template-columns:1fr}
-  .rform{order:2}
 }
 
 /* ==========================================================================

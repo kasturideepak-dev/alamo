@@ -622,6 +622,40 @@
     jumpTo(t);
   });
 
+  /* ------------------------------------------------ hero form on phones */
+  // The booking form sits beside the hero copy on wide screens. On a phone that
+  // pushes the hero past two screens, so the form moves down to its own section
+  // just above the closing band and the hero button jumps to it.
+  document.querySelectorAll('.rform').forEach(function (form) {
+    var hero = form.closest('.rhero');
+    var home = form.parentElement;
+    var cta = document.querySelector('.svc-cta');
+    if (!hero || !cta) return;
+    var slot = document.createElement('section');
+    slot.className = 'section rform-slot';
+    slot.id = 'appointment';
+    slot.hidden = true;
+    cta.parentNode.insertBefore(slot, cta);
+    var shell = document.createElement('div');
+    shell.className = 'shell';
+    slot.appendChild(shell);
+    var btn = hero.querySelector('.rhero__acts .rbtn');
+    var small = window.matchMedia('(max-width:980px)');
+    function place() {
+      if (small.matches) {
+        if (form.parentElement !== shell) shell.appendChild(form);
+        slot.hidden = false;
+        if (btn) btn.setAttribute('href', '#appointment');
+      } else {
+        if (form.parentElement !== home) home.appendChild(form);
+        slot.hidden = true;
+        if (btn) btn.setAttribute('href', '#book');
+      }
+    }
+    place();
+    (small.addEventListener ? small.addEventListener('change', place) : small.addListener(place));
+  });
+
   /* --------------------------------------------------- service card rail */
   document.querySelectorAll('[data-srail]').forEach(function (rail) {
     var wrap = rail.closest('section');
