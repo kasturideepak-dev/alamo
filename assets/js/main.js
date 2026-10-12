@@ -622,6 +622,50 @@
     jumpTo(t);
   });
 
+  /* --------------------------------------------------- service card rail */
+  document.querySelectorAll('[data-srail]').forEach(function (rail) {
+    var wrap = rail.closest('section');
+    var prev = wrap.querySelector('[data-srail-prev]');
+    var next = wrap.querySelector('[data-srail-next]');
+    var card = rail.querySelector('.scard');
+    function step() { return card ? card.getBoundingClientRect().width + 14 : 200; }
+    function maxScroll() { return rail.scrollWidth - rail.clientWidth - 2; }
+    function sync() {
+      if (prev) prev.disabled = rail.scrollLeft <= 2;
+      if (next) next.disabled = rail.scrollLeft >= maxScroll();
+    }
+    function nudge(dir) {
+      rail.scrollBy({ left: dir * step() * 2, behavior: still ? 'auto' : 'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function () { nudge(-1); });
+    if (next) next.addEventListener('click', function () { nudge(1); });
+    rail.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+
+    // Slides on its own, pausing while the pointer is over it, while a card has
+    // focus, and whenever the rail is off screen or the tab is in the background.
+    if (still) return;
+    var held = false;
+    function onScreen() {
+      var r = rail.getBoundingClientRect();
+      return document.visibilityState !== 'hidden' &&
+             r.top < window.innerHeight * 0.9 && r.bottom > window.innerHeight * 0.1;
+    }
+    function tick() {
+      if (held || !onScreen()) return;
+      if (rail.scrollLeft >= maxScroll()) rail.scrollTo({ left: 0, behavior: 'smooth' });
+      else rail.scrollBy({ left: step(), behavior: 'smooth' });
+    }
+    setInterval(tick, 3200);
+    ['pointerenter', 'focusin', 'touchstart'].forEach(function (e) {
+      rail.addEventListener(e, function () { held = true; }, { passive: true });
+    });
+    ['pointerleave', 'focusout'].forEach(function (e) {
+      rail.addEventListener(e, function () { held = false; });
+    });
+  });
+
   /* ------------------------------------------------------- service hero */
   // Shared by the weight loss and hormone pages: the photo settles in while the
   // headline lines rise, then drifts slower than the page as you scroll away.

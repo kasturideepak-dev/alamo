@@ -122,7 +122,7 @@ def mobile_bar(body):
     # the TRT page belongs to the hormone section
     services = pick(["services"], "hormone-replacement.html#services" if "trt-contact" in ids
                     else "primary-care.html#services")
-    about = pick(["about", "program", "approach", "trt", "membership"], "primary-care.html#about")
+    about = pick(["about", "program", "approach", "trt", "membership", "why"], "primary-care.html#about")
     item = ('  <a class="mbar__item%s" href="%s"><svg aria-hidden="true"><use href="#%s"/></svg>'
             '<span>%s</span></a>\n')
     return ('\n<nav class="mbar" aria-label="Quick links">\n'
@@ -225,6 +225,16 @@ compose(
   "page-trt.html",
   '<link rel="preload" as="image" href="assets/img/s07-mens.jpg">',
   active="HR",
+)
+compose(
+  "acute-care.html",
+  "Acute Care & Same-Day Sick Visits in San Antonio & Boerne | Alamo Primary Care",
+  "Same-day and next-available acute care visits in San Antonio and Boerne for "
+  "fever, sore throat, infections, minor injuries and stomach pain.",
+  "page-acute-care.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1758691462878-6edc3d3da1be?auto=format&fit=crop&w=2200&q=80">',
+  active="PC",
 )
 compose(
   "aesthetics.html",
