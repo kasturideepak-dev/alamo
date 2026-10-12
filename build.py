@@ -326,6 +326,7 @@ compose(
   "fever, sore throat, infections, minor injuries and stomach pain.",
   "page-acute-care.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1758691462878-6edc3d3da1be?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
 )
@@ -356,7 +357,8 @@ compose(
   "and Boerne, for adults and families at every stage of life.",
   "page-checkups.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
-  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=2200&q=80">',
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.pexels.com/photos/39192383/pexels-photo-39192383.jpeg?auto=compress&cs=tinysrgb&w=2200">',
   active="PC",
 )
 compose(
@@ -376,6 +378,7 @@ compose(
   "San Antonio and Boerne clinics, without the urgent care or ER wait.",
   "page-procedures.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1559123633-d373e3384f08?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
 )
@@ -386,6 +389,7 @@ compose(
   "condition management, medication reviews, memory assessments and fall prevention.",
   "page-geriatric.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
 )
@@ -396,6 +400,7 @@ compose(
   "low testosterone evaluation, ED treatment and heart health screening.",
   "page-mens-health.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1739285388427-d6f85d12a8fc?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
 )
@@ -406,6 +411,7 @@ compose(
   "screenings for women in San Antonio and Boerne, Texas.",
   "page-womens-health.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1631815589874-ca81d86ee018?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
 )
@@ -416,6 +422,7 @@ compose(
   "specialists, coordinates records and stays involved after the referral.",
   "page-referrals.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1745420052490-285dbfa1cf4d?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
 )
@@ -426,6 +433,7 @@ compose(
   "hydration, Myers’ Cocktail, immunity, recovery drips and B12 shots.",
   "page-iv-therapy.html",
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1763310225009-50214e3c99d9?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
 )
