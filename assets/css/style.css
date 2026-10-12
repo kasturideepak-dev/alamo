@@ -1540,6 +1540,17 @@ h1,h2,h3,h4,p{margin:0}
 /* the claim rows keep their icon at the top of the text */
 .svc-ticks--row li{align-items:flex-start}
 .svc-ticks--row .lic{margin-top:2px}
+/* icon points presented as cards, for sections that would otherwise read flat */
+.svc-ticks--cards{display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
+.svc-ticks--cards > li{flex:0 1 calc((100% - 3 * 18px) / 4)}
+@media (max-width:980px){.svc-ticks--cards > li{flex:0 1 calc((100% - 18px) / 2)}}
+@media (max-width:600px){.svc-ticks--cards > li{flex:1 1 100%}}
+.svc-ticks--cards li{padding:clamp(20px,2vw,26px);border-radius:22px;background:#fff;
+  border:1px solid rgba(42,51,121,.08);box-shadow:0 10px 30px rgba(20,27,70,.05);
+  flex-direction:column;gap:14px;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.svc-ticks--cards li:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(20,27,70,.1)}
+.svc-ticks--cards b{font-size:16px;margin-bottom:6px}
+.center-lede{max-width:68ch;margin-inline:auto}
 
 /* soft section grounds so the service pages are not one flat white */
 .sec-tint{position:relative;background:linear-gradient(180deg,#F4F6FC 0%,#FBFCFE 70%,#fff 100%)}

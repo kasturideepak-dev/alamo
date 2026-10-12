@@ -296,6 +296,7 @@ compose(
   "page-weight.html",
   '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">\n'
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1675271007628-47bead6b5960?auto=format&fit=crop&w=2200&q=80">',
   active="WL",
 )
@@ -307,6 +308,7 @@ compose(
   "page-hormone.html",
   '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">\n'
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1666887360680-9dc27a1d2753?auto=format&fit=crop&w=2200&q=80">',
   active="HR",
 )
@@ -445,6 +447,7 @@ compose(
   "page-aesthetics.html",
   '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">\n'
   '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1673970561722-9f1dec556bdd?auto=format&fit=crop&w=2200&q=80">',
   active="AE",
 )
