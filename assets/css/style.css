@@ -2954,3 +2954,8 @@ html[data-static] .word{opacity:1!important}
   text-decoration-color:rgba(42,51,121,.35);transition:color .3s var(--ease),text-decoration-color .3s var(--ease)}
 .xref:hover{color:var(--green-700);text-decoration-color:var(--green-500)}
 .dtable .xref{font-weight:600}
+.lic__only{display:block;font-size:16px;line-height:1.6;color:var(--navy-800);font-weight:500}
+/* a card carrying one sentence wants a little more presence than a label pair */
+.svc-ticks--cards li:has(.lic__only){gap:18px}
+.svc-ticks--cards li:has(.lic__only) .lic{width:48px;height:48px;border-radius:14px}
+.svc-ticks--cards li:has(.lic__only) .lic svg{width:26px;height:26px}
