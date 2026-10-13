@@ -2959,3 +2959,11 @@ html[data-static] .word{opacity:1!important}
 .svc-ticks--cards li:has(.lic__only){gap:18px}
 .svc-ticks--cards li:has(.lic__only) .lic{width:48px;height:48px;border-radius:14px}
 .svc-ticks--cards li:has(.lic__only) .lic svg{width:26px;height:26px}
+
+/* a two-column table holds a handful of short values, so it should not run the
+   full width of the page with the figures stranded far apart */
+.dtable[data-cols="2"]{max-width:none}
+.dtable__wrap:has(.dtable[data-cols="2"]){max-width:720px;margin-inline:auto}
+.dtable[data-cols="2"] th,.dtable[data-cols="2"] td{padding-block:13px}
+.dtable[data-cols="2"] thead th:last-child,.dtable[data-cols="2"] td{text-align:right}
+.dtable[data-cols="3"] .dtable__wrap,.dtable__wrap:has(.dtable[data-cols="3"]){max-width:980px;margin-inline:auto}
