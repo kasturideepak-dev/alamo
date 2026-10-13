@@ -2921,3 +2921,21 @@ html[data-static] .word{opacity:1!important}
 /* a two-column table fits a phone, so it should not force a sideways swipe */
 .dtable[data-cols="2"]{min-width:0}
 .dtable[data-cols="2"] th,.dtable[data-cols="2"] td{padding-inline:clamp(12px,4vw,26px)}
+
+/* on a phone a three or four column comparison restacks into one block per
+   row, so nothing has to be swiped sideways to be read */
+@media (max-width:700px){
+  .dtable[data-cols="3"],.dtable[data-cols="4"]{min-width:0;display:block}
+  .dtable[data-cols="3"] thead,.dtable[data-cols="4"] thead{display:none}
+  .dtable[data-cols="3"] tbody,.dtable[data-cols="4"] tbody{display:block}
+  .dtable[data-cols="3"] tr,.dtable[data-cols="4"] tr{display:block;padding:16px 18px;
+    border-bottom:1px solid var(--line-soft)}
+  .dtable[data-cols="3"] tbody tr:last-child,.dtable[data-cols="4"] tbody tr:last-child{border-bottom:0}
+  .dtable[data-cols="3"] tbody th,.dtable[data-cols="4"] tbody th{display:block;padding:0 0 10px;
+    border:0;font-family:var(--ff-display);font-weight:400;font-size:1.15rem;color:var(--navy-800)}
+  .dtable[data-cols="3"] td,.dtable[data-cols="4"] td{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+    gap:14px;padding:7px 0;border:0;font-size:14.5px}
+  .dtable[data-cols="3"] td::before,.dtable[data-cols="4"] td::before{content:attr(data-label);
+    font-weight:600;color:var(--navy-700)}
+  .dtable[data-cols="3"] tbody tr:nth-child(odd),.dtable[data-cols="4"] tbody tr:nth-child(odd){background:var(--paper-2)}
+}
