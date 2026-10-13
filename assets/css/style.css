@@ -2947,3 +2947,10 @@ html[data-static] .word{opacity:1!important}
     font-weight:600;color:var(--navy-700)}
   .dtable[data-cols="3"] tbody tr:nth-child(odd),.dtable[data-cols="4"] tbody tr:nth-child(odd){background:var(--paper-2)}
 }
+
+/* a cross-reference inside body copy: the services the text already names */
+.xref{color:var(--navy-600);font-weight:600;text-decoration:underline;
+  text-underline-offset:3px;text-decoration-thickness:1px;
+  text-decoration-color:rgba(42,51,121,.35);transition:color .3s var(--ease),text-decoration-color .3s var(--ease)}
+.xref:hover{color:var(--green-700);text-decoration-color:var(--green-500)}
+.dtable .xref{font-weight:600}

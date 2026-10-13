@@ -253,6 +253,61 @@ def mobile_bar(body):
             + item % (" mbar__item--book", book, "i-cal", "Book now")
             + '</nav>\n')
 
+# Cross-references the content docs call for: the service a sentence already
+# names becomes a link to its page. Kept here so regenerating a partial
+# cannot quietly drop them.
+XREFS = {
+    'semaglutide.html': [
+        ('Tirzepatide acts on two (GIP and GLP-1)',
+         '<a class="xref" href="tirzepatide.html">Tirzepatide</a> acts on two (GIP and GLP-1)'),
+    ],
+    'tirzepatide.html': [
+        ('Your provider confirms whether tirzepatide or semaglutide fits you best.',
+         'Your provider confirms whether tirzepatide or <a class="xref" href="semaglutide.html">semaglutide</a> fits you best.'),
+    ],
+    'lipotropic.html': [
+        ('<li>Nutrition and activity changes from their weight management plan</li>',
+         '<li>Nutrition and activity changes from their <a class="xref" href="weight-management.html">weight management plan</a></li>'),
+        ('<li>Semaglutide or tirzepatide, when prescribed</li>',
+         '<li><a class="xref" href="semaglutide.html">Semaglutide</a> or <a class="xref" href="tirzepatide.html">tirzepatide</a>, when prescribed</li>'),
+        ('<li>Monthly follow-ups and InBody scans to track fat and muscle changes</li>',
+         '<li>Monthly follow-ups and <a class="xref" href="inbody.html">InBody scans</a> to track fat and muscle changes</li>'),
+    ],
+    'inbody.html': [
+        ('<li>Weight loss patients: track fat loss and protect muscle</li>',
+         '<li><a class="xref" href="weight-management.html">Weight loss patients</a>: track fat loss and protect muscle</li>'),
+        ('<li>Patients on semaglutide or tirzepatide: make sure weight loss is coming from fat</li>',
+         '<li>Patients on <a class="xref" href="semaglutide.html">semaglutide</a> or <a class="xref" href="tirzepatide.html">tirzepatide</a>: make sure weight loss is coming from fat</li>'),
+    ],
+    'weight-management.html': [
+        ('<p>Weight loss program: a medically supervised plan that may include semaglutide or tirzepatide.</p>',
+         '<p>Weight loss program: a medically supervised plan that may include <a class="xref" href="semaglutide.html">semaglutide</a> or <a class="xref" href="tirzepatide.html">tirzepatide</a>.</p>'),
+    ],
+    'biote-men.html': [
+        ('Prefer injections with a monthly membership? See our $150/month TRT program.',
+         'Prefer injections with a monthly membership? See our <a class="xref" href="trt.html">$150/month TRT program</a>.'),
+    ],
+    'dermal-fillers.html': [
+        ('<th scope="col">Botox</th>',
+         '<th scope="col"><a class="xref" href="botox.html">Botox</a></th>'),
+        ('<th scope="col">Sculptra</th>',
+         '<th scope="col"><a class="xref" href="sculptra.html">Sculptra</a></th>'),
+    ],
+    'sculptra.html': [
+        ('<th scope="col">Hyaluronic acid filler</th>',
+         '<th scope="col"><a class="xref" href="dermal-fillers.html">Hyaluronic acid filler</a></th>'),
+        ('including weight loss from semaglutide or tirzepatide,',
+         'including weight loss from <a class="xref" href="semaglutide.html">semaglutide</a> or <a class="xref" href="tirzepatide.html">tirzepatide</a>,'),
+    ],
+}
+
+def cross_links(body, out):
+    for find, replace in XREFS.get(out, []):
+        if find not in body:
+            raise SystemExit('cross-link text missing in %s: %s' % (out, find[:60]))
+        body = body.replace(find, replace, 1)
+    return body
+
 def compose(out, title, desc, body_file, preload, active_pc=False, header_file="header.html",
             footer=True, active=None):
     # active: which nav item is current — "PC", "WL", "HR" or "AE"
@@ -264,7 +319,7 @@ def compose(out, title, desc, body_file, preload, active_pc=False, header_file="
     header = (header
               .replace("{{MEGA}}", megamenus.panels(read("megamenu.html"))
                                 if header_file == "header.html" else read("megamenu.html")))
-    body = read(body_file)
+    body = cross_links(read(body_file), out)
     body = (body
         .replace("{{VALUES}}", read("values.html"))
         .replace("{{PROVIDERS}}", read("providers.html"))
