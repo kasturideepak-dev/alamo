@@ -1579,11 +1579,19 @@ h1,h2,h3,h4,p{margin:0}
   line-height:1.15;color:var(--navy-900)}
 .appr__list p{margin-top:8px;font-size:15px;line-height:1.7;color:var(--ink-soft);max-width:60ch}
 .appr__list li:hover .appr__n{color:var(--green-500)}
-.appr__note{margin:26px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-soft);max-width:60ch}
+/* the list and its closing line share the right column, so the line follows
+   the last item instead of being pushed to the foot of the row */
+.appr__body{grid-column:2}
+.appr__note{margin:22px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-soft);max-width:60ch}
+/* a short list leaves the picture floating, so it fills its column instead */
+.appr__head{display:flex;flex-direction:column;align-self:stretch}
+.appr__img{flex:1 1 auto;min-height:260px}
+.appr__img img{height:100%}
 @media (max-width:980px){
   .appr{grid-template-columns:1fr}
-  .appr__head{position:static}
-  .appr__img{aspect-ratio:16/9}
+  .appr__head{position:static;display:block}
+  .appr__img{aspect-ratio:16/9;min-height:0}
+  .appr__body{grid-column:1}
 }
 
 /* related services rail — compact cards that scroll sideways */
