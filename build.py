@@ -274,10 +274,10 @@ XREFS = {
          '<li>Monthly follow-ups and <a class="xref" href="inbody.html">InBody scans</a> to track fat and muscle changes</li>'),
     ],
     'inbody.html': [
-        ('<li>Weight loss patients: track fat loss and protect muscle</li>',
-         '<li><a class="xref" href="weight-management.html">Weight loss patients</a>: track fat loss and protect muscle</li>'),
-        ('<li>Patients on semaglutide or tirzepatide: make sure weight loss is coming from fat</li>',
-         '<li>Patients on <a class="xref" href="semaglutide.html">semaglutide</a> or <a class="xref" href="tirzepatide.html">tirzepatide</a>: make sure weight loss is coming from fat</li>'),
+        ('<span class="lic__only">Weight loss patients: track fat loss and protect muscle</span>',
+         '<span class="lic__only"><a class="xref" href="weight-management.html">Weight loss patients</a>: track fat loss and protect muscle</span>'),
+        ('<span class="lic__only">Patients on semaglutide or tirzepatide: make sure weight loss is coming from fat</span>',
+         '<span class="lic__only">Patients on <a class="xref" href="semaglutide.html">semaglutide</a> or <a class="xref" href="tirzepatide.html">tirzepatide</a>: make sure weight loss is coming from fat</span>'),
     ],
     'weight-management.html': [
         ('<p>Weight loss program: a medically supervised plan that may include semaglutide or tirzepatide.</p>',
