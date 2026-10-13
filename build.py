@@ -180,10 +180,10 @@ PC_SERVICES = [
 
 # the other sections get the same rail, with their own list
 WL_SERVICES = [
-    ("https://images.pexels.com/photos/6551136/pexels-photo-6551136.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Weight Management", "weight-management.html"),
-    ("https://images.pexels.com/photos/7653692/pexels-photo-7653692.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Semaglutide", "semaglutide.html"),
-    ("https://images.pexels.com/photos/5207032/pexels-photo-5207032.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Tirzepatide", "tirzepatide.html"),
-    ("https://images.unsplash.com/photo-1675271007628-47bead6b5960?auto=format&fit=crop&w=600&h=420&q=70", "InBody Weight Analyzer", "inbody.html"),
+    ("https://images.unsplash.com/photo-1675270714610-11a5cadcc7b3?auto=format&fit=crop&w=600&h=420&q=70", "Weight Management", "weight-management.html"),
+    ("https://images.unsplash.com/photo-1683713881012-4c3fb63d0dd2?auto=format&fit=crop&w=600&h=420&q=70", "Semaglutide", "semaglutide.html"),
+    ("https://images.unsplash.com/photo-1611689102192-1f6e0e52df0a?auto=format&fit=crop&w=600&h=420&q=70", "Tirzepatide", "tirzepatide.html"),
+    ("https://images.unsplash.com/photo-1523901839036-a3030662f220?auto=format&fit=crop&w=600&h=420&q=70", "InBody Weight Analyzer", "inbody.html"),
     ("https://images.pexels.com/photos/5234490/pexels-photo-5234490.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Lipolean &amp; B12 Injections", "lipotropic.html"),
 ]
 HR_SERVICES = [
@@ -193,8 +193,8 @@ HR_SERVICES = [
 ]
 AE_SERVICES = [
     ("https://images.pexels.com/photos/4586708/pexels-photo-4586708.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Botox", "botox.html"),
-    ("https://images.unsplash.com/photo-1746017062285-13c77e29fc25?auto=format&fit=crop&w=600&h=420&q=70", "Dermal Filler", "dermal-fillers.html"),
-    ("https://images.unsplash.com/photo-1746708810803-722593e53772?auto=format&fit=crop&w=600&h=420&q=70", "Sculptra", "sculptra.html"),
+    ("https://images.unsplash.com/photo-1695990190064-e8ca2ca16af6?auto=format&fit=crop&w=600&h=420&q=70", "Dermal Filler", "dermal-fillers.html"),
+    ("https://images.unsplash.com/photo-1758598304384-1f678eabdd4f?auto=format&fit=crop&w=600&h=420&q=70", "Sculptra", "sculptra.html"),
 ]
 RAILS = {"PC": (PC_SERVICES, "More Primary Care Services", "/primary-care/#services"),
          "WL": (WL_SERVICES, "More Weight Loss Services", "/weight-loss/#services"),
