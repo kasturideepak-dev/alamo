@@ -1433,8 +1433,8 @@ h1,h2,h3,h4,p{margin:0}
 .svc-card li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
 .svc-card li::before{content:"";position:absolute;left:0;top:.56em;width:6px;height:6px;border-radius:50%;background:var(--green-500)}
 .svc-steps{display:grid;grid-template-columns:repeat(var(--steps,5),minmax(0,1fr));gap:14px;list-style:none;padding:0;margin:0;counter-reset:s}
-.svc-steps[data-steps="4"]{--steps:4}
-.svc-steps[data-steps="6"]{--steps:6}
+.svc-steps[data-step-count="4"]{--steps:4}
+.svc-steps[data-step-count="6"]{--steps:6}
 .svc-steps li{padding:clamp(22px,2.4vw,30px);border-radius:24px;background:#fff;border:1px solid var(--line);
   transition:background .5s var(--ease),transform .5s var(--ease)}
 .svc-steps li:hover{background:var(--navy-700);transform:translateY(-4px)}
@@ -1466,7 +1466,7 @@ h1,h2,h3,h4,p{margin:0}
 @media (max-width:1180px){
   .svc-grid > *{flex-basis:calc((100% - 2 * 14px) / 3)}
   .svc-steps{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .svc-steps[data-steps="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc-steps[data-step-count="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
   .svc-grid > *{flex-basis:calc((100% - 14px) / 2)}
@@ -2822,7 +2822,7 @@ html[data-static] .word{opacity:1!important}
 }
 
 @media (max-width:640px){
-  .svc-steps[data-steps="4"]{grid-template-columns:1fr}
+  .svc-steps[data-step-count="4"]{grid-template-columns:1fr}
 }
 
 /* ---- medication pages: trust strip, data table, facing lists, list + photo ---- */
