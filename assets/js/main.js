@@ -51,7 +51,11 @@
   // Numbers already read correctly in the HTML; this only animates them.
   if (hasGSAP && !still && ScrollTrigger) {
     document.querySelectorAll('[data-count]').forEach(function (el) {
+      // only animate a leaf that holds the number itself: anything with child
+      // elements is using the attribute for something else and must be left alone
+      if (el.children.length) return;
       var to = parseFloat(el.getAttribute('data-count'));
+      if (isNaN(to)) return;
       var suffix = el.getAttribute('data-suffix') || '';
       var o = { v: 0 };
       var render = function () { el.textContent = Math.round(o.v).toLocaleString('en-US') + suffix; };

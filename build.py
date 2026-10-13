@@ -214,7 +214,7 @@ def service_rail(skip=None, section="PC"):
             '          <span class="scard__img"><img src="%s" alt="" loading="lazy" decoding="async"></span>\n'
             '          <span class="scard__name">%s</span>\n'
             '        </a>' % (href, src, label))
-    return ('<section class="section svc-more" data-count="%d">\n' % len(cards) +
+    return ('<section class="section svc-more" data-rail-count="%d">\n' % len(cards) +
             '  <div class="shell">\n'
             '    <div class="svc-more__head">\n'
             '      <h2 class="h2" data-split>' + heading + '</h2>\n'

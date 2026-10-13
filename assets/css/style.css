@@ -2876,23 +2876,23 @@ html[data-static] .word{opacity:1!important}
 
 /* a rail with only a few cards should fill its row rather than trail off into
    empty space, and has nothing to scroll */
-.svc-more[data-count="1"] .srail__ctrl,
-.svc-more[data-count="2"] .srail__ctrl,
-.svc-more[data-count="3"] .srail__ctrl,
-.svc-more[data-count="4"] .srail__ctrl{display:none}
-.svc-more[data-count="1"] .srail__track,
-.svc-more[data-count="2"] .srail__track,
-.svc-more[data-count="3"] .srail__track,
-.svc-more[data-count="4"] .srail__track{width:100%;justify-content:center;gap:18px}
-.svc-more[data-count="1"] .scard,
-.svc-more[data-count="2"] .scard,
-.svc-more[data-count="3"] .scard,
-.svc-more[data-count="4"] .scard{width:auto;flex:1 1 0;max-width:330px}
+.svc-more[data-rail-count="1"] .srail__ctrl,
+.svc-more[data-rail-count="2"] .srail__ctrl,
+.svc-more[data-rail-count="3"] .srail__ctrl,
+.svc-more[data-rail-count="4"] .srail__ctrl{display:none}
+.svc-more[data-rail-count="1"] .srail__track,
+.svc-more[data-rail-count="2"] .srail__track,
+.svc-more[data-rail-count="3"] .srail__track,
+.svc-more[data-rail-count="4"] .srail__track{width:100%;justify-content:center;gap:18px}
+.svc-more[data-rail-count="1"] .scard,
+.svc-more[data-rail-count="2"] .scard,
+.svc-more[data-rail-count="3"] .scard,
+.svc-more[data-rail-count="4"] .scard{width:auto;flex:1 1 0;max-width:330px}
 @media (max-width:560px){
-  .svc-more[data-count="3"] .srail__track,
-  .svc-more[data-count="4"] .srail__track{width:max-content}
-  .svc-more[data-count="3"] .scard,
-  .svc-more[data-count="4"] .scard{width:clamp(150px,16vw,196px);flex:none}
+  .svc-more[data-rail-count="3"] .srail__track,
+  .svc-more[data-rail-count="4"] .srail__track{width:max-content}
+  .svc-more[data-rail-count="3"] .scard,
+  .svc-more[data-rail-count="4"] .scard{width:clamp(150px,16vw,196px);flex:none}
 }
 
 /* a list section with no photo: heading and intro on the left, the list on the
