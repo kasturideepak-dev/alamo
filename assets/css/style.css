@@ -2805,6 +2805,8 @@ html[data-static] .word{opacity:1!important}
 @media (max-width:900px) and (min-width:701px){
   /* seven cannot split evenly in two columns, so the last one takes the row */
   .svc-grid[data-cards="7"] > *:last-child{flex-basis:100%}
+  /* three stay in one row rather than splitting 2 + 1 */
+  .svc-grid[data-cards="3"] > *{flex-basis:calc((100% - 2 * 14px) / 3 - 0.5px)}
   .svc-grid[data-cards="5"] > *,
   .svc-grid[data-cards="9"] > *{flex-basis:calc((100% - 2 * 14px) / 3 - 0.5px)}
   .svc-ticks--cards[data-cards="5"] > li{flex-basis:calc((100% - 2 * 18px) / 3 - 0.5px)}
@@ -2822,3 +2824,52 @@ html[data-static] .word{opacity:1!important}
 @media (max-width:640px){
   .svc-steps[data-steps="4"]{grid-template-columns:1fr}
 }
+
+/* ---- medication pages: trust strip, data table, facing lists, list + photo ---- */
+.tstrip{background:var(--navy-900);color:#fff}
+.tstrip__list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 30px;
+  list-style:none;margin:0;padding:18px 0;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.76)}
+.tstrip__list li{position:relative;padding-left:30px}
+.tstrip__list li::before{content:"";position:absolute;left:8px;top:50%;translate:0 -50%;
+  width:6px;height:6px;border-radius:50%;background:var(--green-400)}
+.tstrip__list li:first-child{padding-left:0}
+.tstrip__list li:first-child::before{display:none}
+
+.dtable__wrap{overflow-x:auto;border-radius:24px;border:1px solid var(--line);background:#fff;
+  box-shadow:0 30px 60px -50px rgba(17,21,58,.45)}
+.dtable{width:100%;border-collapse:collapse;min-width:420px}
+.dtable th,.dtable td{padding:clamp(14px,1.5vw,18px) clamp(16px,2vw,26px);text-align:left;
+  font-size:15px;color:var(--ink-soft);border-bottom:1px solid var(--line-soft)}
+.dtable thead th{font-family:var(--ff-display);font-weight:400;font-size:15.5px;color:var(--navy-800);
+  background:var(--paper-2);border-bottom:1px solid var(--line)}
+.dtable tbody th{font-weight:600;color:var(--navy-800)}
+.dtable tbody tr:last-child th,.dtable tbody tr:last-child td{border-bottom:0}
+.dtable tbody tr:hover{background:var(--paper-2)}
+.dtable__note,.duo__note{margin:18px auto 0;max-width:72ch;text-align:center;
+  font-size:14px;line-height:1.7;color:var(--muted)}
+
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.duo__card{padding:clamp(24px,2.6vw,34px);border-radius:26px;background:#fff;border:1px solid var(--line)}
+.duo__card h3{margin:0 0 16px;font-family:var(--ff-display);font-weight:400;
+  font-size:clamp(1.2rem,1.6vw,1.45rem);color:var(--navy-800)}
+.duo__card ul{display:grid;gap:11px;list-style:none;padding:0;margin:0}
+.duo__card li{position:relative;padding-left:30px;font-size:15px;line-height:1.6;color:var(--ink-soft)}
+.duo__card li::before{position:absolute;left:0;top:.08em;width:19px;height:19px;border-radius:50%;
+  display:grid;place-items:center;font-size:12px;font-weight:700}
+.duo__card--yes li::before{content:"✓";background:var(--green-50);color:var(--green-700)}
+.duo__card--no li::before{content:"!";background:rgba(42,51,121,.08);color:var(--navy-600)}
+@media (max-width:860px){.duo{grid-template-columns:1fr}}
+
+.listsec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(30px,5vw,70px);align-items:center}
+.listsec--solo{grid-template-columns:minmax(0,1fr)}
+.listsec__list{display:grid;gap:11px;list-style:none;padding:0;margin:26px 0 0}
+.listsec__list li{position:relative;padding-left:22px;font-size:15.5px;line-height:1.6;color:var(--ink-soft)}
+.listsec__list li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
+  border-radius:50%;background:var(--green-500)}
+.listsec__note{margin-top:22px;font-size:14.5px;line-height:1.7;color:var(--muted);max-width:66ch}
+.listsec__img{margin:0;border-radius:28px;overflow:hidden;aspect-ratio:4/3}
+.listsec__img img{width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){.listsec{grid-template-columns:1fr}}
+.prose{margin-top:24px;display:grid;gap:16px}
+.prose p{font-size:16px;line-height:1.75;color:var(--ink-soft);max-width:62ch}

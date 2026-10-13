@@ -134,6 +134,16 @@ PAGES = {
     "hormone-replacement.html": "hormone-replacement",
     "trt.html": "hormone-replacement/trt",
     "aesthetics.html": "aesthetics",
+    "semaglutide.html": "weight-loss/semaglutide",
+    "tirzepatide.html": "weight-loss/tirzepatide",
+    "lipotropic.html": "weight-loss/lipotropic-b12-injections",
+    "inbody.html": "weight-loss/inbody-scan",
+    "weight-management.html": "weight-loss/weight-management",
+    "biote-men.html": "hormone-replacement/biote-for-men",
+    "biote-women.html": "hormone-replacement/biote-for-women",
+    "botox.html": "aesthetics/botox",
+    "dermal-fillers.html": "aesthetics/dermal-fillers",
+    "sculptra.html": "aesthetics/sculptra",
 }
 
 def url_for(name):
@@ -168,21 +178,46 @@ PC_SERVICES = [
     ("s11-iv", "IV Therapy", "iv-therapy.html"),
 ]
 
-def service_rail(skip=None):
+# the other sections get the same rail, with their own list
+WL_SERVICES = [
+    ("https://images.pexels.com/photos/6551136/pexels-photo-6551136.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Weight Management", "weight-management.html"),
+    ("https://images.pexels.com/photos/7653692/pexels-photo-7653692.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Semaglutide", "semaglutide.html"),
+    ("https://images.pexels.com/photos/5207032/pexels-photo-5207032.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Tirzepatide", "tirzepatide.html"),
+    ("https://images.unsplash.com/photo-1675271007628-47bead6b5960?auto=format&fit=crop&w=600&h=420&q=70", "InBody Weight Analyzer", "inbody.html"),
+    ("https://images.pexels.com/photos/5234490/pexels-photo-5234490.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Lipolean &amp; B12 Injections", "lipotropic.html"),
+]
+HR_SERVICES = [
+    ("https://images.unsplash.com/photo-1666887360680-9dc27a1d2753?auto=format&fit=crop&w=600&h=420&q=70", "Testosterone Replacement", "trt.html"),
+    ("https://images.pexels.com/photos/3782194/pexels-photo-3782194.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Biote for Men", "biote-men.html"),
+    ("https://images.unsplash.com/photo-1761414500568-1348275e08a0?auto=format&fit=crop&w=600&h=420&q=70", "Biote for Women", "biote-women.html"),
+]
+AE_SERVICES = [
+    ("https://images.pexels.com/photos/4586708/pexels-photo-4586708.jpeg?auto=compress&cs=tinysrgb&w=600&h=420&fit=crop", "Botox", "botox.html"),
+    ("https://images.unsplash.com/photo-1746017062285-13c77e29fc25?auto=format&fit=crop&w=600&h=420&q=70", "Dermal Filler", "dermal-fillers.html"),
+    ("https://images.unsplash.com/photo-1746708810803-722593e53772?auto=format&fit=crop&w=600&h=420&q=70", "Sculptra", "sculptra.html"),
+]
+RAILS = {"PC": (PC_SERVICES, "More Primary Care Services", "/primary-care/#services"),
+         "WL": (WL_SERVICES, "More Weight Loss Services", "/weight-loss/#services"),
+         "HR": (HR_SERVICES, "More Hormone Therapies", "/hormone-replacement/#services"),
+         "AE": (AE_SERVICES, "More Aesthetic Services", "/aesthetics/#services")}
+
+def service_rail(skip=None, section="PC"):
+    items, heading, fallback = RAILS.get(section, RAILS["PC"])
     cards = []
-    for img, label, page in PC_SERVICES:
+    for img, label, page in items:
         if page and page == skip:
             continue
-        href = url_for(page) if page else "/primary-care/#services"
+        href = url_for(page) if page else fallback
+        src = img if img.startswith("http") else "/assets/img/%s.jpg" % img
         cards.append(
             '        <a class="scard" href="%s">\n'
-            '          <span class="scard__img"><img src="/assets/img/%s.jpg" alt="" loading="lazy" decoding="async"></span>\n'
+            '          <span class="scard__img"><img src="%s" alt="" loading="lazy" decoding="async"></span>\n'
             '          <span class="scard__name">%s</span>\n'
-            '        </a>' % (href, img, label))
+            '        </a>' % (href, src, label))
     return ('<section class="section svc-more">\n'
             '  <div class="shell">\n'
             '    <div class="svc-more__head">\n'
-            '      <h2 class="h2" data-split>More Primary Care Services</h2>\n'
+            '      <h2 class="h2" data-split>' + heading + '</h2>\n'
             '      <div class="srail__ctrl">\n'
             '        <button class="srail__btn" type="button" data-srail-prev aria-label="Scroll left">\n'
             '          <svg aria-hidden="true"><use href="#i-arrow-l"/></svg>\n'
@@ -235,7 +270,7 @@ def compose(out, title, desc, body_file, preload, active_pc=False, header_file="
         .replace("{{PROVIDERS}}", read("providers.html"))
         .replace("{{INSURANCE}}", read("insurance.html"))
         .replace("{{TESTIMONIALS}}", read("testimonials.html"))
-        .replace("{{SERVICE_RAIL}}", service_rail(skip=out))
+        .replace("{{SERVICE_RAIL}}", service_rail(skip=out, section=active or "PC"))
         
         .replace("{{CUT_TO_NAVY}}", cut("to-navy"))
         .replace("{{CUT_TO_WHITE}}", cut("to-white"))
@@ -438,6 +473,110 @@ compose(
   '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1763310225009-50214e3c99d9?auto=format&fit=crop&w=2200&q=80">',
   active="PC",
+)
+compose(
+  "semaglutide.html",
+  "Semaglutide for Weight Loss in San Antonio & Boerne | Alamo Primary Care",
+  "Physician-prescribed semaglutide in San Antonio and Boerne: labs before you start, "
+  "gradual dosing, monthly follow-ups and InBody body composition tracking.",
+  "page-semaglutide.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.pexels.com/photos/7653692/pexels-photo-7653692.jpeg?auto=compress&cs=tinysrgb&w=2200">',
+  active="WL",
+)
+compose(
+  "tirzepatide.html",
+  "Tirzepatide for Weight Loss in San Antonio & Boerne | Alamo Primary Care",
+  "Physician-prescribed tirzepatide (Zepbound, Mounjaro) in San Antonio and Boerne, with "
+  "labs, managed dose steps and InBody tracking at every monthly visit.",
+  "page-tirzepatide.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.pexels.com/photos/5207032/pexels-photo-5207032.jpeg?auto=compress&cs=tinysrgb&w=2200">',
+  active="WL",
+)
+compose(
+  "lipotropic.html",
+  "Lipotropic (Lipolean) & B12 Injections in San Antonio & Boerne | Alamo Primary Care",
+  "Weekly lipotropic and vitamin B12 injections in San Antonio and Boerne, given by "
+  "clinical staff as part of a physician-led weight loss plan.",
+  "page-lipotropic.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.pexels.com/photos/5234490/pexels-photo-5234490.jpeg?auto=compress&cs=tinysrgb&w=2200">',
+  active="WL",
+)
+compose(
+  "inbody.html",
+  "InBody Body Composition Scan in San Antonio & Boerne | Alamo Primary Care",
+  "A 60-second InBody scan measuring muscle, body fat, visceral fat and body water, "
+  "with results explained by your provider in San Antonio or Boerne.",
+  "page-inbody.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1675271007628-47bead6b5960?auto=format&fit=crop&w=2200&q=80">',
+  active="WL",
+)
+compose(
+  "weight-management.html",
+  "Weight Management in San Antonio & Boerne | Alamo Primary Care",
+  "A long-term weight management program in San Antonio and Boerne: metabolic review, nutrition, habits and InBody tracking, with or without medication.",
+  "page-weight-management.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.pexels.com/photos/6551136/pexels-photo-6551136.jpeg?auto=compress&cs=tinysrgb&w=2200">',
+  active="WL",
+)
+compose(
+  "biote-men.html",
+  "Biote Testosterone Pellet Therapy for Men in San Antonio & Boerne | Alamo Primary Care",
+  "Testosterone pellet therapy for men in San Antonio and Boerne: morning labs, in-office insertion every four to six months and monitoring by your primary care team.",
+  "page-biote-men.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.pexels.com/photos/3782194/pexels-photo-3782194.jpeg?auto=compress&cs=tinysrgb&w=2200">',
+  active="HR",
+)
+compose(
+  "biote-women.html",
+  "Biote Hormone Pellet Therapy for Women in San Antonio & Boerne | Alamo Primary Care",
+  "Bioidentical hormone pellet therapy for perimenopause and menopause in San Antonio and Boerne, with lab testing first and follow-ups every three to four months.",
+  "page-biote-women.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1761414500568-1348275e08a0?auto=format&fit=crop&w=2200&q=80">',
+  active="HR",
+)
+compose(
+  "botox.html",
+  "Botox in San Antonio & Boerne | Alamo Primary Care",
+  "Botox for forehead lines, frown lines and crow's feet in San Antonio and Boerne, planned and performed by medical providers with a two-week follow-up.",
+  "page-botox.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.pexels.com/photos/4586708/pexels-photo-4586708.jpeg?auto=compress&cs=tinysrgb&w=2200">',
+  active="AE",
+)
+compose(
+  "dermal-fillers.html",
+  "Dermal Fillers in San Antonio & Boerne | Alamo Primary Care",
+  "Lip, cheek, under-eye, chin and jawline filler in San Antonio and Boerne, with immediate, natural-looking results planned by medical providers.",
+  "page-dermal-fillers.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1746017062285-13c77e29fc25?auto=format&fit=crop&w=2200&q=80">',
+  active="AE",
+)
+compose(
+  "sculptra.html",
+  "Sculptra in San Antonio & Boerne | Alamo Primary Care",
+  "Sculptra collagen-stimulating treatment in San Antonio and Boerne: gradual, natural results over two to three sessions that can last two years or more.",
+  "page-sculptra.html",
+  '<link rel="preconnect" href="https://images.unsplash.com">\n'
+  '<link rel="preconnect" href="https://images.pexels.com">\n'
+  '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1746708810803-722593e53772?auto=format&fit=crop&w=2200&q=80">',
+  active="AE",
 )
 compose(
   "aesthetics.html",
