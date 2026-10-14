@@ -2987,3 +2987,21 @@ html[data-static] .word{opacity:1!important}
 @media (max-width:560px){
   .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:100%}
 }
+
+/* pricing: one panel, the heading and the phone line on the left, what you pay
+   on the right, instead of two small cards adrift in the section */
+.cost{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:clamp(24px,4vw,60px);align-items:center;
+  padding:clamp(26px,3.2vw,44px);border-radius:30px;background:#fff;
+  border:1px solid var(--line);box-shadow:0 30px 70px -56px rgba(17,21,58,.45)}
+.cost__head .h2{margin:0}
+.cost__note{margin-top:14px;font-size:15.5px;line-height:1.7;color:var(--ink-soft)}
+.cost__note a{color:var(--navy-700);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.cost__note a:hover{color:var(--green-700)}
+.cost__list{display:grid;gap:12px;list-style:none;padding:0;margin:0}
+.cost__list li{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:18px;
+  background:var(--paper-2);border:1px solid var(--line-soft);
+  font-size:15.5px;line-height:1.6;color:var(--ink-soft)}
+.cost__list svg{flex:none;width:26px;height:26px;padding:6px;border-radius:50%;
+  background:var(--green-50);color:var(--green-700)}
+@media (max-width:860px){.cost{grid-template-columns:1fr;gap:26px;align-items:start}}
