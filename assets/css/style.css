@@ -3058,6 +3058,7 @@ html[data-static] .word{opacity:1!important}
 .safe__list[data-cols="3"] li:nth-child(3n+1){border-left:0}
 /* an odd one out runs the width of the panel rather than leaving a gap beside it */
 .safe__list[data-cols="2"] > li:last-child:nth-child(odd){grid-column:1 / -1;border-left:0}
+.safe__list b{color:var(--ink);font-weight:600}
 .safe__dot{flex:none;width:9px;height:9px;margin-top:.52em;border-radius:50%;
   background:var(--green-500);box-shadow:0 0 0 5px var(--green-50)}
 .safe__ico{flex:none;width:26px;height:26px;padding:6px;margin-top:-1px;border-radius:50%;
@@ -3072,6 +3073,7 @@ html[data-static] .word{opacity:1!important}
 .tcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
   list-style:none;padding:0;margin:0;counter-reset:tc}
 .tcards[data-cards="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.svc-why__copy{margin:18px 0 0;font-size:16.5px;line-height:1.75;color:var(--ink-soft);max-width:54ch}
 .tcards li{position:relative;overflow:hidden;padding:30px 28px 30px 32px;border-radius:26px;
   background:linear-gradient(165deg,#fff 0%,#FBFCFE 60%,#F6F8FD 100%);
   border:1px solid var(--line-soft);box-shadow:0 34px 70px -60px rgba(17,21,58,.55);
