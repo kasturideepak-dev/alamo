@@ -1,0 +1,102 @@
+<!-- =============================== HERO =============================== -->
+<section class="rhero rhero--svc rhero--form" data-rhero>
+  <div class="rhero__media"><img src="assets/img/waiting-room-b.jpg" alt="The Alamo Primary Care team at work" fetchpriority="high" decoding="async" style="object-position:50% 45%" data-rhero-img></div>
+  <div class="shell rhero__in rhero__in--split">
+    <div>
+      <p class="rhero__eyebrow" data-rhero-rise><i></i>Careers</p>
+      <h1 class="rhero__title">
+        <span class="rhero__line"><span data-rhero-line>Careers at Alamo</span></span>
+        <span class="rhero__line"><span data-rhero-line>Primary Care</span></span>
+      </h1>
+      <p class="rhero__lede" data-rhero-rise>Apply now to join our team at Westover Hills in San Antonio or on Main
+        Street in Boerne. Send us your details and your resume, and our team will be in touch.</p>
+      <div class="rhero__acts" data-rhero-rise>
+        <a class="rbtn" href="#apply">Apply Now <svg aria-hidden="true"><use href="#i-arrow-r"/></svg></a>
+        <a class="rbtn rbtn--line" href="tel:+12105711338">Call 210-571-1338 <svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+      </div>
+    </div>
+
+    <div class="rhero__card" data-rhero-rise>
+      <p class="rhero__card-head">Where you would work</p>
+      <ul class="rhero__card-list">
+        <li><svg aria-hidden="true"><use href="#i-pin"/></svg><span><b>Westover Hills, San Antonio</b>12047 Potranco Rd Ste 105, TX 78253 &middot; Mon&ndash;Thu 7&ndash;5, Fri 7&ndash;3</span></li>
+        <li><svg aria-hidden="true"><use href="#i-pin"/></svg><span><b>Main Street, Boerne</b>1411 S Main Street, TX 78006 &middot; Mon&ndash;Fri 8&ndash;5</span></li>
+        <li><svg aria-hidden="true"><use href="#i-mail"/></svg><span><b>Questions?</b><a href="mailto:admin@alamoprimarycare.com">admin@alamoprimarycare.com</a></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{{CUT_TO_WHITE}}
+
+<!-- =============================== APPLY ============================== -->
+<section class="section cform" id="apply">
+  <div class="shell cform__in">
+    <div class="cform__side">
+      <p class="pill-eyebrow" data-reveal-y><svg aria-hidden="true"><use href="#i-pen"/></svg> Apply now</p>
+      <h2 class="cform__title" data-split>Send Us Your Application</h2>
+      <p class="lede" data-reveal-y>Fill in your details, tell us which position you are applying for, and attach
+        your resume.</p>
+      <div class="cform__ways" data-reveal-y>
+        <a href="tel:+12105711338"><svg aria-hidden="true"><use href="#i-phone"/></svg><span><small>Call</small><b>210-571-1338</b></span></a>
+        <a href="mailto:admin@alamoprimarycare.com"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><small>Email</small><b>admin@alamoprimarycare.com</b></span></a>
+        <p><svg aria-hidden="true"><use href="#i-pin"/></svg><span><small>Clinics</small><b>Westover Hills, San Antonio &middot; Main Street, Boerne</b></span></p>
+      </div>
+    </div>
+
+    <form class="cform__card" data-cform novalidate data-reveal-y>
+      <div class="field">
+        <label for="cr-name">Full name</label>
+        <input id="cr-name" name="name" type="text" autocomplete="name" required placeholder="Full name">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cr-phone">Contact number</label>
+          <input id="cr-phone" name="phone" type="tel" autocomplete="tel" required placeholder="(210) 555-0123">
+        </div>
+        <div class="field">
+          <label for="cr-email">E-mail</label>
+          <input id="cr-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+        </div>
+      </div>
+      <div class="field">
+        <label for="cr-address">Address</label>
+        <input id="cr-address" name="address" type="text" autocomplete="street-address" required placeholder="Street address">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cr-city">City / State</label>
+          <input id="cr-city" name="city" type="text" autocomplete="address-level2" required placeholder="San Antonio, TX">
+        </div>
+        <div class="field">
+          <label for="cr-zip">Zip code</label>
+          <input id="cr-zip" name="zip" type="text" autocomplete="postal-code" required placeholder="78253">
+        </div>
+      </div>
+      <div class="field">
+        <label for="cr-position">Position</label>
+        <input id="cr-position" name="position" type="text" required placeholder="The role you are applying for">
+      </div>
+      <div class="field">
+        <label for="cr-source">How did you hear about us?</label>
+        <input id="cr-source" name="source" type="text" placeholder="Optional">
+      </div>
+      <div class="field">
+        <label for="cr-resume">Upload resume</label>
+        <input id="cr-resume" name="resume" type="file" accept=".pdf,.doc,.docx">
+      </div>
+      <input type="hidden" name="program" value="Careers">
+      <button class="btn btn--green btn--lead cform__submit" type="submit">
+        <span class="btn__ico"><svg aria-hidden="true"><use href="#i-arrow-r"/></svg></span>
+        Submit</button>
+      <p class="cform__fine">We&rsquo;ll only use your details to contact you about your application.</p>
+      <div class="cform__done" role="status" hidden>
+        <span><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+        <h3>Thanks, we&rsquo;ve received your application.</h3>
+        <p>Our team will review it and be in touch. Need us sooner? Call <a href="tel:+12105711338">210-571-1338</a>.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+{{BAND}}

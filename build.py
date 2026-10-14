@@ -145,6 +145,10 @@ PAGES = {
     "botox.html": "aesthetics/botox",
     "dermal-fillers.html": "aesthetics/dermal-fillers",
     "sculptra.html": "aesthetics/sculptra",
+    "about.html": "about",
+    "our-doctor.html": "about/our-doctor",
+    "careers.html": "careers",
+    "contact.html": "contact",
 }
 
 def url_for(name):
@@ -667,4 +671,37 @@ compose(
   '<link rel="preconnect" href="https://images.pexels.com">\n'
   '<link rel="preload" as="image" href="https://images.unsplash.com/photo-1673970561722-9f1dec556bdd?auto=format&fit=crop&w=2200&q=80">',
   active="AE",
+)
+
+compose(
+  "about.html",
+  "About Alamo Primary Care — San Antonio & Boerne",
+  "Alamo Primary Care provides comprehensive primary healthcare in San Antonio and Boerne, "
+  "with personalized, compassionate care focused on your overall well-being.",
+  "page-about.html",
+  '<link rel="preload" as="image" href="assets/img/building.jpg">',
+)
+compose(
+  "our-doctor.html",
+  "Dr. Vishal Nemarugommula, MD — Alamo Primary Care",
+  "Meet Dr. Vishal Nemarugommula, MD, Family Medicine Physician and founder of Alamo Primary "
+  "Care in San Antonio, with 17+ years of medical experience.",
+  "page-doctor.html",
+  '<link rel="preload" as="image" href="assets/img/dr-vishal.jpg">',
+)
+compose(
+  "careers.html",
+  "Careers — Alamo Primary Care",
+  "Apply to join the Alamo Primary Care team at Westover Hills in San Antonio or on Main Street "
+  "in Boerne. Send your details and resume.",
+  "page-careers.html",
+  '<link rel="preload" as="image" href="assets/img/waiting-room-b.jpg">',
+)
+compose(
+  "contact.html",
+  "Contact Alamo Primary Care — San Antonio & Boerne",
+  "Call 210-571-1338, email admin@alamoprimarycare.com, or request an appointment at our "
+  "Westover Hills clinic in San Antonio or on Main Street in Boerne.",
+  "page-contact.html",
+  '<link rel="preload" as="image" href="assets/img/waiting-room-a.jpg">',
 )
