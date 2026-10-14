@@ -160,6 +160,9 @@ def absolutise(html):
     html = html.replace('href="assets/', 'href="/assets/')
     html = html.replace('src="assets/', 'src="/assets/')
     html = html.replace('content="assets/', 'content="/assets/')
+    # data attributes carry asset paths too (the megamenu swaps its preview image
+    # from one), and those must not resolve against the page's own folder
+    html = re.sub(r'(\sdata-[a-z-]+=")assets/', r'\1/assets/', html)
     return html
 
 # --- related services rail -------------------------------------------------
