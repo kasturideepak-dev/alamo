@@ -3005,3 +3005,32 @@ html[data-static] .word{opacity:1!important}
 .cost__list svg{flex:none;width:26px;height:26px;padding:6px;border-radius:50%;
   background:var(--green-50);color:var(--green-700)}
 @media (max-width:860px){.cost{grid-template-columns:1fr;gap:26px;align-items:start}}
+
+/* a heading with a list under it: the points sit in their own cards across the
+   full width, so a long lead paragraph no longer leaves the column beside it empty */
+.safe{display:grid;gap:clamp(26px,3.2vw,42px)}
+.safe__intro .h2{margin:0}
+.safe__intro .lede{margin:16px 0 0;max-width:74ch}
+.safe__intro--split{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
+  gap:clamp(24px,4vw,64px);align-items:start}
+.safe__intro--split .lede{margin:0;max-width:none}
+.safe__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;
+  list-style:none;padding:0;margin:0}
+.safe__list[data-cols="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* an odd one out stretches across rather than leaving a gap beside it */
+.safe__list[data-cols="2"] > li:last-child:nth-child(odd){grid-column:1 / -1}
+.safe__list li{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border-radius:20px;
+  background:#fff;border:1px solid var(--line-soft);font-size:15.5px;line-height:1.6;
+  color:var(--ink-soft);box-shadow:0 22px 50px -46px rgba(17,21,58,.5)}
+.safe__dot{flex:none;width:9px;height:9px;margin-top:.52em;border-radius:50%;
+  background:var(--green-500);box-shadow:0 0 0 5px var(--green-50)}
+.safe__note{display:block;margin:0;padding:18px 22px;border-radius:18px;
+  border-left:3px solid var(--green-200);background:var(--paper-2);
+  font-size:14.5px;line-height:1.75;color:var(--muted)}
+.sec-tint .safe__note,.sec-tint--green .safe__note{background:#fff}
+@media (max-width:900px){
+  .safe__intro--split{grid-template-columns:1fr;gap:16px}
+  .safe__intro--split .lede{margin:0}
+  .safe__list,.safe__list[data-cols="3"]{grid-template-columns:1fr}
+}
+
