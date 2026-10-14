@@ -5,6 +5,7 @@ Static HTML is the deliverable; this only keeps the shared header, footer and
 repeated sections from drifting between the two pages. Run: python3 build.py
 """
 import hashlib, pathlib, re, sys
+from html import unescape as html_unescape
 
 import megamenus
 
@@ -308,6 +309,25 @@ def cross_links(body, out):
         body = body.replace(find, replace, 1)
     return body
 
+# Sections carrying only a short list or a couple of lines were padded like
+# full ones, so two of them in a row left a band of empty page between the
+# content. Anything light enough gets tighter padding.
+def tighten(body):
+    def light(block):
+        text = re.sub(r"<[^>]+>", " ", block)
+        text = re.sub(r"\s+", " ", html_unescape(text)).strip()
+        heavy = re.search(r"<(img|table|iframe|video)\b", block)
+        return len(text) < 620 and not heavy
+    out, pos = [], 0
+    for m in re.finditer(r'<section class="(section[^"]*)"([^>]*)>', body):
+        end = body.find("</section>", m.end())
+        if end == -1 or not light(body[m.end():end]):
+            continue
+        out.append((m.start(1), m.end(1)))
+    for a, b in reversed(out):
+        body = body[:b] + " section--tight" + body[b:]
+    return body
+
 def compose(out, title, desc, body_file, preload, active_pc=False, header_file="header.html",
             footer=True, active=None):
     # active: which nav item is current — "PC", "WL", "HR" or "AE"
@@ -319,7 +339,7 @@ def compose(out, title, desc, body_file, preload, active_pc=False, header_file="
     header = (header
               .replace("{{MEGA}}", megamenus.panels(read("megamenu.html"))
                                 if header_file == "header.html" else read("megamenu.html")))
-    body = cross_links(read(body_file), out)
+    body = tighten(cross_links(read(body_file), out))
     body = (body
         .replace("{{VALUES}}", read("values.html"))
         .replace("{{PROVIDERS}}", read("providers.html"))

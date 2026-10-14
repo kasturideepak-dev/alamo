@@ -2969,3 +2969,21 @@ html[data-static] .word{opacity:1!important}
 .dtable[data-cols="2"] th,.dtable[data-cols="2"] td{padding-block:13px}
 .dtable[data-cols="2"] thead th:last-child,.dtable[data-cols="2"] td{text-align:right}
 .dtable[data-cols="3"] .dtable__wrap,.dtable__wrap:has(.dtable[data-cols="3"]){max-width:980px;margin-inline:auto}
+
+/* a section holding a short list or a couple of lines does not need the full
+   rhythm above and below it */
+.section--tight{padding-block:clamp(42px,4.6vw,62px)}
+
+/* eleven service tiles in a four-wide grid leave a hole at the end of the last
+   row, so the remainder is centred instead */
+.pcard-grid:not([class*="pcard-grid--"]){display:flex;flex-wrap:wrap;justify-content:center}
+.pcard-grid:not([class*="pcard-grid--"]) > *{flex:0 1 calc((100% - 3 * clamp(10px,1.3vw,18px)) / 4 - 0.5px)}
+@media (max-width:1180px){
+  .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:calc((100% - 2 * clamp(10px,1.3vw,18px)) / 3 - 0.5px)}
+}
+@media (max-width:860px){
+  .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:calc((100% - clamp(10px,1.3vw,18px)) / 2 - 0.5px)}
+}
+@media (max-width:560px){
+  .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:100%}
+}
