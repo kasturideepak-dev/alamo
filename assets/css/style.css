@@ -2800,6 +2800,8 @@ html[data-static] .word{opacity:1!important}
   .svc-grid[data-cards="10"] > *{flex-basis:calc((100% - 4 * 14px) / 5 - 0.5px)}
   .svc-ticks--cards[data-cards="5"] > li{flex-basis:calc((100% - 4 * 18px) / 5 - 0.5px)}
   .svc-ticks--cards[data-cards="3"] > li{flex-basis:calc((100% - 2 * 18px) / 3 - 0.5px)}
+  /* two points read better as a centred pair than as two narrow cards */
+  .svc-ticks--cards[data-cards="2"] > li{flex-basis:calc((100% - 2 * 18px) / 3 - 0.5px)}
 }
 @media (max-width:1180px) and (min-width:901px){
   .svc-grid[data-cards="4"] > *,
