@@ -1559,6 +1559,11 @@ h1,h2,h3,h4,p{margin:0}
 .sec-tint{position:relative;background:linear-gradient(180deg,#F4F6FC 0%,#FBFCFE 70%,#fff 100%)}
 .sec-tint--green{position:relative;background:linear-gradient(180deg,#F2F8F2 0%,#FAFCFA 70%,#fff 100%)}
 .sec-tint--flip{background:linear-gradient(180deg,#fff 0%,#F7F8FD 40%,#F2F4FB 100%)}
+/* a band that keeps its colour the whole way down, for a section that holds a
+   white panel: the fading tints leave the lower half looking like a gap */
+.sec-band{position:relative;background:linear-gradient(180deg,#E9EDF9 0%,#EFF2FB 55%,#E9EDF9 100%)}
+.sec-band > .shell{position:relative;z-index:1}
+.sec-band .safe__note{background:#fff}
 .sec-dots::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
   background-image:radial-gradient(rgba(42,51,121,.12) 1px,transparent 1px);background-size:26px 26px;
   -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000,transparent 70%);
