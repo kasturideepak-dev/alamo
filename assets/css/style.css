@@ -3006,31 +3006,57 @@ html[data-static] .word{opacity:1!important}
   background:var(--green-50);color:var(--green-700)}
 @media (max-width:860px){.cost{grid-template-columns:1fr;gap:26px;align-items:start}}
 
-/* a heading with a list under it: the points sit in their own cards across the
-   full width, so a long lead paragraph no longer leaves the column beside it empty */
+/* a heading with a list under it: the points are ruled into one panel across
+   the full width, so a long lead paragraph no longer leaves the column beside
+   it empty and no single line floats in a card of its own */
 .safe{display:grid;gap:clamp(26px,3.2vw,42px)}
 .safe__intro .h2{margin:0}
 .safe__intro .lede{margin:16px 0 0;max-width:74ch}
 .safe__intro--split{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
   gap:clamp(24px,4vw,64px);align-items:start}
 .safe__intro--split .lede{margin:0;max-width:none}
-.safe__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;
-  list-style:none;padding:0;margin:0}
+.safe__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));list-style:none;
+  padding:0;margin:0;overflow:hidden;border-radius:26px;background:#fff;
+  border:1px solid var(--line-soft);box-shadow:0 30px 64px -58px rgba(17,21,58,.5)}
 .safe__list[data-cols="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
-/* an odd one out stretches across rather than leaving a gap beside it */
-.safe__list[data-cols="2"] > li:last-child:nth-child(odd){grid-column:1 / -1}
-.safe__list li{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border-radius:20px;
-  background:#fff;border:1px solid var(--line-soft);font-size:15.5px;line-height:1.6;
-  color:var(--ink-soft);box-shadow:0 22px 50px -46px rgba(17,21,58,.5)}
+.safe__list li{display:flex;gap:14px;align-items:flex-start;padding:20px 24px;
+  font-size:15.5px;line-height:1.6;color:var(--ink-soft);
+  border-top:1px solid var(--line-soft);border-left:1px solid var(--line-soft)}
+.safe__list[data-cols="2"] li:nth-child(-n+2),
+.safe__list[data-cols="3"] li:nth-child(-n+3){border-top:0}
+.safe__list[data-cols="2"] li:nth-child(odd),
+.safe__list[data-cols="3"] li:nth-child(3n+1){border-left:0}
+/* an odd one out runs the width of the panel rather than leaving a gap beside it */
+.safe__list[data-cols="2"] > li:last-child:nth-child(odd){grid-column:1 / -1;border-left:0}
 .safe__dot{flex:none;width:9px;height:9px;margin-top:.52em;border-radius:50%;
   background:var(--green-500);box-shadow:0 0 0 5px var(--green-50)}
+.safe__ico{flex:none;width:26px;height:26px;padding:6px;margin-top:-1px;border-radius:50%;
+  background:var(--green-50);color:var(--green-700)}
 .safe__note{display:block;margin:0;padding:18px 22px;border-radius:18px;
   border-left:3px solid var(--green-200);background:var(--paper-2);
   font-size:14.5px;line-height:1.75;color:var(--muted)}
 .sec-tint .safe__note,.sec-tint--green .safe__note{background:#fff}
+
+/* a list whose points each open with a term: the term becomes the card's tag */
+.tcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;
+  list-style:none;padding:0;margin:0}
+.tcards[data-cards="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tcards li{position:relative;padding:26px 24px;border-radius:24px;background:#fff;
+  border:1px solid var(--line-soft);box-shadow:0 30px 64px -58px rgba(17,21,58,.5)}
+.tcards__k{display:inline-block;padding:8px 13px;border-radius:999px;background:var(--green-50);
+  color:var(--green-800);font-size:12.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.tcards__k i{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.tcards__v{display:block;margin-top:16px;font-size:15.5px;line-height:1.65;color:var(--ink-soft)}
+.tcards--rail li:not(:last-child)::after{content:"";position:absolute;top:42px;right:-17px;
+  width:18px;border-top:1px dashed var(--line)}
 @media (max-width:900px){
   .safe__intro--split{grid-template-columns:1fr;gap:16px}
   .safe__intro--split .lede{margin:0}
   .safe__list,.safe__list[data-cols="3"]{grid-template-columns:1fr}
+  .safe__list li{border-left:0;border-top:1px solid var(--line-soft)}
+  .safe__list li:first-child{border-top:0}
+  .tcards,.tcards[data-cards="2"]{grid-template-columns:1fr}
+  .tcards--rail li:not(:last-child)::after{display:none}
+}
 }
 
