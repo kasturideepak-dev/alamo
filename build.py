@@ -335,6 +335,26 @@ def tighten(body):
         body = body[:b] + " section--tight" + body[b:]
     return body
 
+NAV_CLASSES = ("nav__link", "nav__util", "minbar__link", "drawer__link", "ndrop__link")
+
+def mark_current(html, here):
+    """Mark the menu item for the page being built.
+
+    The service tabs get their state from {{ACT_*}} because a service page is
+    'under' its section; everything else is matched on the link's own URL, so a
+    new page in the menu is highlighted without another switch to remember.
+    """
+    def one(m):
+        tag, cls, href = m.group(0), m.group(1), m.group(2)
+        # only the item that opens a menu lights up for the pages beneath it, so
+        # /about/our-doctor/ keeps About Us marked without marking its sibling
+        under = ("nav__util--drop" in cls and here.startswith(href)
+                 and href.count("/") >= 2 and href != "/")
+        if (href != here and not under) or "is-active" in cls:
+            return tag
+        return tag.replace('class="%s"' % cls, 'class="%s is-active"' % cls, 1)
+    return re.sub(r'<a class="([^"]*(?:%s)[^"]*)" href="([^"]+)"' % "|".join(NAV_CLASSES), one, html)
+
 def compose(out, title, desc, body_file, preload, active_pc=False, header_file="header.html",
             footer=True, active=None):
     # active: which nav item is current — "PC", "WL", "HR" or "AE"
@@ -379,6 +399,7 @@ def compose(out, title, desc, body_file, preload, active_pc=False, header_file="
     html = HEAD_OPEN + "\n".join(head_lines).rstrip() + "\n</head>\n<body>\n" \
          + "\n".join(body_lines).rstrip() + "\n</body>\n</html>\n"
     html = absolutise(html)
+    html = mark_current(html, url_for(out))
     folder = PAGES[out]
     target = (ROOT / folder / "index.html") if folder else (ROOT / "index.html")
     target.parent.mkdir(parents=True, exist_ok=True)
