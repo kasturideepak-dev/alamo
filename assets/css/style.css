@@ -2895,19 +2895,44 @@ html[data-static] .word{opacity:1!important}
 .svc-more[data-rail-count="2"] .srail__ctrl,
 .svc-more[data-rail-count="3"] .srail__ctrl,
 .svc-more[data-rail-count="4"] .srail__ctrl{display:none}
+/* a rail with nothing to scroll is laid out as a row of its own, starting at the
+   heading's edge, rather than a few cards adrift in the middle of the shell */
+.svc-more[data-rail-count="1"] .srail,
+.svc-more[data-rail-count="2"] .srail,
+.svc-more[data-rail-count="3"] .srail,
+.svc-more[data-rail-count="4"] .srail{margin-right:0;padding-right:0;overflow:visible}
 .svc-more[data-rail-count="1"] .srail__track,
 .svc-more[data-rail-count="2"] .srail__track,
 .svc-more[data-rail-count="3"] .srail__track,
-.svc-more[data-rail-count="4"] .srail__track{width:100%;justify-content:center;gap:18px}
+.svc-more[data-rail-count="4"] .srail__track{display:grid;width:100%;gap:20px}
+.svc-more[data-rail-count="2"] .srail__track{grid-template-columns:repeat(2,minmax(0,1fr))}
+.svc-more[data-rail-count="3"] .srail__track{grid-template-columns:repeat(3,minmax(0,1fr))}
+.svc-more[data-rail-count="4"] .srail__track{grid-template-columns:repeat(4,minmax(0,1fr))}
+.svc-more[data-rail-count="1"] .srail__track{grid-template-columns:minmax(0,380px)}
 .svc-more[data-rail-count="1"] .scard,
 .svc-more[data-rail-count="2"] .scard,
 .svc-more[data-rail-count="3"] .scard,
-.svc-more[data-rail-count="4"] .scard{width:auto;flex:1 1 0;max-width:330px}
-@media (max-width:560px){
+.svc-more[data-rail-count="4"] .scard{width:auto;gap:14px}
+.svc-more[data-rail-count="1"] .scard__img,
+.svc-more[data-rail-count="2"] .scard__img{aspect-ratio:16/10}
+.svc-more[data-rail-count="3"] .scard__img{aspect-ratio:4/3}
+.svc-more[data-rail-count="1"] .scard__name,
+.svc-more[data-rail-count="2"] .scard__name,
+.svc-more[data-rail-count="3"] .scard__name{font-size:16.5px}
+@media (max-width:900px){
+  /* back to a swipeable rail, where the cards would otherwise be too narrow to read */
+  .svc-more[data-rail-count="1"] .srail,
+  .svc-more[data-rail-count="2"] .srail,
+  .svc-more[data-rail-count="3"] .srail,
+  .svc-more[data-rail-count="4"] .srail{margin-right:calc(var(--gutter) * -1);padding-right:var(--gutter)}
+  .svc-more[data-rail-count="2"] .srail__track,
   .svc-more[data-rail-count="3"] .srail__track,
-  .svc-more[data-rail-count="4"] .srail__track{width:max-content}
+  .svc-more[data-rail-count="4"] .srail__track{display:flex;width:max-content;gap:14px}
+  .svc-more[data-rail-count="2"] .scard,
   .svc-more[data-rail-count="3"] .scard,
-  .svc-more[data-rail-count="4"] .scard{width:clamp(150px,16vw,196px);flex:none}
+  .svc-more[data-rail-count="4"] .scard{width:clamp(170px,42vw,230px);flex:none}
+  .svc-more[data-rail-count="2"] .scard__img,
+  .svc-more[data-rail-count="3"] .scard__img{aspect-ratio:4/3.2}
 }
 
 /* a list section with no photo: heading and intro on the left, the list on the
