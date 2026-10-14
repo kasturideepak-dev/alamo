@@ -44,7 +44,15 @@
       </a>
 
       <ul class="nav nav--right">
-        <li><a class="nav__util" href="about.html">About Us</a></li>
+        <li class="has-drop">
+          <a class="nav__util nav__util--drop" href="about.html" aria-haspopup="true" aria-expanded="false">About Us
+            <svg class="nav__caret" aria-hidden="true" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </a>
+          <ul class="ndrop">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="our-doctor.html">Our Doctor</a></li>
+          </ul>
+        </li>
         <li><a class="nav__util" href="careers.html">Careers</a></li>
         <li><a class="nav__util" href="#book">Book Appointment</a></li>
         <li><a class="nav__util" href="https://cpl.luminatehealth.com/" target="_blank" rel="noopener">Labs</a></li>

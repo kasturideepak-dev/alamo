@@ -166,6 +166,22 @@ h1,h2,h3,h4,p{margin:0}
 .topbar__call b{font-weight:500;color:#fff}
 .topbar__links{display:flex;align-items:center;gap:6px;margin-left:auto}
 .topbar__links .topbar__call{margin-left:8px}
+
+/* a small menu under a nav item, for the pages that sit beneath About Us */
+.has-drop{position:relative}
+.nav__util--drop{display:inline-flex;align-items:center;gap:6px}
+.nav__caret{width:9px;height:6px;transition:transform .3s var(--ease)}
+.has-drop:hover .nav__caret,.has-drop:focus-within .nav__caret{transform:rotate(180deg)}
+.ndrop{position:absolute;top:calc(100% + 14px);left:50%;translate:-50% 0;z-index:40;
+  display:grid;gap:2px;min-width:186px;padding:8px;border-radius:18px;list-style:none;
+  background:#fff;border:1px solid var(--line-soft);box-shadow:0 30px 60px -34px rgba(17,21,58,.5);
+  opacity:0;visibility:hidden;transform-origin:top center;scale:.97;
+  transition:opacity .25s var(--ease),visibility .25s var(--ease),scale .25s var(--ease)}
+.ndrop::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px}
+.has-drop:hover .ndrop,.has-drop:focus-within .ndrop{opacity:1;visibility:visible;scale:1}
+.ndrop a{display:block;padding:11px 14px;border-radius:12px;font-size:14.5px;font-weight:500;
+  color:var(--navy-800);transition:background .25s var(--ease),color .25s var(--ease)}
+.ndrop a:hover{background:var(--navy-50);color:var(--green-700)}
 .topbar__link{padding:7px 14px;border-radius:999px;font-size:13px;font-weight:500;color:rgba(255,255,255,.92);
   transition:background .3s var(--ease),color .3s var(--ease)}
 .topbar__link:hover{background:rgba(255,255,255,.14);color:#fff}
