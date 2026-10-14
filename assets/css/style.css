@@ -3162,12 +3162,22 @@ html[data-static] .word{opacity:1!important}
 .drhero__img b{font-size:14.5px;font-weight:600;color:var(--navy-800)}
 .drhero__img small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-700)}
 
+.drphil{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
+  gap:clamp(26px,3.4vw,52px);align-items:stretch}
+.drphil__body{display:grid;align-content:center;gap:22px}
+.drphil__lead{margin:0;font-size:17px;line-height:1.8;color:var(--ink-soft)}
+.drphil__off{display:flex;gap:16px;align-items:flex-start;padding:22px 24px;border-radius:22px;
+  background:var(--paper-2);border:1px solid var(--line-soft)}
+.drphil__off span{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;
+  background:var(--green-50);color:var(--green-700)}
+.drphil__off svg{width:18px;height:18px}
+.drphil__off p{margin:0;font-size:15px;line-height:1.7;color:var(--muted)}
 .drquote{position:relative;margin:0;padding:clamp(30px,4vw,56px);border-radius:30px;
   background:linear-gradient(150deg,var(--navy-900),var(--navy-700));color:#fff;overflow:hidden}
 .drquote::before{content:"\201C";position:absolute;right:28px;top:-22px;font-family:var(--ff-display);
   font-size:190px;line-height:1;color:rgba(255,255,255,.08)}
 .drquote blockquote{margin:0;font-family:var(--ff-display);font-weight:400;
-  font-size:clamp(21px,2.3vw,31px);line-height:1.34;max-width:34ch}
+  font-size:clamp(21px,2.1vw,29px);line-height:1.34}
 .drquote figcaption{display:grid;gap:3px;margin-top:26px}
 .drquote figcaption b{font-size:15px;font-weight:600}
 .drquote figcaption small{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--green-400)}
@@ -3263,6 +3273,7 @@ html[data-static] .word{opacity:1!important}
 .spec__list svg{flex:none;width:24px;height:24px;padding:6px;border-radius:50%;
   background:rgba(82,176,79,.22);color:var(--green-400)}
 @media (max-width:1040px){.credits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.drphil{grid-template-columns:1fr}}
 @media (max-width:860px){.spec{grid-template-columns:1fr}}
 @media (max-width:560px){.credits{grid-template-columns:1fr}
   .drstrip{grid-template-columns:1fr;gap:18px}}
