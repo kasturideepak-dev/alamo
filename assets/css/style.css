@@ -165,13 +165,14 @@ h1,h2,h3,h4,p{margin:0}
 .topbar__call em{font-style:normal;color:var(--navy-200);font-weight:500}
 .topbar__call b{font-weight:500;color:#fff}
 .topbar__links{display:flex;align-items:center;gap:6px;margin-left:auto}
+.topbar__links .topbar__call{margin-left:8px}
 .topbar__link{padding:7px 14px;border-radius:999px;font-size:13px;font-weight:500;color:rgba(255,255,255,.92);
   transition:background .3s var(--ease),color .3s var(--ease)}
 .topbar__link:hover{background:rgba(255,255,255,.14);color:#fff}
 .topbar__link + .topbar__link{position:relative}
 .topbar__link + .topbar__link::before{content:"";position:absolute;left:-3px;top:50%;translate:0 -50%;
   width:1px;height:14px;background:rgba(255,255,255,.3)}
-@media (max-width:860px){.topbar__links{display:none}}
+@media (max-width:860px){.topbar__link{display:none}.topbar__links .topbar__call{margin-left:0}}
 .ins-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .ins{display:grid;place-items:center;min-height:104px;padding:18px;border-radius:20px;background:#fff;
   border:1px solid var(--line);font-size:15px;font-weight:600;color:var(--navy-300);text-align:center;
