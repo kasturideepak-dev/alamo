@@ -3053,9 +3053,6 @@ html[data-static] .word{opacity:1!important}
 @media (max-width:1180px){
   .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:calc((100% - 2 * clamp(10px,1.3vw,18px)) / 3 - 0.5px)}
 }
-@media (max-width:860px) and (min-width:761px){
-  .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:calc((100% - clamp(10px,1.3vw,18px)) / 2 - 0.5px)}
-}
 @media (max-width:760px){
   /* back to the app tiles below: the grid owns the columns again */
   .pcard-grid:not([class*="pcard-grid--"]){display:grid}
