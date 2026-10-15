@@ -2567,7 +2567,13 @@ html[data-static] .word{opacity:1!important}
   .tst__rule{margin-inline:auto}
   .tst__stage::before{left:-8px;right:-8px}
   .collage{min-height:260px}
-  .foot__nav{justify-content:flex-start;gap:12px 22px}
+  /* the footer links and the card links are a 23px target on a phone */
+  .foot__nav{justify-content:flex-start;gap:4px 18px}
+  .foot__nav a{display:inline-block;padding-block:9px}
+  .acard__link{padding-block:8px}
+  .tlink,.wl-link,.wl-step__link,.xref a{display:inline-flex;align-items:center;padding-block:8px}
+  /* calling or mailing from a phone should not need a precise tap */
+  .loc__row a,.ctile a,.rhero__card-list a,.cform__ways a{display:inline-block;padding-block:9px}
   .topbar__hours span{display:none}
 }
 @media (max-width:620px){
