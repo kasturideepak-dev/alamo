@@ -3039,6 +3039,17 @@ html[data-static] .word{opacity:1!important}
 @media (max-width:560px){
   .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:100%}
 }
+/* on a phone the three- and five-up hub grids were still holding their columns,
+   which left each tile about a hundred pixels wide with its artwork cropped to
+   nothing — every variant takes the full width instead */
+@media (max-width:560px){
+  .pcard-grid.pcard-grid--2,.pcard-grid.pcard-grid--3,
+  .pcard-grid.pcard-grid--4,.pcard-grid.pcard-grid--5{grid-template-columns:minmax(0,1fr)}
+  .pcard-grid--2 .pcard,.pcard-grid--3 .pcard,
+  .pcard-grid--4 .pcard,.pcard-grid--5 .pcard{aspect-ratio:1/.62}
+  .pcard-grid--2 .pcard h3,.pcard-grid--3 .pcard h3,
+  .pcard-grid--4 .pcard h3,.pcard-grid--5 .pcard h3{font-size:20px}
+}
 
 /* pricing: one panel, the heading and the phone line on the left, what you pay
    on the right, instead of two small cards adrift in the section */
