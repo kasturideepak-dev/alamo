@@ -1395,10 +1395,18 @@ h1,h2,h3,h4,p{margin:0}
 @media (max-width:640px){
   .dm-bento{grid-template-columns:1fr;grid-template-areas:"photo" "reach" "num" "tailor" "when" "free" "clinic"}
   .dm-form__row,.dm-checks{grid-template-columns:1fr}
-  .derm{--R:270px}
+  .derm{--R:210px}
   .dm-float--a{width:104px}
   .dm-float--b{width:120px}
   .dm-about{padding-top:190px}
+}
+@media (max-width:560px){
+  /* the labels fan out from the bottom centre, so on a narrow screen the
+     outermost ones were landing past the left edge */
+  .derm{--R:150px}
+  .dm-chip{font-size:11.5px;padding:3px 10px 3px 3px;gap:7px}
+  .dm-spoke--r .dm-chip{padding:3px 3px 3px 10px}
+  .dm-chip img{width:20px;height:20px}
 }
 
 /* ==========================================================================
@@ -3295,4 +3303,16 @@ html[data-static] .word{opacity:1!important}
 @media (max-width:860px){.spec{grid-template-columns:1fr}}
 @media (max-width:560px){.credits{grid-template-columns:1fr}
   .drstrip{grid-template-columns:1fr;gap:18px}}
+
+/* the weight loss page sets its labels in a 10.5-11.5px mono, which is below
+   what reads comfortably on a phone */
+@media (max-width:560px){
+  .wl-kicker{font-size:12.5px}
+  .wl-steps4 span{font-size:12px}
+  .wl-report figcaption small,.wl-stats dd,.wl-sticky__list small{font-size:12px}
+  .wl-arch figcaption,.wl-sticky__frame figcaption{font-size:12px}
+  .dm-card__seal{font-size:12px}
+  .about-c__eyebrow{font-size:12px}
+  .wl-row > b{font-size:1.45rem}
+}
 
