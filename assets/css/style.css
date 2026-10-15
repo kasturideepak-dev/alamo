@@ -1089,7 +1089,7 @@ h1,h2,h3,h4,p{margin:0}
   .pcard-grid.pcard-grid--2,.pcard-grid.pcard-grid--4{grid-template-columns:repeat(2,minmax(0,1fr))}
   .pcard-grid--5 .pcard,.pcard-grid--5 .pcard:nth-child(n+4){grid-column:auto;aspect-ratio:auto}
   .pcard-grid--3 .pcard,.pcard-grid--2 .pcard,.pcard-grid--4 .pcard{aspect-ratio:auto}
-  .pcard-grid--2 .pcard h3,.pcard-grid--3 .pcard h3,.pcard-grid--4 .pcard h3{font-size:13px}
+  .pcard-grid--2 .pcard h3,.pcard-grid--3 .pcard h3,.pcard-grid--4 .pcard h3{font-size:12px}
   .pcard--light{background:none}
   .pcard.pcard--light img{object-fit:cover;background:linear-gradient(160deg,#fff,#E6E9F6)}
   .pcard__tag{display:none}
@@ -2541,7 +2541,12 @@ html[data-static] .word{opacity:1!important}
 @media (max-width:760px){
   .icard-grid{grid-template-columns:1fr 1fr}
   /* app-style tiles: photo square on top, label underneath, four per row */
-  .pcard-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 10px}
+  .pcard-grid,.pcard-grid.pcard-grid--4,
+  .pcard-grid.pcard-grid--5{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 10px}
+  /* a hub with three or two services fills the row rather than leaving a hole */
+  .pcard-grid.pcard-grid--3{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 10px}
+  .pcard-grid.pcard-grid--2{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px}
+  .pcard-grid--5 .pcard,.pcard-grid--5 .pcard:nth-child(n+4){grid-column:auto}
   .pcard{display:flex;flex-direction:column;align-items:center;gap:8px;
     aspect-ratio:auto;padding:0;border-radius:0;overflow:visible;isolation:auto}
   .pcard::before,.pcard::after{display:none}
@@ -3048,22 +3053,15 @@ html[data-static] .word{opacity:1!important}
 @media (max-width:1180px){
   .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:calc((100% - 2 * clamp(10px,1.3vw,18px)) / 3 - 0.5px)}
 }
-@media (max-width:860px){
+@media (max-width:860px) and (min-width:761px){
   .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:calc((100% - clamp(10px,1.3vw,18px)) / 2 - 0.5px)}
 }
-@media (max-width:560px){
-  .pcard-grid:not([class*="pcard-grid--"]) > *{flex-basis:100%}
+@media (max-width:760px){
+  /* back to the app tiles below: the grid owns the columns again */
+  .pcard-grid:not([class*="pcard-grid--"]){display:grid}
+  .pcard-grid:not([class*="pcard-grid--"]) > *{flex:none}
 }
-/* on a phone the three- and five-up hub grids were still holding their columns,
-   which left each tile about a hundred pixels wide with its artwork cropped to
-   nothing — every variant takes the full width instead */
-@media (max-width:560px){
-  .pcard-grid.pcard-grid--2,.pcard-grid.pcard-grid--3,
-  .pcard-grid.pcard-grid--4,.pcard-grid.pcard-grid--5{grid-template-columns:minmax(0,1fr)}
-  .pcard-grid--2 .pcard,.pcard-grid--3 .pcard,
-  .pcard-grid--4 .pcard,.pcard-grid--5 .pcard{aspect-ratio:1/.62}
-  .pcard-grid--2 .pcard h3,.pcard-grid--3 .pcard h3,
-  .pcard-grid--4 .pcard h3,.pcard-grid--5 .pcard h3{font-size:20px}
+
 }
 
 /* pricing: one panel, the heading and the phone line on the left, what you pay
