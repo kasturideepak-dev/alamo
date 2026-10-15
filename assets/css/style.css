@@ -1108,6 +1108,13 @@ h1,h2,h3,h4,p{margin:0}
   .steps,.signs__grid{grid-template-columns:1fr}
   .tline::before,.tline::after{left:40px}
   .tline__item{grid-template-columns:82px 1fr;gap:12px}
+}
+@media (max-width:560px){
+  /* "Before your first visit" cannot sit in an 82px column without spilling over
+     the text, so on a phone the stage label sits above what it describes */
+  .tline::before,.tline::after{display:none}
+  .tline__item{grid-template-columns:minmax(0,1fr);gap:8px;padding:14px 0}
+  .tline__when{justify-self:start;white-space:normal}
   .hcheck__tabs{display:grid;width:100%}
   .hcheck__tabs button{padding:10px 12px}
   .faq__item p{padding-right:0}
